@@ -1,15 +1,196 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso em Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Curso</title>
 </head>
 <body>
-    <h1>oi</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque a nulla aliquam, asperiores quasi aut ullam dolorem deserunt consectetur quam ipsum obcaecati autem exercitationem quia recusandae iste delectus architecto mollitia.</p>
+    <input id="close-menu" class="close-menu" type="checkbox" aria-label="Close menu" role="button">
+    <label class="close-menu-label" for="close-menu" title="Close menu"></label>
+
+    <!-- Header -->
+    <aside class="menu white-bg">
+        <div class="main-content menu-content">
+            <h1 onclick="getElementById('close-menu').checked = false;">
+                <a href="#home">Curso em Vídeo</a>
+            </h1>
+            <nav>
+                <ul onclick="getElementById('close-menu').checked = false;">
+                    <li><a href="#intro">Quem Somos</a></li>
+                    <li><a href="#grid-one">Primeira Grid</a></li>
+                    <li><a href="#gallery">Cursos</a></li>
+                    <li><a href="#grid-two">Segunda Grid</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Espaço menu -->
+    <div class="menu-spacing"></div>
+
+    <!-- Section 1 -->
+    <section id="home" class="intro main-bg section">
+        <div class="main-content intro-content">
+            <div class="intro-text-content">
+                <h2>Mergulhe na Tecnologia</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi aliquid deserunt ea. Quia adipisci nobis tempora explicabo? Animi dolor, quis similique exercitationem voluptate ad itaque eum quo fugit, cumque quia!</p>
+            </div>
+            <div class="intro-img">
+                <img src="assets/img/javascript-img.svg" alt="Logo de HTML, CSS e JavaScript.">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="intro" class="white-bg section">
+        <div class="main-content top3-content">
+            <h2>Quem Somos</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="grid-one" class="grid-one main-bg section">
+        <div class="main-content grid-one-content">
+            <h2 class="grid-main-heading">Grid</h2>
+            <p class="grid-description">Uma breve descrição.</p>
+            <div class="grid">
+                <article>
+                    <h3>Teste 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+                <article>
+                    <h3>Teste 2</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+                <article>
+                    <h3>Teste 3</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="gallery" class="grid-one white-bg section">
+        <div class="main-content grid-one-content">
+            <h2 class="grid-main-heading">Cursos mais procurados</h2>
+            <p class="grid-description">Lorem</p>
+            <div class="grid">
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=1" alt="random image from unsplash"/>
+                </div>
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=2" alt="random image from unsplash"/>
+                </div>
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=3" alt="random image from unsplash"/>
+                </div>
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=4" alt="random image from unsplash"/>
+                </div>
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=5" alt="random image from unsplash"/>
+                </div>
+                <div class="gallery-img">
+                    <img src="https://source.unsplash.com/random/360x360?r=6" alt="random image from unsplash"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="grid-two" class="grid-one main-bg section">
+        <div class="main-content grid-one-content">
+            <h2 class="grid-main-heading">My Grid 2</h2>
+            <p class="grid-description">Uma breve descrição.</p>
+            <div class="grid">
+                <article>
+                    <h3>Texto 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+                <article>
+                    <h3>Texto 2</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+                <article>
+                    <h3>Texto 3</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque sed exercitationem ducimus voluptatem ipsam, soluta, dolor quibusdam libero quas quam adipisci itaque molestias, corporis ex fuga? Autem, dolor quas.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+
+    <section id="intro" class="white-bg section">
+        <div class="main-content top3-content">
+            <h2>Quem Somos</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi labore, voluptatem laborum expedita atque tenetur dolorem praesentium similique iusto ab reprehenderit perferendis aliquam.</p>
+        </div>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="contact" class="intro main-bg section">
+        <div class="main-content intro-content">
+            <div class="intro-text-content">
+                <h2>Fale conosco</h2>
+                <p>Talvez um Texto</p>
+            </div>
+            <!-- <div class="intro-img">
+                <img src="assets/img/javascript-img.svg" alt="Logo de HTML, CSS e JavaScript.">
+            </div> -->
+            <div class="contact-form">
+                <fieldset class="form-grid">
+                    <legend>Contato</legend>
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" id="nome" placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Seu sobrenome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" placeholder="Seu e-mail">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Sua mensagem"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <button type="submit">Enviar</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer white-bg">
+        <p><a rel="nofollow" target="_blank" href="https://github.com/ErosNetto">Nosso Intagram</a></p>
+    </footer>
+
+    <a class="back-to-top" href="#">➤</a>
 
     <script src="assets/js/script.js"></script>
 </body>

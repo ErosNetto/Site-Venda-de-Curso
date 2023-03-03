@@ -15,7 +15,7 @@
     --color-dark-900: #000;
 
     /* backgroud Gradient */
-    --color-gradient: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+    --color-gradient: linear-gradient(to right, #0A1128, #2e407c);   /* --primary-color: #182346; */
     
 }
 
@@ -39,7 +39,7 @@ body {
 #container {
     height: 100vh;
     width: 100%;
-    background: #0A1128; /*var(--color-gradient);*/
+    background: var(--color-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +134,7 @@ body {
 
 #login-button {
     border: none;
-    background: #0A1128; /*var(--color-gradient);*/
+    background: var(--color-gradient);
     padding: 7px;
     border-radius: 3px;
     color: var(--color-dark-900);
@@ -146,6 +146,24 @@ body {
 #login-button:hover {
     transform: scale(1.05);
 }
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-footer a {
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--color-dark-50);
+}
+
+.form-footer a:hover {
+    color: var(--secondary-color);
+}
+
+
 
 /* Modo Dark */
 .dark#login-form {

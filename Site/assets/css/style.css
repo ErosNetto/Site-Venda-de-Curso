@@ -341,19 +341,10 @@ body .full-width {
     color: var(--light-gray-color);
 }
 
-/*  Footer  */
+/* Footer  */ 
 .footer {
-    text-align: center;
-    font-size: 1.6rem;
-}
-
-.footer a {
-    color: #444;
-}
-
-.footer p {
-    margin: 0;
-    padding: 3rem;
+    justify-content: center;
+    align-items: center;
 }
 
 /*  Checkbox do menu  */

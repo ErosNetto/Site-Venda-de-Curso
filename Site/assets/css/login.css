@@ -20,7 +20,7 @@
     --color-purple-200: #bf46ef;
 
     /* Gradient */
-    --color-gradient: linear-gradient(90deg, var(--color-purple-50), var(--color-purple-100), var(--color-purple-200));
+    --color-gradient: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
     
 }
 

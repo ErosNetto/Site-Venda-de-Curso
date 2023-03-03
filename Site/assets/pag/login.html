@@ -5,8 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <h1>Login</h1>
+    <section id="container">
+        <form id="login-form">
+            <div id="form-header">
+                <h1>Login</h1>
+                <i id="mode-icon" class="fa-solid fa-moon"></i>
+            </div>
+            <div id="inputs">
+                <div class="input-box">
+                    <label for="nome">
+                        Nome
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="nome" id="nome">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="input-box">
+                    <label for="email">
+                        E-mail
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" name="email" id="email">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="input-box">
+                    <label for="senha">
+                        Senha
+                        <div class="input-field">
+                            <i class="fa-solid fa-key"></i>
+                            <input type="password" name="senha" id="senha">
+                        </div>
+                    </label>
+
+                    <div id="forgot-password">
+                        <a href="#">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="login-button">Login</button>
+
+
+            
+        </form>
+    </section>
+    <script src="https://kit.fontawesome.com/b8373a4b3f.js" crossorigin="anonymous"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

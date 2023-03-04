@@ -13,3 +13,8 @@ modo.addEventListener('click',() => {
     modo.classList.add('fa-moon');
     form.classList.remove('dark');
 });
+
+const form = document.querySelector('#login-form')
+form.addEventListener('submit', e => {
+    e.preventDefault()
+})

@@ -13,11 +13,10 @@ body {
 }
 
 /*  Login  */
-
-.wrapper {
+.login-container {
     position: relative;
     width: 400px;
-    height: 440px;
+    height: 350px;
     background: transparent;
     border: 2px solid #162938;
     border-radius: 20px;
@@ -26,46 +25,106 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     /* inportante */
     overflow: hidden;
 
     /* modo */
     transition: height 0.2s ease;
 }
-/*  !!! */
-.wrapper.active {
-    height: 520px;
-}
 
-.wrapper .form-box {
+.login-container .form-box {
     width: 100%;
     padding: 40px;
 }
 
-.wrapper .form-box.login {
+
+
+/* Login */
+
+/* .login-container.active {
+    height: 520px;
+} */
+
+.login-container .form-box.login1 {
     transition: transform 0.18s ease;
     transform: translateX(0);
 }
 
-.wrapper.active .form-box.login {
+.login-container .form-box.login2 {
+    position: absolute;
     transition: none;
+    transform: translatex(400px);
+}
+
+.login-container .icon-close {
+    transition: none;
+    transform: translatex(400px);
+}
+
+.login-container.active .form-box.login1 {
+    transition: none;
+    transition: transform 0.18s ease;
     transform: translateX(-400px);
 }
 
-.wrapper .form-box.register {
+.login-container.active .form-box.login2  {
+    transition: transform 0.18s ease;
+    transform: translatex(0);
+}
+
+.login-container.active .icon-close {
+    transition: transform 0.18s ease;
+    transform: translatex(0);
+}
+
+
+
+
+/* register */
+.login-container.cadastrar {
+    height: 520px;
+}
+
+.login-container.cadastrar .form-box.login1 {
+    transition: none;
+    transition: transform 0.18s ease;
+    transform: translateX(-400px);
+}
+
+.login-container .form-box.register {
     position: absolute;
     transition: none;
     transform:  translatex(400px);
 }
 
-.wrapper.active .form-box.register {
+.login-container.cadastrar .form-box.register {
     transition: transform 0.18s ease;
     transform: translateX(0);
 }
 
 
-/*  !!! */
+/* Botao volta */
+.login-container .icon-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+
+
 
 .form-box h2 {
     font-size: 2em;

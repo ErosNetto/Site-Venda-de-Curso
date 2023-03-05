@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login3.css">
+</head>
+<body>
+    <section class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <input type="password" name="senha" id="senha" required>
+                    <label for="senha">Senha</label>
+                </div>
+                <div class="remember-forgot">
+                    <label for="ver-senha"><input type="checkbox" name="ver-senha" id="ver-senha"> Ver senha</label>
+                    <a href="#">Lembrar senha?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Não tem uma conta? <a href="#" class="register-link">Cadastrar</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Cadastrar</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="text" name="nome" id="nome" required>
+                    <label for="nome">Nome de usuario</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <input type="password" name="senha" id="senha" required>
+                    <label for="senha">Senha</label>
+                </div>
+                <div class="remember-forgot">
+                    <label for="ver-senha"><input type="checkbox" name="ver-senha" id="ver-senha"> Eu aceito o termo & condições</label>
+                </div>
+                <button type="submit" class="btn">Cadastrar</button>
+                <div class="login-register">
+                    <p>Já tem uma conta? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="script3.js"></script>
+    <script src="https://kit.fontawesome.com/b8373a4b3f.js" crossorigin="anonymous"></script>
+</body>
+</html>

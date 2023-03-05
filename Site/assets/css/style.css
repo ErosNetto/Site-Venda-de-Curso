@@ -166,12 +166,17 @@ body .full-width {
     display: flex;
 }
  
-.menu ul li a{
+.menu ul li a {
     display: block;
     padding: 2rem;
     font-size: 1.8rem;
     color: var(--primary-color);
     position: relative;
+}
+/* Teste Botão */
+#li-button {
+    display: flex;
+    align-items: center;
 }
  
 .menu ul li a::after {
@@ -188,6 +193,21 @@ body .full-width {
 .menu ul li a:hover::after {
     width: 50%;
     left: 25%;
+}
+/* Teste botão */
+.menu button {
+    border: 0.5rem solid var(--primary-color);
+    background: none;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.menu button:hover {
+    background: var(--primary-color);
+    color: var(--white-color);
 }
 
 /*  Section 1  */

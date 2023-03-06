@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <section class="login-container">
+        <div class="form-box login1">
+            <h2>Login</h2>
+            <form class="formAvancar" action="#" method="POST">
+
+                <!-- Parte 1 -->
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" name="email" id="email" required>
+                    <!-- mudar o tipo pra email required-->
+                    <label for="email">Email</label>
+                </div>
+
+                <button class="btn btnAvancar">Avançar</button>
+                
+                <div class="login-register">
+                    <p>Não tem uma conta? <a href="#" class="register-link">Cadastrar</a></p>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Botao volta -->
+        <span class="icon-close">
+            <i class="fa-solid fa-arrow-left"></i>
+        </span>
+
+        <div class="form-box login2">
+            <h2>Login</h2>
+            <form action="#" method="POST">
+
+                <!-- parte 2 --> 
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-regular fa-eye"></i>
+                    </span>
+                    <input type="password" name="senha" class="senha" required>
+                    <label for="senha">Senha</label>
+                </div>
+
+                <div class="remember-forgot">
+                    <a href="#">Lembrar senha?</a>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+                <!-- <div class="login-register">
+                    <p>Não tem uma conta? <a href="#" class="register-link">Cadastrar</a></p>
+                </div> -->
+            
+            </form>
+        </div>
+
+
+        <!-- Cadastro -->
+        <div class="form-box register">
+            <h2>Cadastrar</h2>
+            <form action="#">
+
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+                    <input type="text" name="nome" id="nome" required>
+                    <label for="nome">Nome de usuario</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <input type="password" name="senha" class="senha" required>
+                    <label for="senha">Senha</label>
+                </div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox" class="ver-senha"> Ver senha</label>
+                </div>
+
+                <button type="submit" class="btn">Cadastrar</button>
+                
+                <div class="login-register">
+                    <p>Já tem uma conta? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+    <!-- Icones -->
+    <script src="https://kit.fontawesome.com/b8373a4b3f.js" crossorigin="anonymous"></script>
+    
+
+    <script src="login.js"></script>
+</body>
+</html>

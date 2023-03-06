@@ -1,0 +1,243 @@
+/* https://fontawesome.com/ icones*/
+
+:root {
+    --primary-color: #0A1128;
+    --back-color: #1f398f;
+    --secondary-color: crimson;
+    --white-color: #FFFFFF;
+    --light-gray-color: #EEEEEE;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, var(--back-color), rgb(33, 88, 114));;
+    /* background: linear-gradient(to right, #0A1128, #2e407c);; */
+}
+
+/*  Login  */
+.login-container {
+    position: relative;
+    width: 400px;
+    height: 350px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--primary-color);
+    /* inportante */
+    overflow: hidden;
+    /* modo */
+    transition: height 0.2s ease;
+}
+
+.login-container .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+
+
+/* Login */
+.login-container .form-box.login1 {
+    transition: transform 0.18s ease;
+    transform: translateX(0);
+}
+
+.login-container .form-box.login2 {
+    position: absolute;
+    transition: none;
+    transition: transform 0.18s ease;
+    transform: translatex(400px);
+}
+
+.login-container .icon-close {
+    transition: none;
+    transform: translatex(400px);
+}
+
+.login-container.active .form-box.login1 {
+    transition: none;
+    transition: transform 0.18s ease;
+    transform: translateX(-400px);
+}
+
+.login-container.active .form-box.login2  {
+    transition: transform 0.18s ease;
+    transform: translatex(0);
+}
+
+.login-container.active .icon-close {
+    transition: transform 0.18s ease;
+    transform: translatex(0);
+}
+
+
+
+
+/* register */
+.login-container.cadastrar {
+    height: 520px;
+}
+
+.login-container.cadastrar .form-box.login1 {
+    transition: none;
+    transition: transform 0.18s ease;
+    transform: translateX(-400px);
+}
+
+.login-container .form-box.register {
+    position: absolute;
+    transition: none;
+    transition: transform 0.16s ease;
+    transform:  translatex(400px);
+}
+
+.login-container.cadastrar .form-box.register {
+    transition: transform 0.18s ease;
+    transform: translateX(0);
+}
+
+
+/* Botao volta */
+.login-container .icon-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    /* background: var(--primary-color); */
+    font-size: 1.7em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+
+
+
+.form-box h2 {
+    font-size: 2em;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid var(--primary-color);
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: var(--primary-color);
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: var(--primary-color);
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: 0.9em;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: var(--primary-color);
+    margin-left: 3px;
+}
+
+.remember-forgot a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: var(--primary-color);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: 0.9em;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register  p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register  p a:hover {
+    text-decoration: underline;
+}
+
+.fa-eye, .fa-eye-slash {
+    cursor: pointer;
+}

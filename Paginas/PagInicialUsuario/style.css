@@ -1,0 +1,181 @@
+:root {
+    --Cor-da-Nav-primaria: #202020;
+    --Cor-da-Nav-secundaria: #d40e0e8f;
+    --Cor-do-texto-Nav: #fff;
+
+    --light-gray-color: #EEEEEE;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    height: 900vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Header Horizontal */
+.menu {
+    background: var(--Cor-da-Nav-primaria);
+    color: var(--Cor-do-texto-Nav);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 0.1rem solid var(--light-gray-color);
+}
+
+.main-content {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 10rem 3rem;
+}
+ 
+.menu-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+ 
+.menu h1 {
+    font-size: 2.3rem;
+    color: var(--Cor-do-texto-Nav);
+}
+ 
+.menu h1 a {
+    color: inherit;
+}
+ 
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+ 
+.menu ul li a {
+    display: block;
+    padding: 2rem;
+    font-size: 1.8rem;
+    color: var(--Cor-do-texto-Nav);
+    position: relative;
+}
+/* Teste Botão */
+#li-button {
+    display: flex;
+    align-items: center;
+}
+ 
+.menu ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    width: 0;
+    height: 0.2rem;
+    background: var(--Cor-da-Nav-secundaria);
+    transition: all 300ms ease-in-out;
+}
+ 
+.menu ul li a:hover::after {
+    width: 50%;
+    left: 25%;
+}
+/* Teste botão */
+.menu button {
+    border: 0.5rem solid var(--Cor-do-texto-Nav);
+    background: none;
+    color: var(--Cor-do-texto-Nav);
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.menu button:hover {
+    background: var(--Cor-do-texto-Nav);
+    color: var(--Cor-do-texto-Nav);
+}
+
+/* Header Lateral */
+.menu-lateral {
+    z-index: 999;
+    width: 80px;
+    height: 100%;
+    background-color: var(--Cor-da-Nav-primaria);
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 var(--Cor-da-Nav-secundaria);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .3s;
+}
+
+.menu-lateral.expandir {
+    width: 300px;
+}
+
+.btn-expandir {
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir i {
+    color: var(--Cor-do-texto-Nav);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.menu-lateral ul {
+    height: 100%;
+    list-style-type: none;
+}
+
+.menu-lateral ul li.item-menu {
+    transition: .2s;
+}
+
+.menu-lateral ul li.ativo {
+    background: var(--Cor-da-Nav-secundaria);
+}
+
+.menu-lateral ul li.item-menu:hover {
+    background: var(--Cor-da-Nav-secundaria);
+}
+
+.menu-lateral ul li.item-menu a {
+    color: var(--Cor-do-texto-Nav);
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+
+.menu-lateral a .text-link{
+    margin-left: 60px;
+    transition: .5s;
+    opacity: 0;
+}
+
+.menu-lateral.expandir .text-link{
+    margin-left: 20px;
+    opacity: 1;
+}
+
+.menu-lateral a .icon i {
+    font-size: 30px;
+    margin-left: 15px;
+}

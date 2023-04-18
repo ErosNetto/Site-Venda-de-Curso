@@ -19,7 +19,8 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(to right, var(--back-color), rgb(33, 88, 114));;
+    background-color: #FFFFFF;
+    /* background: linear-gradient(to right, var(--back-color), #215872); */
     /* background: linear-gradient(to right, #0A1128, #2e407c);; */
 }
 
@@ -28,7 +29,7 @@ body {
     position: relative;
     width: 400px;
     height: 350px;
-    background: transparent;
+    background: #215872;
     border: 2px solid var(--primary-color);
     border-radius: 20px;
     backdrop-filter: blur(20px);

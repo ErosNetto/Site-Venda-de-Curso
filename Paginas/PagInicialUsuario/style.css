@@ -21,120 +21,96 @@ a {
     text-decoration: none;
 }
 
-/* Header Horizontal */
-.menu {
-    background: var(--Cor-da-Nav-primaria);
-    color: var(--Cor-do-texto-Nav);
 
+/* Header Horizontal */
+.menu-horizontal {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    background: var(--Cor-da-Nav-primaria);
+    color: var(--Cor-do-texto-Nav);
     width: 100%;
+    height: 80px;
     z-index: 1;
-    border-bottom: 0.1rem solid var(--light-gray-color);
 }
 
-.main-content {
-    max-width: 120rem;
-    margin: 0 auto;
-    padding: 10rem 3rem;
-}
- 
-.menu-content {
+.menu-horizontal {
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.menu-horizontal .btn-exp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
  
-.menu h1 {
+.menu-horizontal h1 {
     font-size: 2.3rem;
     color: var(--Cor-do-texto-Nav);
 }
- 
-.menu h1 a {
+
+.menu-horizontal i {
+    font-size: 30px;
+    margin: 0 10px 0 13px;
+    padding-left: 18px;
+    cursor: pointer;
+    color: var(--Cor-do-texto-Nav);
+}
+
+.menu-horizontal h1 a {
     color: inherit;
+    padding: 11px;
 }
  
-.menu ul {
+.menu-horizontal ul {
     list-style: none;
     display: flex;
+    flex-direction: row;
 }
  
-.menu ul li a {
+.menu-horizontal ul li a {
     display: block;
     padding: 2rem;
     font-size: 1.8rem;
     color: var(--Cor-do-texto-Nav);
     position: relative;
 }
-/* Teste Botão */
-#li-button {
-    display: flex;
-    align-items: center;
-}
- 
-.menu ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    width: 0;
-    height: 0.2rem;
-    background: var(--Cor-da-Nav-secundaria);
-    transition: all 300ms ease-in-out;
-}
- 
-.menu ul li a:hover::after {
-    width: 50%;
-    left: 25%;
-}
-/* Teste botão */
-.menu button {
-    border: 0.5rem solid var(--Cor-do-texto-Nav);
-    background: none;
-    color: var(--Cor-do-texto-Nav);
-    padding: 0.5rem 1rem;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: all 300ms ease-in-out;
+/* AQUI
+.menu-horizontal .img-user {
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    background: transparent;
+    overflow: hidden;
 }
 
-.menu button:hover {
-    background: var(--Cor-do-texto-Nav);
-    color: var(--Cor-do-texto-Nav);
-}
+.menu-horizontal .img-user img{
+    height: 80px;
+    width: auto;
+}*/
+
 
 /* Header Lateral */
 .menu-lateral {
-    z-index: 999;
+    margin-top: 80px;
+    z-index: 111;
     width: 80px;
     height: 100%;
     background-color: var(--Cor-da-Nav-primaria);
-    padding: 40px 0 40px 1%;
+    padding: 0 0 40px 13px;
     box-shadow: 3px 0 0 var(--Cor-da-Nav-secundaria);
     overflow: hidden;
     position: fixed;
-    top: 0;
-    left: 0;
     transition: .3s;
 }
 
 .menu-lateral.expandir {
     width: 300px;
-}
-
-.btn-expandir {
-    width: 100%;
-    padding-left: 10px;
-}
-
-.btn-expandir i {
-    color: var(--Cor-do-texto-Nav);
-    font-size: 24px;
-    cursor: pointer;
 }
 
 .menu-lateral ul {

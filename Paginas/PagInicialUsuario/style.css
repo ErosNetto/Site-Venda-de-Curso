@@ -54,7 +54,7 @@ a {
     color: var(--Cor-do-texto-Nav);
 }
 
-.menu-horizontal i {
+.menu-horizontal .btn-exp i {
     font-size: 30px;
     margin: 0 10px 0 13px;
     padding-left: 18px;
@@ -75,10 +75,16 @@ a {
  
 .menu-horizontal ul li a {
     display: block;
-    padding: 2rem;
-    font-size: 1.8rem;
+    padding: 1rem;
     color: var(--Cor-do-texto-Nav);
     position: relative;
+    cursor: default;
+}
+
+.menu-horizontal a i {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--Cor-do-texto-Nav);
 }
 /* AQUI
 .menu-horizontal .img-user {

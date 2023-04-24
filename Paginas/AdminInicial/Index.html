@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso em Video | Admin</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Flaticon -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="menu-horizontal">
+            <div class="btn-exp">
+                <i class="bi bi-list" id="btn-ex"></i>
+                <h1>
+                    <a href="#">Curso em Vídeo</a>
+                </h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Menu lateral -->
+    <aside>
+        <nav class="menu-lateral">
+            <ul>
+                <li class="item-menu ativo">
+                    <a href="/Paginas/AdminInicial/">
+                        <span class="icon"><i class="bi bi-house-door"></i></span>
+                        <span class="text-link">Inicio</span>
+                    </a>
+                </li>
+
+                <li class="item-menu">
+                    <a href="/Paginas/AdminNotificacao/">
+                        <span class="icon"><i class="bi bi-bell"></i></span>
+                        <span class="text-link">Notificações</span>
+                    </a>
+                </li>
+
+                <li class="item-menu">
+                    <a href="/Paginas/AdminCadastro/">
+                        <span class="icon"><i class="bi bi-gear"></i></span>
+                        <span class="text-link">Configuração</span>
+                    </a>
+                </li>            
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- <div class="menu-espaco-horizontal"></div> -->
+
+    <section class="section">
+        <div class="main-conteudo conteudo">
+            <div class="titulo-texto">
+                <h1>Administradores</h1>
+            </div>
+                
+            <div class="responsive-table">
+                <table>
+                    <!-- <thead>
+                        <tr>
+                            <th>Title 1</th>
+                            <th>Title 2</th>
+                            <th>Title 3</th>
+                        </tr>
+                    </thead> -->
+                    <tbody>
+                        <tr>
+                            <td>Eros Netto Antunes</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a class="a-after" href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                        <tr>
+                            <td>João Carlos Xavier de Paula Junior</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a class="a-after" href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                        <tr>
+                            <td>Pedro de Alcântara Francisco Antônio João Carlos Xavier de Paula</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a class="a-after" href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="../script.js"></script>
+</body>
+</html>

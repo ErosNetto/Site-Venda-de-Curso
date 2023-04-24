@@ -389,74 +389,58 @@ a {
     margin-bottom: 25px;
 }
 
-.form-adm {
-    margin-top: 25px;
-    grid-column: span 2;
+.responsive-table {
+    overflow: hidden;
+    overflow-x: auto;
+    margin-bottom: 25px;
 }
 
-.form-adm .form-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.form-group {
-    flex: 1 1 100%;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 30px;
-    font-weight: 600;
-    color: var(--Cor-do-texto-Nav);
-}
-
-
-.form-group input {
-    background: var(--Cor-do-texto-Nav);
-    /* border: 5px solid var(--Cor-do-texto-Nav); */
-    outline: none;
-    font-size: 26px;
+.responsive-table table {
+    min-width: 360px;
     width: 100%;
-    /* height: 76px; */
-    padding: 15px 20px;
-    /* padding: 10px 20px 10px 20px; */
-    border-radius: 50px;
-    transition: .2s;
+    border-collapse: collapse;
+}
+
+/* table caption {
+    font-style: italic;
+    font-size: 1.6rem;
+    text-align: left;
+    margin-bottom: 1rem;
+} */
+
+.responsive-table td {
+    border-bottom: 2px solid var(--Cor-da-Nav-secundaria) ;
+    white-space: nowrap;
+    padding: 30px;
+    text-align: left;
+    font-size: 20px;
     color: var(--Cor-do-texto-Nav);
 }
 
-.form-group input:hover, .form-group input:focus {
-    border-color: var(--Cor-da-Nav-secundaria);
-    /* box-shadow: 0 0 10px 2px var(--Cor-da-Nav-secundaria); */
+.responsive-table td:first-child {
+    white-space: normal;
 }
 
-.form-group::placeholder {
-    font-size: 22px;
-    color: #aeaeae;
+.responsive-table a {
+    color: #3fd304;
+    margin: 0 10px;
 }
 
-.form-group #confirmar-senha {
-    margin-top: 8px;
-}
-
-.btn-car {
-    margin: 25px auto;
-    font-size: 26px;
-    font-weight: 600;
-    width: 285px;
-    height: 60px;
-    padding: 5px;
-    border-radius: 50px;
-    border: 1px solid var(--Cor-do-texto-Nav);
-    background: var(--Cor-do-texto-Nav);
-    color: var(--Cor-da-Nav-primaria);
-}
-
-.btn-car:hover {
+.responsive-table a.a-after::after {
+    content: '';
+    position: absolute;
+    /* display: block; */
+    /* top: 117px; */
+    right: 158px;
+    width: 2px;
+    height: 20px;
     background: var(--Cor-da-Nav-secundaria);
-    border-color: var(--Cor-da-Nav-secundaria);
-    color: var(--Cor-do-texto-Nav);
+}
+
+.responsive-table a:last-child {
+    color: var(--Cor-da-Nav-secundaria);
+}
+
+.responsive-table td:last-child {
+    text-align: center;
 }

@@ -231,9 +231,9 @@ a {
     background: var(--Cor-da-Nav-secundaria);
 }
 
-.menu-suspeso ul li:nth-child(1), .menu-btn li:nth-child(2), .menu-btn li:nth-child(3){
-    /* margin-bottom: 5px; */
-}
+/* .menu-suspeso ul li:nth-child(1), .menu-btn li:nth-child(2), .menu-btn li:nth-child(3){
+    margin-bottom: 5px;
+} */
 
 .menu-suspeso ul li:nth-child(4) {
     margin-top: 5px; /*20px*/
@@ -349,7 +349,7 @@ a {
 /* section */
 .section {
     /* height: 100vh; */
-    margin: 170px 0 0 113px;
+    margin: 150px 0 50px 113px; /* margin: 150px 0 0 113px; */
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -387,6 +387,8 @@ a {
     justify-content: left;
     padding-bottom: 15px;
     border-bottom: 5px solid var(--Cor-da-Nav-secundaria);
+
+    margin-bottom: 25px;
 }
 
 .titulo-texto a {
@@ -406,99 +408,111 @@ a {
     padding-left: 20px;
 }
 
-.titulo-texto .favoritos a {
+.titulo-texto .carrinho a {
     color: #b4b3b3;
+    cursor: pointer;
 }
 
-.titulo-texto .favoritos a:hover {
+.titulo-texto .carrinho a:hover {
     color: var(--Cor-da-Nav-secundaria);
 }
 
 
-
-
-
-
-
-.responsive-table {
-    overflow: hidden;
-    overflow-x: auto;
-    margin-bottom: 25px;
+/* Footer section*/
+/*
+.footer-texto {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 0 30px 25px 30px;
 }
 
-.responsive-table table {
-    min-width: 360px;
-    width: 100%;
-    border-collapse: collapse;
+.btn-comprar button {
+    font-size: 26px;
+    font-weight: 600;
+    width: 150px;
+    height: 45px;
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid var(--Cor-do-texto-Nav);
+    background: var(--Cor-do-texto-Nav);
+    color: var(--Cor-da-Nav-primaria);
+    cursor: pointer;
 }
 
-/* table caption {
-    font-style: italic;
-    font-size: 1.6rem;
-    text-align: left;
-    margin-bottom: 1rem;
-} */
-
-.responsive-table td {
-    border-bottom: 2px solid var(--Cor-da-Nav-secundaria) ;
-    white-space: nowrap;
-    padding: 30px;
-    text-align: left;
-    font-size: 20px;
+.btn-comprar button:hover {
+    background: var(--Cor-da-Nav-secundaria);
+    border-color: var(--Cor-da-Nav-secundaria);
     color: var(--Cor-do-texto-Nav);
 }
 
-.responsive-table tr td:nth-child(1) {
-    width: 218px;
-}
-
-.responsive-table tr td:nth-child(2) {
-    width: 503px;
-    vertical-align: initial;
-    white-space: inherit;
-
-}
-
-.responsive-table .nome-curso {
-    width: 503px;
-    display: inline-block;
-}
-
-.responsive-table td:last-child {
-    text-align: center;
+.total {
+    color: var(--Cor-do-texto-Nav);
     font-size: 30px;
+    font-weight: 800;
+} */
+
+
+.grid-list-curso {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr .7fr;
+    border-bottom: 1px solid var(--Cor-da-Nav-secundaria);
+    padding: 0 25px 25px 25px;
+    margin-bottom: 25px;
+}
+
+.grid-list-curso .imagen-curso {
+    width: 218px;
+    height: 134px;
+}
+
+.grid-list-curso .texto-curso {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.texto-curso h3 a {
+    color: var(--Cor-do-texto-Nav);
+    font-size: 28px;
     font-weight: 600;
 }
 
-.responsive-table td h2 {
-    display: flex;
+.texto-curso h3 a:hover {
+    color: var(--Cor-da-Nav-secundaria);
 }
 
-.responsive-table .botoes-curso a:first-child {
-    color: #3fd304;
+.botoes-curso {
+    font-size: 20px;
+}
+
+.botoes-curso a:nth-child(1) {
+    color: #0077ff;
     padding-right: 10px;
     border-right: 2px solid var(--Cor-da-Nav-secundaria);
 }
 
-.responsive-table .botoes-curso a:first-child:hover {
-    color: #3fd30494;
+.botoes-curso a:nth-child(1):hover {
+    color: #0455b1d7;
 }
 
-.responsive-table .botoes-curso a:nth-child(2) {
+.botoes-curso a:nth-child(2) {
     color: #ff0000d7;
     padding: 0 10px 0 10px;
 }
 
-.responsive-table .botoes-curso a:nth-child(2):hover {
+.botoes-curso a:nth-child(2):hover {
     color: var(--Cor-da-Nav-secundaria);
 }
 
-.responsive-table .botoes-curso a:nth-child(3) {
-    color: #0077ff;
-    padding-left: 10px;
-    border-left: 2px solid var(--Cor-da-Nav-secundaria);
-}
-
-.responsive-table .botoes-curso a:nth-child(3):hover {
-    color: #0455b1d7;
+.preco-curso {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: end;
+    align-items: center;
+    color: var(--Cor-do-texto-Nav);
+    font-size: 30px;
+    font-weight: 600;
 }

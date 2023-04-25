@@ -341,7 +341,12 @@ a {
 } */
 
 
-/* section 1 */
+
+
+
+
+
+/* section */
 .section {
     /* height: 100vh; */
     margin: 170px 0 0 113px;
@@ -379,15 +384,41 @@ a {
 .titulo-texto {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: left;
     padding-bottom: 15px;
     border-bottom: 5px solid var(--Cor-da-Nav-secundaria);
 }
 
-.titulo-texto h1 {
-    font-size: 50px;
-    color: var(--Cor-do-texto-Nav);
+.titulo-texto a {
+    color: var(--Cor-da-Nav-secundaria);
+    font-size: 28px;
+    cursor: default;
 }
+
+.titulo-texto .carrinho {
+    margin-left: 30px;
+    border-right: 1px solid var(--Cor-da-Nav-secundaria);
+    padding-right: 20px;
+}
+
+.titulo-texto .favoritos {
+    border-left: 1px solid var(--Cor-da-Nav-secundaria);
+    padding-left: 20px;
+}
+
+.titulo-texto .favoritos a {
+    color: #b4b3b3;
+}
+
+.titulo-texto .favoritos a:hover {
+    color: var(--Cor-da-Nav-secundaria);
+}
+
+
+
+
+
+
 
 .responsive-table {
     overflow: hidden;
@@ -417,34 +448,57 @@ a {
     color: var(--Cor-do-texto-Nav);
 }
 
-.responsive-table td:nth-child(1), .responsive-table td:nth-child(2) {
-    white-space: normal;
+.responsive-table tr td:nth-child(1) {
+    width: 218px;
+}
+
+.responsive-table tr td:nth-child(2) {
+    width: 503px;
+    vertical-align: initial;
+    white-space: inherit;
+
+}
+
+.responsive-table .nome-curso {
+    width: 503px;
+    display: inline-block;
 }
 
 .responsive-table td:last-child {
     text-align: center;
+    font-size: 30px;
+    font-weight: 600;
 }
-/* .responsive-table a {
-    color: #3fd304;
-    /* margin: 0 10px;
-} */
 
-.responsive-table a:first-child {
+.responsive-table td h2 {
+    display: flex;
+}
+
+.responsive-table .botoes-curso a:first-child {
     color: #3fd304;
     padding-right: 10px;
-    border-right: 1px solid var(--Cor-da-Nav-secundaria);
+    border-right: 2px solid var(--Cor-da-Nav-secundaria);
 }
 
-.responsive-table a:first-child:hover {
+.responsive-table .botoes-curso a:first-child:hover {
     color: #3fd30494;
 }
 
-.responsive-table a:last-child {
+.responsive-table .botoes-curso a:nth-child(2) {
     color: #ff0000d7;
-    padding-left: 10px;
-    border-left: 1px solid var(--Cor-da-Nav-secundaria);
+    padding: 0 10px 0 10px;
 }
 
-.responsive-table a:last-child:hover {
+.responsive-table .botoes-curso a:nth-child(2):hover {
     color: var(--Cor-da-Nav-secundaria);
+}
+
+.responsive-table .botoes-curso a:nth-child(3) {
+    color: #0077ff;
+    padding-left: 10px;
+    border-left: 2px solid var(--Cor-da-Nav-secundaria);
+}
+
+.responsive-table .botoes-curso a:nth-child(3):hover {
+    color: #0455b1d7;
 }

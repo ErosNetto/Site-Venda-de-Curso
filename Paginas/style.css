@@ -22,7 +22,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px;
+    height: 100px;/*120px*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,10 +166,12 @@ a {
 .menu-suspeso {
     z-index: 1;
     position: absolute;
-    top: 125px;
+    top: 105px; /*125px*/
     right: 22px;
-    width: 420px;
-    height: 577px;
+
+    width: 316px; /*420px*/
+    height: 462px; /*577px*/
+
     background: var(--Cor-da-Nav-primaria);
 	transition: .2s;
     visibility: hidden;
@@ -183,7 +185,7 @@ a {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px; /*20px*/
     transition: .2s;
 }
 
@@ -192,18 +194,18 @@ a {
 }
 
 .info-img img {
-    width: 110px;
-    height: 110px;
+    width: 80px; /*110px*/
+    height: 80px;
 }
 
 .info-text h3 {
-    font-size: 22px;
+    font-size: 18px; /*22px*/
     margin: 0 0 10px 0;
     color: var(--Cor-do-texto-Nav);
 }
 
 .info-text p {
-    font-size: 18px;
+    font-size: 12px; /*18px*/
     color: #aeaeae;
 }
 
@@ -220,7 +222,7 @@ a {
 .menu-suspeso ul li a {
     width: 100%;
     padding: 15px;
-    font-size: 22px;
+    font-size: 18px; /*22px*/
     color: var(--Cor-do-texto-Nav);
     transition: .2s;
 }
@@ -230,25 +232,33 @@ a {
 }
 
 .menu-suspeso ul li:nth-child(1), .menu-btn li:nth-child(2), .menu-btn li:nth-child(3){
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .menu-suspeso ul li:nth-child(4) {
-    margin-top: 20px;
-    margin-bottom: 5px;
+    margin-top: 5px; /*20px*/
+    /* margin-bottom: 5px; */
 }
 
 .menu-suspeso ul li:nth-child(6) {
-    margin-top: 20px;
+    margin-top: 5px; /*20px*/
 }
 
 .menu-hover:hover::after {
     content: '';
     position: absolute;
-    top: 95px;
+    
+    top: 80px;
+    right: 22px;
+    width: 125px;
+    height: 30px;
+    
+    /* top: 95px;
     right: 20px;
     width: 110px;
-    height: 50px;
+    height: 50px; */
+
+
     /* background: red; */
 }
 
@@ -261,7 +271,7 @@ a {
 /* Header Lateral */
 .menu-lateral {
     /* margin-top: 120px; */
-    top: 120px;
+    top: 100px; /*120px*/
     z-index: 1;
     width: 110px;
     height: 100%;
@@ -370,6 +380,8 @@ a {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    padding-bottom: 15px;
+    border-bottom: 5px solid var(--Cor-da-Nav-secundaria);
 }
 
 .titulo-texto h1 {
@@ -377,20 +389,8 @@ a {
     color: var(--Cor-do-texto-Nav);
 }
 
-.titulo-texto::after {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 87px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: var(--Cor-da-Nav-secundaria);
-    margin-bottom: 25px;
-}
-
 .form-adm {
-    margin-top: 25px;
+    /* margin-top: 25px; */
     grid-column: span 2;
 }
 
@@ -408,7 +408,7 @@ a {
 .form-group label {
     display: block;
     margin-bottom: 10px;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 600;
     color: var(--Cor-do-texto-Nav);
 }
@@ -425,16 +425,16 @@ a {
     /* padding: 10px 20px 10px 20px; */
     border-radius: 50px;
     transition: .2s;
-    color: var(--Cor-do-texto-Nav);
+    color: var(--Cor-da-Nav-primaria);
 }
 
 .form-group input:hover, .form-group input:focus {
-    border-color: var(--Cor-da-Nav-secundaria);
-    /* box-shadow: 0 0 10px 2px var(--Cor-da-Nav-secundaria); */
+    /* border-color: var(--Cor-da-Nav-secundaria); */
+    box-shadow: 0 0 10px 5px var(--Cor-da-Nav-secundaria);
 }
 
 .form-group::placeholder {
-    font-size: 22px;
+    font-size: 20px;
     color: #aeaeae;
 }
 

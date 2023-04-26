@@ -392,30 +392,86 @@ a {
 .grid-conteudo {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    gap: 55px;
     /* padding: 25px 25px 25px 25px; */
-    margin-bottom: 25px;
+    margin: 25px 0 25px 0;
 }
 
+.form-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
 
+.form-group {
+    flex: 1 1 100%;
+}
 
-
-
-
-.btn-comprar button {
-    font-size: 18px;
+.form-group label, .lado-direito h3 {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 27px;
     font-weight: 600;
-    width: 109px;
-    height: 34px;
-    padding: 5px;
+    color: var(--Cor-do-texto-Nav);
+}
+
+.form-group input {
+    background: var(--Cor-do-texto-Nav);
+    outline: none;
+    font-size: 26px;
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    border-radius: 50px;
+    transition: .2s;
+    color: var(--Cor-da-Nav-primaria);
+}
+
+.form-group input:hover, .form-group input:focus {
+    box-shadow: 0 0 10px 5px var(--Cor-da-Nav-secundaria);
+}
+
+.form-group::placeholder {
+    font-size: 20px;
+    color: #aeaeae;
+}
+
+.form-group #confirmar-senha {
+    margin-top: 8px;
+}
+
+.lado-direito {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.lado-direito p {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 20px;
+    /* font-weight: 600; */
+    color: var(--Cor-do-texto-Nav);
+}
+
+.lado-direito span {
+    color: #ff0000d7;
+}
+
+.btn-car {
+    font-size: 22px;
+    font-weight: 600;
+    width: auto;
+    height: 45px;
+    padding: 10px 20px;
     border-radius: 50px;
     border: 1px solid var(--Cor-do-texto-Nav);
     background: var(--Cor-do-texto-Nav);
     color: var(--Cor-da-Nav-primaria);
-    cursor: pointer;
 }
 
-.btn-comprar button:hover {
+.btn-car:hover {
     background: var(--Cor-da-Nav-secundaria);
     border-color: var(--Cor-da-Nav-secundaria);
     color: var(--Cor-do-texto-Nav);

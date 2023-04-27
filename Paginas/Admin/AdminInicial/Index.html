@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso em Video | Admin</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
@@ -29,22 +29,22 @@
     <aside>
         <nav class="menu-lateral">
             <ul>
-                <li class="item-menu">
-                    <a href="/Paginas/AdminInicial/">
+                <li class="item-menu ativo">
+                    <a href="/Paginas/Admin/AdminInicial/">
                         <span class="icon"><i class="bi bi-house-door"></i></span>
                         <span class="text-link">Inicio</span>
                     </a>
                 </li>
 
                 <li class="item-menu">
-                    <a href="/Paginas/AdminNotificacao/">
+                    <a href="/Paginas/Admin/AdminNotificacao/">
                         <span class="icon"><i class="bi bi-bell"></i></span>
                         <span class="text-link">Notificações</span>
                     </a>
                 </li>
 
-                <li class="item-menu ativo">
-                    <a href="/Paginas/AdminCadastro/">
+                <li class="item-menu">
+                    <a href="/Paginas/Admin/AdminCadastro/">
                         <span class="icon"><i class="bi bi-gear"></i></span>
                         <span class="text-link">Configuração</span>
                     </a>
@@ -58,26 +58,28 @@
     <section class="section">
         <div class="main-conteudo conteudo">
             <div class="titulo-texto">
-                <h1>Cadastrar um novo administrador</h1>
+                <h1>Administradores</h1>
             </div>
-                
-            <div class="form-adm">
-                <form action="" method="" class="form-grid">
-                    <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite um nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" placeholder="Digite um email">
-                    </div>
-                    <div class="form-group">
-                        <label for="senha">Senha:</label>
-                        <input type="password" id="senha" name="senha" placeholder="Digite uma senha">
-                        <input type="password" id="confirmar-senha" name="senha" placeholder="Confirmar senha">
-                    </div>
-                    <button class="btn-car">Cadastrar</button>
-                </form>
+            <div class="responsive-table">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Eros Netto Antunes</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                        <tr>
+                            <td>João Carlos Xavier de Paula Junior</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                        <tr>
+                            <td>Pedro de Alcântara Francisco Antônio João Carlos Xavier de Paula</td>
+                            <td>Cadastrado em: 16 de nov de 2022</td>
+                            <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>

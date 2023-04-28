@@ -437,6 +437,7 @@ a {
     background: var(--Cor-do-texto-Nav);
     color: var(--Cor-da-Nav-primaria);
     cursor: pointer;
+    transition: .2s;
 }
 
 .btn-comprar button:hover {

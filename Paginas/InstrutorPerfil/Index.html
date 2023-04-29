@@ -116,11 +116,51 @@
     <section class="section">
         <div class="main-conteudo main-conteudo-2">
             <div class="titulo-pag-inicial">
-                <h2>Perfil do usuário</h2>
+                <h2>Perfil do instrutor</h2>
             </div>
-            <h3 class="perfil-h3">Meu progresso:</h3>
+
+            <div class="grid-conteudo">
+                <div class="inst-esquerdo">
+                    <!-- <div class="foto"> -->
+                        <img src="Foto 300-300.png" alt="Foto do Instrutor">
+                    <!-- </div> -->
+                    <p>Luiz Otávio Miranda</p>
+                </div>
+
+                <div class="inst-direito">
+                    <h3>Sobre</h3>
+                    <p>Meu nome é Luiz Otávio, trabalho com desenvolvimento de softwares desde 2009 usando várias linguagens, bibliotecas e frameworks diferentes.Das linguagens de programação que trabalhei, me especializei em JavaScript, Python e PHP. Também tenho vasto conhecimento em áreas relacionadas ao trabalho de desenvolvimento, como HTML, CSS, SQL e mais (soft skills).</p>
+                </div>
+            </div>
+
+            <h3 class="inst-h3">Curos autorais:</h3>
+
             <div class="conteudo-cursos">
 
+                <div class="curso">
+                    <div class="img-curso">
+                        <a href="/Paginas/PagCurso/">
+                            <img src="https://source.unsplash.com/random/270x210?r=1?e=1" alt="Imagem do curso">
+                        </a>
+                    </div>
+                    <h4>Curso de JavaScript Avançado</h3>
+                </div>
+                <div class="curso">
+                    <div class="img-curso">
+                        <a href="/Paginas/PagCurso/">
+                            <img src="https://source.unsplash.com/random/270x210?r=1?e=2" alt="Imagem do curso">
+                        </a>
+                    </div>
+                    <h4>Curso de JavaScript Avançado</h3>
+                </div>
+                <div class="curso">
+                    <div class="img-curso">
+                        <a href="/Paginas/PagCurso/">
+                            <img src="https://source.unsplash.com/random/270x210?r=1?e=3" alt="Imagem do curso">
+                        </a>
+                    </div>
+                    <h4>Curso de JavaScript Avançado</h3>
+                </div>
                 <div class="curso">
                     <div class="img-curso">
                         <a href="/Paginas/PagCurso/">
@@ -128,32 +168,11 @@
                         </a>
                     </div>
                     <h4>Curso de JavaScript Avançado</h3>
-                    <!-- <div class="conteudo-barra"> -->
-                        <div class="barra">
-                            <div class="progresso"></div>
-                            <h5>50%</h5>
-                        </div>
-                    <!-- </div> -->
                 </div>
 
             </div>
-
-            <input type="number" class="number" onclick="alrerarProgresso()"/>
-            <button onclick="alrerarProgresso()">GO</button>
-              
         </div>
     </section>
-
-    <script>
-        const progresso = document.querySelector('.progresso');
-        const input = document.querySelector('.number');
-        const numero = document.querySelector('.barra h5');
-
-        const alrerarProgresso = () => {
-            progresso.setAttribute('style', 'width: ' + input.value + '%');
-            numero.innerHTML = input.value + "%";
-        }
-    </script>
 
     <script src="../script.js"></script>
 </body>

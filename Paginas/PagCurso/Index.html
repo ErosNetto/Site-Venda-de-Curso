@@ -89,7 +89,7 @@
                     </a>
                 </li>
 
-                <li class="item-menu ativo">
+                <li class="item-menu">
                     <a href="/Paginas/UsuarioPerfil/">
                         <span class="icon"><i class="bi bi-person-circle"></i></span>
                         <span class="text-link">Perfil</span>
@@ -103,7 +103,7 @@
                     </a>
                 </li>
 
-                <li class="item-menu">
+                <li class="item-menu ativo">
                     <a href="/Paginas/UsuarioConfig">
                         <span class="icon"><i class="bi bi-gear"></i></span>
                         <span class="text-link">Configuração</span>
@@ -114,93 +114,38 @@
     </aside>
   
     <section class="section">
-        <div class="main-conteudo main-espaco">
-            <div class="titulo-pag-inicial">
-                <h2>Perfil do usuário</h2>
-            </div>
-            <h3 class="perfil-h3">Meu progresso:</h3>
-            <div class="conteudo-cursos">
-
-                <div class="curso">
-                    <div class="img-curso">
-                        <a href="/Paginas/PagCurso/">
-                            <img src="https://source.unsplash.com/random/270x210?r=1?e=4" alt="Imagem do curso">
-                        </a>
-                    </div>
-                    <h4>Curso de JavaScript Avançado</h3>
-                    <!-- <div class="conteudo-barra"> -->
-                        <div class="barra">
-                            <div class="progresso"></div>
-                            <h5>50%</h5>
-                        </div>
-                    <!-- </div> -->
-                </div>
-
-            </div>
-
-            <input type="number" class="number" onclick="alrerarProgresso()"/>
-            <button onclick="alrerarProgresso()">GO</button>
-              
-        </div>
-
-
-        <div class="main-conteudo-2 conteudo-2">
+        <div class="main-conteudo conteudo">
             <div class="titulo-texto">
-                <h1>Perfil do instrutor</h1>
+                <h1>Curso de Python</h1>
+                <h2>R$ 109,99</h2>
             </div>
             <div class="grid-conteudo">
-                <div class="form-esquerdo">
-                    <form action="" method="" class="form-grid">
-                        <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+                <div class="lado-esquerdo">
+                    <div class="img"></div>
+                    <div class="conteudo-curso">
+                        <h4>Professor: <a href="../InstrutorPerfil">Luiz Otávio Miranda</a></h4>
+                        <h4>Carga horária: <span>240h</span></h4>
+                        <h4>Categoria: <a href="../UsuarioInicial/">Ti e software</a></h4>
+                    </div>
+                    <button class="btn-car">Adicionar ao carrinho</button>
+                    <!-- <div class="icons">
+                        <div class="add-car">
+                            <i class="bi bi-cart-plus"></i>
+                            <i class="bi bi-cart-plus-fill"></i>
                         </div>
-                        <div class="form-group">
-                            <label for="sobrenome">Sobrenome:</label>
-                            <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome">
+                        <div class="add-fav">
+                            <i class="bi bi-suit-heart"></i>
+                            <i class="bi bi-suit-heart-fill"></i>
                         </div>
-                        <div class="form-group">
-                            <label for="profissao">Profissão :</label>
-                            <input type="text" id="profissao" name="profissao" placeholder="Digite sua profissão">
-                        </div>
-                        <div class="form-group">
-                            <label for="foto">Foto de perfil:</label>
-                            <div class="img-conteudo">
-                                <img src="Group 7.png" alt="">
-                            </div>
-                        </div>
-                        <!-- <button class="btn-salvar">Salvar</button> -->
-                        
-                    </form>
+                    </div> -->
                 </div>
-                
+
                 <div class="lado-direito">
-                    <div class="form-group">
-                        <label for="nome">Biogragia:</label>
-                        <textarea name="message" id="message" cols="30" rows="10" placeholder="Sua biografia"></textarea>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label for="nome">Faça o upload da sua foto de perfil:</label>
-                            <input type="image">
-                        </div>
-                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, eum quasi cumque veritatis porro sint veniam sequi? Itaque ipsum ipsa, odit molestias velit accusantium consectetur, iure tenetur non autem iste!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae nulla nostrum praesentium soluta, iusto dolorum delectus aspernatur dolore vel deleniti esse veniam voluptatem ut officia et error impedit beatae dolor.</p>
                 </div>
             </div>
-            <!-- <button class="btn-salvar">Salvar</button> -->
         </div>
     </section>
-
-    <script>
-        const progresso = document.querySelector('.progresso');
-        const input = document.querySelector('.number');
-        const numero = document.querySelector('.barra h5');
-
-        const alrerarProgresso = () => {
-            progresso.setAttribute('style', 'width: ' + input.value + '%');
-            numero.innerHTML = input.value + "%";
-        }
-    </script>
 
     <script src="../script.js"></script>
 </body>

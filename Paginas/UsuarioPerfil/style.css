@@ -530,8 +530,13 @@ a {
     color: #aeaeae;
 }
 
+
+
+
+
+
 .img-conteudo {
-    width: auto;
+    width: 100%;
     height: 300px;
     background: var(--light-gray-color);
     display: flex;
@@ -539,10 +544,23 @@ a {
     align-items: center;
 }
 
-.img-conteudo img {
+.img-conteudo .img-load {
+    max-width: 522.5px;
+    height: 300px;
+}
+
+.img-user {
     width: 280px;
     height: 280px;
+    position: absolute;
 }
+
+/* input[type='file'] {
+    font-size: 22px;
+} */
+
+
+
 
 .lado-direito {
     display: flex;

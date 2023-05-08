@@ -488,7 +488,8 @@ a {
 }
 
 .botoes-curso a:first-child {
-    color: #3fd304;
+    /* color: #3fd304; */
+    color: #3fd30469;
     padding-right: 10px;
     border-right: 2px solid var(--Cor-da-Nav-secundaria);
 }

@@ -1,5 +1,6 @@
 :root {
-    --Cor-da-Nav-primaria: #202020;
+    /* --Cor-da-Nav-primaria: #202020; */
+    --Cor-da-Nav-primaria: #0A1128;
     --Cor-da-Nav-secundaria: #d40e0e8f;
     --Cor-do-texto-Nav: #fff;
     --light-gray-color: #EEEEEE;
@@ -552,7 +553,7 @@ a {
 
 
 /* .btn-car {
-    /* margin: 25px auto; 
+    margin: 25px auto; 
     font-size: 20px;
     font-weight: 600;
     width: 200px;

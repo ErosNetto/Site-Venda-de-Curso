@@ -3,8 +3,9 @@ import databaseConfig from '../config/database';
 import Curso from '../models/Curso';
 import User from '../models/User';
 import FotoCurso from '../models/FotoCurso';
+import VideoCurso from '../models/VideoCurso';
 
-const models = [Curso, User, FotoCurso];
+const models = [Curso, User, FotoCurso, VideoCurso];
 
 const connection = new Sequelize(databaseConfig);
 

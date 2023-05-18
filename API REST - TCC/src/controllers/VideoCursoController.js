@@ -1,11 +1,11 @@
 import multer from 'multer';
-import multerConfigFotos from '../config/multerConfigFotos';
+import multerConfigCurso from '../config/multerConfigCurso';
 
-import FotoCurso from '../models/FotoCurso';
+import VideoCurso from '../models/VideoCurso';
 
-const upload = multer(multerConfigFotos).single('foto');
+const upload = multer(multerConfigCurso).single('video');
 
-class FotoCursoController {
+class VideoCursoController {
   store(req, res) {
     return upload(req, res, async (error) => {
       if (error) {
@@ -17,9 +17,9 @@ class FotoCursoController {
       try {
         const { originalname, filename } = req.file;
         const { curso_id } = req.body;
-        const foto = await FotoCurso.create({ originalname, filename, curso_id });
+        const video = await VideoCurso.create({ originalname, filename, curso_id });
 
-        return res.json(foto);
+        return res.json(video);
       } catch (e) {
         return res.status(400).json({
           errors: ['Curso não existe'],
@@ -29,4 +29,4 @@ class FotoCursoController {
   }
 }
 
-export default new FotoCursoController();
+export default new VideoCursoController();

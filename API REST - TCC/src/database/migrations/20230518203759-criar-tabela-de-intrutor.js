@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('cursos', {
+    return queryInterface.createTable('instrutor', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,23 +11,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      descricao: {
+      sobrenome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      profissao: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      biografia: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      categoria: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      preco: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      originalname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      filename: {
+      idioma: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -53,6 +49,6 @@ module.exports = {
   },
 
   down(queryInterface) {
-    return queryInterface.dropTable('cursos');
+    return queryInterface.dropTable('instrutor');
   },
 };

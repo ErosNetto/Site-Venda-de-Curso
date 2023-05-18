@@ -14,6 +14,7 @@ import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
 import cursoRoutes from './routes/cursoRoutes';
 import fotoCursoRoutes from './routes/fotoCursoRoutes';
+import videoCursoRoutes from './routes/videoCursoRoutes';
 
 const whitelist = [
   'http://34.151.254.26:82',
@@ -43,6 +44,7 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
     this.app.use('/images/', express.static(resolve(__dirname, '..', 'uploads', 'images')));
+    this.app.use('/videos/', express.static(resolve(__dirname, '..', 'uploads', 'videos')));
   }
 
   routes() {
@@ -51,6 +53,7 @@ class App {
     this.app.use('/tokens/', tokenRoutes);
     this.app.use('/cursos/', cursoRoutes);
     this.app.use('/fotosCurso/', fotoCursoRoutes);
+    this.app.use('/videoCurso/', videoCursoRoutes);
   }
 }
 

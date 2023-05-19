@@ -1,4 +1,3 @@
-// import { emit } from 'nodemon';
 import User from '../models/User';
 
 class UserController {

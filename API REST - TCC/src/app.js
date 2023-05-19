@@ -15,6 +15,8 @@ import tokenRoutes from './routes/tokenRoutes';
 import cursoRoutes from './routes/cursoRoutes';
 import fotoCursoRoutes from './routes/fotoCursoRoutes';
 import videoCursoRoutes from './routes/videoCursoRoutes';
+import instrutorRoutes from './routes/instrutorRoutes';
+import instrutorFotoRoutes from './routes/instrutorFotoRoutes';
 
 const whitelist = [
   'http://34.151.254.26:82',
@@ -54,6 +56,8 @@ class App {
     this.app.use('/cursos/', cursoRoutes);
     this.app.use('/fotosCurso/', fotoCursoRoutes);
     this.app.use('/videoCurso/', videoCursoRoutes);
+    this.app.use('/instrutor/', instrutorRoutes);
+    this.app.use('/instrutorFoto/', instrutorFotoRoutes);
   }
 }
 

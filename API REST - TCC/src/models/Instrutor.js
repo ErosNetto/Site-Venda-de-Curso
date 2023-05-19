@@ -1,7 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
-// import appConfig from '../config/appConfig';
 
-export default class Curso extends Model {
+export default class Instrutor extends Model {
   static init(sequelize) {
     super.init({
       nome: {
@@ -14,31 +13,42 @@ export default class Curso extends Model {
           },
         },
       },
-      descricao: {
+      sobrenome: {
+        type: Sequelize.STRING,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [3, 255],
+            msg: 'Sobrenome precisa ter entre 3 e 255 caracteres.',
+          },
+        },
+      },
+      profissao: {
+        type: Sequelize.STRING,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [3, 255],
+            msg: 'Campo profissão precisa ter entre 3 e 255 caracteres.',
+          },
+        },
+      },
+      biografia: {
         type: Sequelize.TEXT,
         defaultValue: '',
         validate: {
           len: {
             args: [10, 500],
-            msg: 'Campo descrição não pode ser nulo.',
+            msg: 'A biografia precisa ter no minimo 50 caracteres.',
           },
         },
       },
-      categoria: {
+      idioma: {
         type: Sequelize.STRING,
         defaultValue: '',
         validate: {
           notEmpty: {
-            msg: 'Selecione uma categoria.',
-          },
-        },
-      },
-      preco: {
-        type: Sequelize.FLOAT,
-        defaultValue: '',
-        validate: {
-          notEmpty: {
-            msg: 'Campo preço é obrigatório.',
+            msg: 'O campo idioma é obrigatorio.',
           },
         },
       },
@@ -58,6 +68,6 @@ export default class Curso extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.FotoCurso, { foreignKey: 'curso_id' });
+    this.hasMany(models.FotoInstrutor, { foreignKey: 'instrutor_id' });
   }
 }

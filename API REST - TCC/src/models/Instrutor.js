@@ -67,7 +67,7 @@ export default class Instrutor extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.hasMany(models.FotoInstrutor, { foreignKey: 'instrutor_id' });
-  // }
+  static associate(models) {
+    this.hasMany(models.FotoInstrutor, { foreignKey: 'instrutor_id' });
+  }
 }

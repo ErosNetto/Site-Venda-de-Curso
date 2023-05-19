@@ -1,13 +1,14 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 
-import Curso from '../models/Curso';
 import User from '../models/User';
+import Instrutor from '../models/Instrutor';
+import FotoInstrutor from '../models/FotoInstrutor';
+import Curso from '../models/Curso';
 import FotoCurso from '../models/FotoCurso';
 import VideoCurso from '../models/VideoCurso';
-import Instrutor from '../models/Instrutor';
 
-const models = [Curso, User, FotoCurso, VideoCurso, Instrutor];
+const models = [User, Instrutor, FotoInstrutor, Curso, FotoCurso, VideoCurso];
 
 const connection = new Sequelize(databaseConfig);
 

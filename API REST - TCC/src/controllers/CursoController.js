@@ -1,5 +1,6 @@
 import Curso from '../models/Curso';
 import FotoCurso from '../models/FotoCurso';
+import VideoCurso from '../models/VideoCurso';
 
 class CursoController {
   async index(req, res) {
@@ -41,11 +42,17 @@ class CursoController {
 
       const curso = await Curso.findByPk(id, {
         attributes: ['id', 'nome', 'descricao', 'categoria', 'preco'],
-        order: [['id', 'DESC'], [FotoCurso, 'id', 'DESC']],
-        include: {
-          model: FotoCurso,
-          attributes: ['url', 'filename'],
-        },
+        order: [['id', 'DESC'], [FotoCurso, 'id', 'DESC'], [VideoCurso, 'id', 'DESC']],
+        include: [
+          {
+            model: FotoCurso,
+            attributes: ['url', 'filename'],
+          },
+          {
+            model: VideoCurso,
+            attributes: ['url', 'filename'],
+          },
+        ],
       });
 
       if (!curso) {

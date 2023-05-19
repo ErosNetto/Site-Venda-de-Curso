@@ -12,10 +12,11 @@ import cors from 'cors';
 import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
+import instrutorRoutes from './routes/instrutorRoutes';
+import fotoInstrutorRoutes from './routes/fotoInstrutorRoutes';
 import cursoRoutes from './routes/cursoRoutes';
 import fotoCursoRoutes from './routes/fotoCursoRoutes';
 import videoCursoRoutes from './routes/videoCursoRoutes';
-import instrutorRoutes from './routes/instrutorRoutes';
 
 const whitelist = [
   'http://34.151.254.26:82',
@@ -52,10 +53,11 @@ class App {
     this.app.use('/', homeRoutes);
     this.app.use('/users/', userRoutes);
     this.app.use('/tokens/', tokenRoutes);
+    this.app.use('/instrutor/', instrutorRoutes);
+    this.app.use('/instrutorFoto/', fotoInstrutorRoutes);
     this.app.use('/cursos/', cursoRoutes);
     this.app.use('/fotosCurso/', fotoCursoRoutes);
     this.app.use('/videoCurso/', videoCursoRoutes);
-    this.app.use('/instrutor/', instrutorRoutes);
   }
 }
 

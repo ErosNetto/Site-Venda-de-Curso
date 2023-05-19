@@ -1,4 +1,5 @@
 import Instrutor from '../models/Instrutor';
+import FotoInstrutor from '../models/FotoInstrutor';
 
 class InstrutorController {
   async store(req, res) {
@@ -6,10 +7,9 @@ class InstrutorController {
       const novoInstrutor = await Instrutor.create(req.body);
       return res.status(400).json(novoInstrutor);
     } catch (e) {
-      // return res.status(400).json({
-      //   errors: e.errors.map((err) => err.message),
-      // });
-      console.log(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
@@ -26,27 +26,48 @@ class InstrutorController {
   // Show
   async show(req, res) {
     try {
-      const instrutor = await Instrutor.findByPk(req.params.id);
+      const { id } = req.params;
 
-      const {
-        id, nome, sobrenome, profissao, biografia, idioma,
-      } = instrutor;
-      return res.json({
-        id, nome, sobrenome, profissao, biografia, idioma,
+      if (!id) {
+        return res.status(400).json({
+          errors: ['Faltando ID.'],
+        });
+      }
+
+      const instrutor = await Instrutor.findByPk(id, {
+        attributes: ['id', 'nome', 'sobrenome', 'profissao', 'biografia', 'idioma'],
+        order: [['id', 'DESC'], [FotoInstrutor, 'id', 'DESC']],
+        include: {
+          model: FotoInstrutor,
+          attributes: ['url', 'filename'],
+        },
       });
+
+      if (!instrutor) {
+        return res.status(400).json({
+          errors: ['Curso não existe'],
+        });
+      }
+
+      // const { nome, email } = aluno;
+      // return res.json({ nome, email });
+
+      return res.json(instrutor);
     } catch (e) {
-      return res.json(null);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
   // Update
   async update(req, res) {
     try {
-      const instrutor = await Instrutor.findByPk(req.instrutorId);
+      const instrutor = await Instrutor.findByPk(req.params.id);
 
       if (!instrutor) {
         return res.status(400).json({
-          errors: ['Usuário não existe.'],
+          errors: ['O intrutor não existe.'],
         });
       }
 

@@ -7,7 +7,7 @@ import instrutorRequired from '../middlewares/instrutorRequired';
 const router = new Router();
 
 // router.get('/', loginRequired, instrutorController.index);
-router.post('/', loginRequired, instrutorController.store);
+router.post('/', loginRequired, instrutorRequired, instrutorController.store);
 router.get('/:id', loginRequired, instrutorController.show);
 router.put('/:id', loginRequired, instrutorRequired, instrutorController.update);
 // router.delete('/', loginRequired, instrutorController.delete);

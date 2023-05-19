@@ -45,7 +45,7 @@ class InstrutorController {
 
       if (!instrutor) {
         return res.status(400).json({
-          errors: ['Curso não existe'],
+          errors: ['Instrutor não existe'],
         });
       }
 

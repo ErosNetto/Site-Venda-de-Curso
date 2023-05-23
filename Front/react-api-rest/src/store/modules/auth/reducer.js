@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: false,
   token: false,
   user: {},
+  istrutor: false,
   isLoading: false,
 };
 
@@ -16,6 +17,7 @@ export default function (state = initialState, action) {
       newState.isLoggedIn = true;
       newState.token = action.payload.token;
       newState.user = action.payload.user;
+      newState.istrutor = action.payload.user.istrutor;
       newState.isLoading = false;
       return newState;
     }

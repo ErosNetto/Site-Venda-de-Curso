@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import history from '../../services/history';
+// import history from '../../services/history';
 import { Container1 } from '../../styles/GlobalStyles';
 import { Form1, LoginBox } from './styled';
 import * as actions from '../../store/modules/auth/actions';
@@ -39,7 +39,7 @@ export default function Login(props) {
     if (formErrors) return;
 
     dispatch(actions.loginRequest({ email, password, prevPath }));
-    history.push('/register');
+    // history.push('/register');
   };
 
   // HTML(JSX)

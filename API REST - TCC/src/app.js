@@ -19,8 +19,7 @@ import fotoCursoRoutes from './routes/fotoCursoRoutes';
 import videoCursoRoutes from './routes/videoCursoRoutes';
 
 const whitelist = [
-  'http://34.151.254.26:82',
-  'http://localhost:3002',
+  'http://localhost:3000',
 ];
 
 const corsOptions = {

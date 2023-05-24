@@ -253,6 +253,8 @@ export const MenuSuspeso = styled.div`
 export const Nav = styled.nav`
   /* margin-top: 120px; */
   top: 100px; /*120px*/
+  left: 0;
+  position: fixed;
   z-index: 1;
   width: 110px;
   height: 100%;
@@ -260,7 +262,6 @@ export const Nav = styled.nav`
   padding: 0 0 40px 13px;
   box-shadow: 3px 0 0 ${colors.corSecundaria};
   overflow: hidden;
-  position: fixed;
   transition: 0.3s;
 
   &.expandir {

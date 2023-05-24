@@ -23,11 +23,11 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      user_id: {
+      instrutor_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
+          model: 'instrutors',
           key: 'id',
         },
         onDelete: 'CASCADE',

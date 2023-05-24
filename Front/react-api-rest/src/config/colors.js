@@ -1,5 +1,6 @@
 export const corPrimaria = '#0A1128';
 export const corSecundaria = 'crimson';
+export const cinzaClaro = '#EEEEEE';
 
 export const primaryColor = '#C3073F';
 export const primaryDarkColor = '#1A1A1D';

@@ -41,12 +41,12 @@ export default class Curso extends Model {
           },
         },
       },
-      user_id: {
+      instrutor_id: {
         type: Sequelize.INTEGER,
         defaultValue: '',
         validate: {
           notEmpty: {
-            msg: 'Campo User_id é obrigatório.',
+            msg: 'Campo instrutor_id é obrigatório.',
           },
         },
       },
@@ -59,5 +59,6 @@ export default class Curso extends Model {
   static associate(models) {
     this.hasMany(models.FotoCurso, { foreignKey: 'curso_id' });
     this.hasMany(models.VideoCurso, { foreignKey: 'curso_id' });
+    this.belongsTo(models.Instrutor, { foreignKey: 'instrutor_id' });
   }
 }

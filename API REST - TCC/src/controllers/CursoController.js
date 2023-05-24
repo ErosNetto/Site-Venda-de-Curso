@@ -1,16 +1,23 @@
 import Curso from '../models/Curso';
 import FotoCurso from '../models/FotoCurso';
 import VideoCurso from '../models/VideoCurso';
+import Instrutor from '../models/Instrutor';
 
 class CursoController {
   async index(req, res) {
     const cursos = await Curso.findAll({
-      attributes: ['id', 'nome', 'descricao', 'categoria', 'preco', 'user_id'],
-      order: [['id', 'DESC'], [FotoCurso, 'id', 'DESC']],
-      include: {
-        model: FotoCurso,
-        attributes: ['url', 'filename'],
-      },
+      attributes: ['id', 'nome', 'descricao', 'categoria', 'preco', 'instrutor_id'],
+      order: [['id', 'DESC'], [Instrutor, 'id', 'DESC'], [FotoCurso, 'id', 'DESC']],
+      include: [
+        {
+          model: Instrutor,
+          attributes: ['id', 'nome'],
+        },
+        {
+          model: FotoCurso,
+          attributes: ['url', 'filename'],
+        },
+      ],
     });
     res.json(cursos);
   }
@@ -42,8 +49,12 @@ class CursoController {
 
       const curso = await Curso.findByPk(id, {
         attributes: ['id', 'nome', 'descricao', 'categoria', 'preco'],
-        order: [['id', 'DESC'], [FotoCurso, 'id', 'DESC'], [VideoCurso, 'id', 'DESC']],
+        order: [['id', 'DESC'], [Instrutor, 'id', 'DESC'], [FotoCurso, 'id', 'DESC'], [VideoCurso, 'id', 'DESC']],
         include: [
+          {
+            model: Instrutor,
+            attributes: ['id', 'nome'],
+          },
           {
             model: FotoCurso,
             attributes: ['url', 'filename'],

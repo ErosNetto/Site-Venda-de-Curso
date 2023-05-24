@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './styled.css';
-import javaScritpImg from './img/javascript-img.svg';
+import javaScritpImg from '../../img/javascript-img.svg';
 
 export default function Index() {
   return (

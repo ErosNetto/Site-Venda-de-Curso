@@ -5,7 +5,6 @@ const initialState = {
   isLoggedIn: false,
   token: false,
   user: {},
-  istrutor: false,
   isLoading: false,
 };
 
@@ -39,6 +38,15 @@ export default function (state = initialState, action) {
       newState.user.nome = action.payload.nome;
       newState.user.email = action.payload.email;
       newState.isLoading = false;
+      return newState;
+    }
+
+    case types.INSTRUTOR_UPDATED_SUCCESS: {
+      const newState = { ...state };
+      newState.user.istrutor = action.payload.istrutor;
+      newState.isLoading = false;
+      // eslint-disable-next-line
+      console.log(newState);
       return newState;
     }
 

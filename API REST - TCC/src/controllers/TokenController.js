@@ -25,7 +25,7 @@ class TokenController {
       });
     }
 
-    const { id, istrutor } = user;
+    const { id } = user;
     const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
@@ -33,7 +33,7 @@ class TokenController {
     return res.json({
       token,
       user: {
-        nome: user.nome, id, email, istrutor,
+        nome: user.nome, id, email,
       },
     });
   }

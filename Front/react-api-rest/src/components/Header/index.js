@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import * as actions from '../../store/modules/auth/actions';
 import axios from '../../services/axios';
 import history from '../../services/history';
-import Loading from '../Loading';
+// import Loading from '../Loading';
 import { HeaderInicio, SearchBox, MenuSuspeso, Nav } from './style';
 import fotoPerfil from '../../img/Group 5.png';
 
@@ -16,16 +16,15 @@ export default function Header() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
 
-  const istrutor = useSelector((state) => state.auth.istrutor);
-
   const id = useSelector((state) => state.auth.user.id);
   const nomeStored = useSelector((state) => state.auth.user.nome);
   const emailStored = useSelector((state) => state.auth.user.email);
+  const istrutor = useSelector((state) => state.auth.user.istrutor);
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [fotoUser, setFotoUser] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   function handleExpandir() {
     setExpanded(!expanded);
@@ -46,15 +45,15 @@ export default function Header() {
 
     async function getData() {
       try {
-        setIsLoading(true);
+        // setIsLoading(true);
         const { data } = await axios.get(`/user/${id}`);
         const FotoUser = get(data, 'FotoUser[0].url', '');
 
         setFotoUser(FotoUser);
 
-        setIsLoading(false);
+        // setIsLoading(false);
       } catch (err) {
-        setIsLoading(false);
+        // setIsLoading(false);
         const status = get(err, 'response.status', 0);
         const errors = get(err, 'response.data.errors', []);
 
@@ -68,7 +67,7 @@ export default function Header() {
 
   return (
     <>
-      <Loading isLoading={isLoading} />
+      {/* <Loading isLoading={isLoading} /> */}
       <HeaderInicio>
         <div className="btn-exp">
           {/* eslint-disable-next-line */}

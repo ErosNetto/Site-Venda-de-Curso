@@ -18,11 +18,14 @@ export default function Configuracoes() {
   const id = useSelector((state) => state.auth.user.id);
   const nomeSalvo = useSelector((state) => state.auth.user.nome);
   const emailSalvo = useSelector((state) => state.auth.user.email);
+  const istrutorSalvo = useSelector((state) => state.auth.user.istrutor);
+
   const isLoadingSalvo = useSelector((state) => state.auth.isLoading);
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [istrutor, setIstrutor] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,6 +33,7 @@ export default function Configuracoes() {
 
     setNome(nomeSalvo);
     setEmail(emailSalvo);
+    setIstrutor(true);
   }, [id, nomeSalvo, emailSalvo]);
 
   async function handleSubmit(e) {
@@ -61,8 +65,10 @@ export default function Configuracoes() {
   async function handleDelete(e) {
     e.preventDefault();
     if (!id) return;
+
     try {
       setIsLoading(true);
+
       await axios.delete(`/users`);
       dispatch(actions.loginFailure());
       toast.success('Usuário deletado com sucesso.');
@@ -80,33 +86,30 @@ export default function Configuracoes() {
     }
   }
 
-  // async function handleInstrutor(e) {
-  //   e.preventDefault();
+  async function handleInstrutor(e) {
+    e.preventDefault();
 
-  //   try {
-  //     setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-  //     await axios.put(`/user/${id}`, {
-  //       istrutor,
-  //     });
-  //     toast.success('Você virou um intrutor!');
+      await axios.put('/users', {
+        istrutor,
+      });
+      dispatch(actions.intrutorUpdatedSuccess({ istrutor }));
 
-  //     setIsLoading(false);
-  //   } catch (err) {
-  //     setIsLoading(false);
-  //     const status = get(err, 'response.status', 0);
-  //     const data = get(err, 'response.data', {});
-  //     const errors = get(data, 'errors', []);
+      setIsLoading(false);
+      toast.success('Você virou um intrutor!');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
 
-  //     if (errors.length > 0) {
-  //       errors.map((error) => toast.error(error));
-  //     } else {
-  //       toast.error('Erro desconhecido');
-  //     }
-
-  //     if (status === 401) dispatch(actions.loginFailure());
-  //   }
-  // }
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
 
   return (
     <>
@@ -157,10 +160,16 @@ export default function Configuracoes() {
 
             <LadoDireito>
               <div>
-                <h3>Deseja ser um instrutor?</h3>
-                <button type="submit" /* onClick={handleInstrutor} */>
-                  Virar instrutor
-                </button>
+                {istrutorSalvo ? (
+                  <h3>Você já é um instrutor.</h3>
+                ) : (
+                  <>
+                    <h3>Deseja ser um instrutor?</h3>
+                    <button type="submit" onClick={handleInstrutor}>
+                      Virar instrutor
+                    </button>
+                  </>
+                )}
               </div>
 
               <div>

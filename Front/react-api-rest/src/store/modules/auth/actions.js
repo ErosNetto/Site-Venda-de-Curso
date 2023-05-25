@@ -35,6 +35,13 @@ export function registerUpdatedSuccess(payload) {
   };
 }
 
+export function intrutorUpdatedSuccess(payload) {
+  return {
+    type: types.INSTRUTOR_UPDATED_SUCCESS,
+    payload,
+  };
+}
+
 export function registerCreatedSuccess(payload) {
   return {
     type: types.REGISTER_CREATED_SUCCESS,

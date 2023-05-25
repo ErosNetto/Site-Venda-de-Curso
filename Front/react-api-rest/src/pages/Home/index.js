@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { get } from 'lodash';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
-import Header from '../../components/Header2';
+import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import {
   Main,

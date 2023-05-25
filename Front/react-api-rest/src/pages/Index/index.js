@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './styled.css';
 import javaScritpImg from '../../img/javascript-img.svg';
 
 export default function Index() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <>
       {/* // Header */}
@@ -32,7 +35,11 @@ export default function Index() {
                 <a href="#contact">Contato</a>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                {isLoggedIn ? (
+                  <Link to="/home">Home</Link>
+                ) : (
+                  <Link to="/login">Login</Link>
+                )}
               </li>
             </ul>
           </nav>

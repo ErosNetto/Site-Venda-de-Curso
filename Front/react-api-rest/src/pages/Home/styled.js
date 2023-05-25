@@ -27,7 +27,7 @@ export const TituloPag = styled.div`
 export const Filtro = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
   /* margin: 22px 0 0 30px; */
 
   select {
@@ -69,7 +69,6 @@ export const ImgCurso = styled.div`
   img {
     transition: all 300ms ease-in-out;
     width: 100%;
-    height: 100%;
 
     &:hover {
       opacity: 0.4;

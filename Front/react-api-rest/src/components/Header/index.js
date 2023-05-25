@@ -1,54 +1,205 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {
-  FaHome,
-  FaSignInAlt,
-  FaUser,
-  FaCircle,
-  FaPowerOff,
-} from 'react-icons/fa';
-
+import { get } from 'lodash';
 import { Link } from 'react-router-dom';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import { toast } from 'react-toastify';
 
 import * as actions from '../../store/modules/auth/actions';
+import axios from '../../services/axios';
 import history from '../../services/history';
-import { Nav } from './style';
+import Loading from '../Loading';
+import { HeaderInicio, SearchBox, MenuSuspeso, Nav } from './style';
+import fotoPerfil from '../../img/Group 5.png';
 
 export default function Header() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [expanded, setExpanded] = useState(false);
+
+  const istrutor = useSelector((state) => state.auth.istrutor);
+
+  const id = useSelector((state) => state.auth.user.id);
+  const nomeStored = useSelector((state) => state.auth.user.nome);
+  const emailStored = useSelector((state) => state.auth.user.email);
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [fotoUser, setFotoUser] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleExpandir() {
+    setExpanded(!expanded);
+  }
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(actions.loginFailure());
     toast.warn('Você saiu!');
-    history.push('/login');
+    history.push('/');
   };
 
+  useEffect(() => {
+    if (!id) return;
+
+    setNome(nomeStored);
+    setEmail(emailStored);
+
+    async function getData() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(`/user/${id}`);
+        const FotoUser = get(data, 'FotoUser[0].url', '');
+
+        setFotoUser(FotoUser);
+
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        const status = get(err, 'response.status', 0);
+        const errors = get(err, 'response.data.errors', []);
+
+        if (status === 400) errors.map((error) => toast.error(error));
+        // toast.error('Erro ao carregar a imagem de usuario!');
+      }
+    }
+
+    getData();
+  }, [id, nomeStored, emailStored]);
+
   return (
-    <Nav>
-      <Link to="/">
-        <FaHome size={24} />
-      </Link>
-      <Link to="/register">
-        <FaUser size={24} />
-      </Link>
+    <>
+      <Loading isLoading={isLoading} />
+      <HeaderInicio>
+        <div className="btn-exp">
+          {/* eslint-disable-next-line */}
+          <i onClick={handleExpandir} className="bi bi-list" id="btn-ex" />
+          <h1>
+            <Link to="/home">Curso em Vídeo</Link>
+          </h1>
+        </div>
 
-      {isLoggedIn ? (
-        <Link onClick={handleLogout} to="/logout">
-          <FaPowerOff size={24} />
-        </Link>
-      ) : (
-        <Link to="/login">
-          <FaSignInAlt size={24} />
-        </Link>
-      )}
+        <nav>
+          <ul>
+            <li>
+              <SearchBox>
+                <input type="text" placeholder="Pesquisar..." />
+                <Link to="#id">
+                  <i className="bi bi-search" />
+                </Link>
+              </SearchBox>
+            </li>
 
-      {isLoggedIn && <FaCircle size={24} color="#66ff33" />}
-    </Nav>
+            <li>
+              <Link to="/carrinho-de-compras" className="a-horizontal">
+                <i className="bi bi-cart cart1" />
+                <i className="bi bi-cart-fill cart2" />
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/lista-de-desejo" className="a-horizontal">
+                <i className="bi bi-heart he1" />
+                <i className="bi bi-heart-fill he2" />
+              </Link>
+            </li>
+
+            <li className="menu-hover">
+              <Link to="/perfil" className="a-horizontal">
+                <div className="img-user">
+                  <img src={fotoPerfil} alt="Foto de perfil" />
+                </div>
+              </Link>
+
+              <MenuSuspeso id="menu-sus">
+                <div className="info-conteudo">
+                  <Link to="/perfil">
+                    <div className="info-img">
+                      {fotoUser ? (
+                        <img src={fotoUser} alt="Foto de perfil" />
+                      ) : (
+                        <img src={fotoPerfil} alt="Foto de perfil" />
+                      )}
+                    </div>
+                    <div className="info-text">
+                      <h3>{nome}</h3>
+                      <p>{email}</p>
+                    </div>
+                  </Link>
+                </div>
+                <hr />
+                <ul>
+                  <li>
+                    <Link to="/perfil">Meu Perfil</Link>
+                  </li>
+                  <li>
+                    <Link to="/carrinho-de-compras">Meu Carrinho</Link>
+                  </li>
+                  <li>
+                    <Link to="/lista-de-desejo">Lista de desejos</Link>
+                  </li>
+                  <li>
+                    <Link to="/configuracoes">Configurações da Conta</Link>
+                  </li>
+                  <li>
+                    <Link to="/historico-de-compras">Histórico de compras</Link>
+                  </li>
+                  <li>
+                    <Link onClick={handleLogout} to="/logout">
+                      Sair
+                    </Link>
+                  </li>
+                </ul>
+              </MenuSuspeso>
+            </li>
+          </ul>
+        </nav>
+      </HeaderInicio>
+
+      <aside>
+        <Nav className={expanded ? 'expandir' : ''}>
+          <ul>
+            <li className="item-menu ativo">
+              <Link to="/home">
+                <span className="icon">
+                  <i className="bi bi-house-door" />
+                </span>
+                <span className="text-link">Inicio</span>
+              </Link>
+            </li>
+
+            <li className="item-menu">
+              <Link to="/perfil">
+                <span className="icon">
+                  <i className="bi bi-person-circle" />
+                </span>
+                <span className="text-link">Perfil</span>
+              </Link>
+            </li>
+
+            {istrutor ? (
+              <li className="item-menu">
+                <Link to="/cursos">
+                  <span className="icon">
+                    <i className="bi bi-folder" />
+                  </span>
+                  <span className="text-link">Cursos</span>
+                </Link>
+              </li>
+            ) : (
+              <></>
+            )}
+
+            <li className="item-menu">
+              <Link to="/configuracoes">
+                <span className="icon">
+                  <i className="bi bi-gear" />
+                </span>
+                <span className="text-link">Configuração</span>
+              </Link>
+            </li>
+          </ul>
+        </Nav>
+      </aside>
+    </>
   );
 }

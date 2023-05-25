@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
-import Header from '../../components/Header2';
+import Header from '../../components/Header';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -24,6 +24,7 @@ export default function Curso({ match }) {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [cargaHoraria, setCargaHoraria] = useState('');
   const [preco, setPreco] = useState('');
   const [instrutor, setInstrutor] = useState('');
   const [instrutorID, setInstrutorID] = useState('');
@@ -44,6 +45,7 @@ export default function Curso({ match }) {
         setNome(data.nome);
         setDescricao(data.descricao);
         setCategoria(data.categoria);
+        setCargaHoraria(data.carga_horaria);
         setPreco(data.preco);
         setInstrutor(data.Instrutor.nome);
         setInstrutorID(data.Instrutor.id);
@@ -85,7 +87,7 @@ export default function Curso({ match }) {
                   <Link to={`/instrutor/${instrutorID}`}>{instrutor}</Link>
                 </h4>
                 <h4>
-                  Carga horária: <span>240h</span>
+                  Carga horária: <span>{cargaHoraria}h</span>
                 </h4>
                 <h4>
                   Categoria: <Link to="/home">{categoria}</Link>

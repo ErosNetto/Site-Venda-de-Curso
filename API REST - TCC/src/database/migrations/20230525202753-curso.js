@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      cargaHoraria: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
       preco: {
         type: Sequelize.FLOAT,
         allowNull: false,

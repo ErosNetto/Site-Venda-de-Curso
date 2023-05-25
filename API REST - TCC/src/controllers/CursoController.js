@@ -6,7 +6,7 @@ import Instrutor from '../models/Instrutor';
 class CursoController {
   async index(req, res) {
     const cursos = await Curso.findAll({
-      attributes: ['id', 'nome', 'descricao', 'categoria', 'preco', 'instrutor_id'],
+      attributes: ['id', 'nome', 'descricao', 'categoria', 'carga_horaria', 'preco'],
       order: [['id', 'DESC'], [Instrutor, 'id', 'DESC'], [FotoCurso, 'id', 'DESC']],
       include: [
         {
@@ -48,7 +48,7 @@ class CursoController {
       }
 
       const curso = await Curso.findByPk(id, {
-        attributes: ['id', 'nome', 'descricao', 'categoria', 'preco'],
+        attributes: ['id', 'nome', 'descricao', 'categoria', 'carga_horaria', 'preco'],
         order: [['id', 'DESC'], [Instrutor, 'id', 'DESC'], [FotoCurso, 'id', 'DESC'], [VideoCurso, 'id', 'DESC']],
         include: [
           {

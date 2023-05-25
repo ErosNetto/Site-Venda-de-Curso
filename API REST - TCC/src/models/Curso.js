@@ -32,6 +32,15 @@ export default class Curso extends Model {
           },
         },
       },
+      carga_horaria: {
+        type: Sequelize.FLOAT,
+        defaultValue: '',
+        validate: {
+          notEmpty: {
+            msg: 'Preencha a carga horária.',
+          },
+        },
+      },
       preco: {
         type: Sequelize.FLOAT,
         defaultValue: '',

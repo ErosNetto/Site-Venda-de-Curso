@@ -19,7 +19,6 @@ export const TituloPag = styled.div`
 
   h2 {
     font-size: 55px;
-    margin: 0;
     font-weight: 800;
     color: ${colors.corPrimaria};
   }

@@ -7,6 +7,7 @@ import Index from '../pages/Index';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Home from '../pages/Home';
+import Curso from '../pages/Curso';
 
 import Aluno from '../pages/Aluno';
 import Fotos from '../pages/Fotos';
@@ -20,8 +21,8 @@ export default function Routes() {
       <MyRoute exact path="/register/" component={Register} isClosed={false} />
 
       <MyRoute exact path="/home/" component={Home} isClosed />
+      <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
 
-      <MyRoute exact path="/aluno/:id/edit" component={Aluno} isClosed />
       <MyRoute exact path="/aluno/" component={Aluno} isClosed />
       <MyRoute exact path="/fotos/:id" component={Fotos} isClosed />
       <MyRoute path="*" component={Page404} />

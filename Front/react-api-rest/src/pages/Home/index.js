@@ -94,14 +94,14 @@ export default function Home() {
               <Curso key={String(curso.id)}>
                 <ImgCurso>
                   {get(curso, 'FotoCursos[0].url', false) ? (
-                    <Link to="/cursos/:id">
+                    <Link to={`/cursos/${curso.id}`}>
                       <img
                         src={curso.FotoCursos[0].url}
                         alt="Imagem do curso"
                       />
                     </Link>
                   ) : (
-                    <Link to="/cursos/:id">
+                    <Link to={`/cursos/${curso.id}`}>
                       <img
                         src="https://source.unsplash.com/random/270x210?r=1?e=4"
                         alt="Imagem do curso"

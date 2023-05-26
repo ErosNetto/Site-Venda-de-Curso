@@ -19,7 +19,6 @@ export default function Configuracoes() {
   const nomeSalvo = useSelector((state) => state.auth.user.nome);
   const emailSalvo = useSelector((state) => state.auth.user.email);
   const istrutorSalvo = useSelector((state) => state.auth.user.istrutor);
-
   const isLoadingSalvo = useSelector((state) => state.auth.isLoading);
 
   const [nome, setNome] = useState('');

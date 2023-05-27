@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { FaEdit } from 'react-icons/fa';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
@@ -20,7 +19,6 @@ import {
   LadoDireito,
   MainEspaco,
   FotoDePerfil,
-  LadoDireitoIntrutor,
 } from './styled';
 // import fotoPerfil from '../../img/Group 5.png';
 
@@ -200,83 +198,79 @@ export default function Configuracoes() {
 
         <MainEspaco />
 
-        {istrutorSalvo ? (
-          <Main>
-            <TituloTexto>
-              <h1>Configurações do instrutor</h1>
-            </TituloTexto>
+        <Main>
+          <TituloTexto>
+            <h1>Configurações do instrutor</h1>
+          </TituloTexto>
 
-            <GridConteudo>
-              <Form /* onSubmit={handleSubmit} */>
-                <div className="grupo-form">
-                  <label htmlFor="nome">Nome</label>
-                  <input
-                    type="text"
-                    // value={nome}
-                    // onChange={(e) => setNome(e.target.value)}
-                    placeholder="Seu nome"
-                  />
-                </div>
+          <GridConteudo>
+            <Form /* onSubmit={handleSubmit} */>
+              <div className="grupo-form">
+                <label htmlFor="nome">Nome</label>
+                <input
+                  type="text"
+                  // value={nome}
+                  // onChange={(e) => setNome(e.target.value)}
+                  placeholder="Seu nome"
+                />
+              </div>
 
-                <div className="grupo-form">
-                  <label htmlFor="Sobrenome">Sobrenome</label>
-                  <input
-                    type="text"
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Seu sobrenome"
-                  />
-                </div>
+              <div className="grupo-form">
+                <label htmlFor="Sobrenome">Sobrenome</label>
+                <input
+                  type="text"
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Seu sobrenome"
+                />
+              </div>
 
-                <div className="grupo-form">
-                  <label htmlFor="profissao">Profissão</label>
-                  <input
-                    type="text"
-                    // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Digite sua profissão"
-                  />
-                </div>
-              </Form>
+              <div className="grupo-form">
+                <label htmlFor="profissao">Profissão</label>
+                <input
+                  type="text"
+                  // value={password}
+                  // onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Digite sua profissão"
+                />
+              </div>
 
-              <LadoDireitoIntrutor>
+              <div className="grupo-form">
                 <label htmlFor="foto">Foto de perfil</label>
 
                 <FotoDePerfil>
-                  {/* {foto ? ( */}
-                  {/* <img src={foto} alt={nome} /> */}
-                  {/* ) : ( */}
                   <img
                     src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                    alt="Imagem do curso"
+                    alt="Imagem do curso" /* alt={} */
                   />
-                  {/* )} */}
-                  <Link to={`/fotoInstrutor/${id}`}>
-                    <i className="bi bi-pencil-square" />
-                  </Link>
                 </FotoDePerfil>
-              </LadoDireitoIntrutor>
-            </GridConteudo>
-
-            <Form>
-              <div className="grupo-form">
-                <label htmlFor="biografia">Biografia</label>
-                <textarea
-                  name="message"
-                  cols="30"
-                  rows="10"
-                  placeholder="Sua biografia"
-                />
               </div>
             </Form>
 
-            <button type="submit" className="btn-instrutor">
-              Salvar
-            </button>
-          </Main>
-        ) : (
-          <> </>
-        )}
+            <div className="lado-direito">
+              <Form /* onSubmit={handleSubmit} */>
+                <div className="grupo-form">
+                  <label htmlFor="biografia">Biografia</label>
+                  <textarea
+                    name="message"
+                    cols="30"
+                    rows="10"
+                    placeholder="Sua biografia"
+                  />
+                </div>
+              </Form>
+              <div>
+                <div className="form-group">
+                  <label htmlFor="nome">Faça o upload da sua foto:</label>
+                  <Link to={`/fotoInstrutor/${id}`}>Foto</Link>
+                </div>
+              </div>
+            </div>
+          </GridConteudo>
+          <button type="submit" className="btn-instrutor">
+            Salvar
+          </button>
+        </Main>
       </ContainerBack>
     </>
   );

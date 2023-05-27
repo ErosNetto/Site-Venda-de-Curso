@@ -8,6 +8,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Home from '../pages/Home';
 import Configuracoes from '../pages/Configuracoes';
+import PerfilUsuario from '../pages/PerfilUsuario';
 import Curso from '../pages/Curso';
 
 import Page404 from '../pages/Page404';
@@ -26,6 +27,7 @@ export default function Routes() {
         component={Configuracoes}
         isClosed
       />
+      <MyRoute exact path="/perfil/" component={PerfilUsuario} isClosed />
       <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
 
       <MyRoute path="*" component={Page404} />

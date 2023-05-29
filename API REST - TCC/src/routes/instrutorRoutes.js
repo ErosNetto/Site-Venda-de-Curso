@@ -6,7 +6,7 @@ import instrutorRequired from '../middlewares/instrutorRequired';
 
 const router = new Router();
 
-// router.get('/', loginRequired, instrutorController.index);
+router.get('/', loginRequired, instrutorRequired, instrutorController.index);
 router.post('/', loginRequired, instrutorRequired, instrutorController.store);
 router.get('/:id', loginRequired, instrutorController.show);
 router.put('/:id', loginRequired, instrutorRequired, instrutorController.update);

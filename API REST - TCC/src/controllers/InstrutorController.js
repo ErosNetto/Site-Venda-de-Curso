@@ -5,7 +5,7 @@ class InstrutorController {
   async store(req, res) {
     try {
       const novoInstrutor = await Instrutor.create(req.body);
-      return res.status(400).json(novoInstrutor);
+      return res.json(novoInstrutor);
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
@@ -13,15 +13,21 @@ class InstrutorController {
     }
   }
 
-  // Index
-  // async index(req, res) {
-  //   try {
-  //     const instrutores = await Instrutor.findAll({ attributes: ['id', 'nome', 'email'] });
-  //     return res.json(instrutores);
-  //   } catch (e) {
-  //     return res.json(null);
-  //   }
-  // }
+  async index(req, res) {
+    try {
+      const instrutores = await Instrutor.findAll({
+        attributes: ['id', 'nome', 'sobrenome', 'profissao', 'biografia', 'idioma', 'user_id'],
+        order: [['id', 'DESC'], [FotoInstrutor, 'id', 'DESC']],
+        include: {
+          model: FotoInstrutor,
+          attributes: ['url', 'filename'],
+        },
+      });
+      return res.json(instrutores);
+    } catch (e) {
+      return res.json(null);
+    }
+  }
 
   // Show
   async show(req, res) {

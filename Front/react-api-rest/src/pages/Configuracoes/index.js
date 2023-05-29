@@ -27,25 +27,91 @@ import {
 export default function Configuracoes() {
   const dispatch = useDispatch();
 
+  // Usuario
   const id = useSelector((state) => state.auth.user.id);
   const nomeSalvo = useSelector((state) => state.auth.user.nome);
   const emailSalvo = useSelector((state) => state.auth.user.email);
   const istrutorSalvo = useSelector((state) => state.auth.user.istrutor);
   const isLoadingSalvo = useSelector((state) => state.auth.isLoading);
 
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // Usuario
+  const [nome, setNomeUser] = useState('');
+  const [email, setEmailUser] = useState('');
+  const [password, setPasswordUser] = useState('');
   const [istrutor, setIstrutor] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Instrutor
+  const [idInstrutor, setIdInstrutor] = useState('');
+  const [nomeInstrutor, setNomeInstrutor] = useState('');
+  const [sobrenomeInstrutor, setSobrenomeInstrutor] = useState('');
+  const [profissao, setProfissao] = useState('');
+  const [biografia, setBiografia] = useState('');
+  const [idioma, setIdioma] = useState('Portugues(BR)');
+  const [fotoInstrutor, setFotoInstrutor] = useState('');
+  const [intrutorPUT, setIntrutorPUT] = useState('');
+
+  // Instrutor
 
   useEffect(() => {
     if (!id) return;
 
-    setNome(nomeSalvo);
-    setEmail(emailSalvo);
+    setNomeUser(nomeSalvo);
+    setEmailUser(emailSalvo);
     setIstrutor(true);
   }, [id, nomeSalvo, emailSalvo]);
+
+  useEffect(() => {
+    if (!istrutorSalvo) return;
+
+    async function getData() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get('/instrutor/');
+        const instrutorEncontrado = data.find(
+          (instrutor) => instrutor.user_id === id
+        );
+        const FotoInstrutor = get(
+          instrutorEncontrado,
+          'FotoInstrutors[0].url',
+          ''
+        );
+
+        if (instrutorEncontrado) {
+          // const { nome, sobrenome, profissao, biografia } = instrutorEncontrado;
+          setIdInstrutor(instrutorEncontrado.id);
+          setNomeInstrutor(instrutorEncontrado.nome);
+          setSobrenomeInstrutor(instrutorEncontrado.sobrenome);
+          setProfissao(instrutorEncontrado.profissao);
+          setBiografia(instrutorEncontrado.biografia);
+          setIdioma(instrutorEncontrado.idioma);
+          setFotoInstrutor(FotoInstrutor);
+          setIntrutorPUT(true);
+        } else {
+          setNomeInstrutor('');
+          setSobrenomeInstrutor('');
+          setProfissao('');
+          setBiografia('');
+          setIdioma('Portugues(BR)');
+          setFotoInstrutor('');
+          setIntrutorPUT('');
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        const errors = get(err, 'response.data.errors', []);
+
+        if (errors.length > 0) {
+          errors.map((error) => toast.error(error));
+        } else {
+          toast.error('Erro desconhecido');
+        }
+      }
+    }
+
+    getData();
+  }, [istrutorSalvo, id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -73,31 +139,7 @@ export default function Configuracoes() {
     dispatch(actions.registerRequest({ nome, email, password, emailSalvo }));
   }
 
-  async function handleDelete(e) {
-    e.preventDefault();
-    if (!id) return;
-
-    try {
-      setIsLoading(true);
-
-      await axios.delete(`/users`);
-      dispatch(actions.loginFailure());
-      toast.success('Usuário deletado com sucesso.');
-      setIsLoading(false);
-      history.push('/');
-    } catch (err) {
-      setIsLoading(false);
-      const errors = get(err, 'response.data.errors', []);
-
-      if (errors.length > 0) {
-        errors.map((error) => toast.error(error));
-      } else {
-        toast.error('Erro desconhecido');
-      }
-    }
-  }
-
-  async function handleInstrutor(e) {
+  async function handleViraInstrutor(e) {
     e.preventDefault();
 
     try {
@@ -122,6 +164,100 @@ export default function Configuracoes() {
     }
   }
 
+  async function handleDelete(e) {
+    e.preventDefault();
+    if (!id) return;
+
+    try {
+      setIsLoading(true);
+
+      await axios.delete(`/users`);
+      dispatch(actions.loginFailure());
+      toast.success('Usuário deletado com sucesso.');
+      setIsLoading(false);
+      history.push('/');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
+
+  async function handleConfigInstrutor(e) {
+    e.preventDefault();
+    let formErrors = false;
+
+    if (nomeInstrutor.length < 3 || nomeInstrutor.length > 255) {
+      formErrors = true;
+      toast.error('Nome deve ter entre 3 e 255 caracteres');
+    }
+
+    if (sobrenomeInstrutor.length < 3 || sobrenomeInstrutor.length > 255) {
+      formErrors = true;
+      toast.error('Sobrenome precisa ter entre 3 e 255 caracteres');
+    }
+
+    if (profissao.length < 3 || profissao.length > 255) {
+      formErrors = true;
+      toast.error('Campo profissão precisa ter entre 3 e 255 caracteres');
+    }
+
+    if (biografia.length < 50 || biografia.length > 500) {
+      formErrors = true;
+      toast.error('A biografia precisa ter no minimo 50 caracteres');
+    }
+
+    if (idioma.length <= 0) {
+      formErrors = true;
+      toast.error('O campo idioma é obrigatorio');
+    }
+
+    if (formErrors) return;
+
+    setIsLoading(true);
+
+    try {
+      if (intrutorPUT) {
+        // UPDATE
+        await axios.put(`/instrutor/${idInstrutor}`, {
+          nome: nomeInstrutor,
+          sobrenome: sobrenomeInstrutor,
+          profissao,
+          biografia,
+          idioma,
+        });
+        toast.success('Instrutor alterado com sucesso');
+        setIsLoading(false);
+      } else {
+        // CREATE
+        await axios.post('/instrutor/', {
+          nome: nomeInstrutor,
+          sobrenome: sobrenomeInstrutor,
+          profissao,
+          biografia,
+          idioma,
+          user_id: id,
+        });
+        toast.success('Instrutor criado com sucesso');
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido 1');
+      }
+    }
+  }
+
   return (
     <>
       <Header />
@@ -141,7 +277,7 @@ export default function Configuracoes() {
                 <input
                   type="text"
                   value={nome}
-                  onChange={(e) => setNome(e.target.value)}
+                  onChange={(e) => setNomeUser(e.target.value)}
                   placeholder="Seu nome"
                 />
               </div>
@@ -151,7 +287,7 @@ export default function Configuracoes() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmailUser(e.target.value)}
                   placeholder="Seu e-mail"
                 />
               </div>
@@ -161,7 +297,7 @@ export default function Configuracoes() {
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPasswordUser(e.target.value)}
                   placeholder="Sua senha"
                 />
               </div>
@@ -176,7 +312,7 @@ export default function Configuracoes() {
                 ) : (
                   <>
                     <h3>Deseja ser um instrutor?</h3>
-                    <button type="submit" onClick={handleInstrutor}>
+                    <button type="submit" onClick={handleViraInstrutor}>
                       Virar instrutor
                     </button>
                   </>
@@ -199,6 +335,7 @@ export default function Configuracoes() {
         </Main>
 
         <MainEspaco />
+        <Loading isLoading={isLoading} />
 
         {istrutorSalvo ? (
           <Main>
@@ -212,8 +349,8 @@ export default function Configuracoes() {
                   <label htmlFor="nome">Nome</label>
                   <input
                     type="text"
-                    // value={nome}
-                    // onChange={(e) => setNome(e.target.value)}
+                    value={nomeInstrutor}
+                    onChange={(e) => setNomeInstrutor(e.target.value)}
                     placeholder="Seu nome"
                   />
                 </div>
@@ -222,8 +359,8 @@ export default function Configuracoes() {
                   <label htmlFor="Sobrenome">Sobrenome</label>
                   <input
                     type="text"
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
+                    value={sobrenomeInstrutor}
+                    onChange={(e) => setSobrenomeInstrutor(e.target.value)}
                     placeholder="Seu sobrenome"
                   />
                 </div>
@@ -232,8 +369,8 @@ export default function Configuracoes() {
                   <label htmlFor="profissao">Profissão</label>
                   <input
                     type="text"
-                    // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    value={profissao}
+                    onChange={(e) => setProfissao(e.target.value)}
                     placeholder="Digite sua profissão"
                   />
                 </div>
@@ -243,15 +380,18 @@ export default function Configuracoes() {
                 <label htmlFor="foto">Foto de perfil</label>
 
                 <FotoDePerfil>
-                  {/* {foto ? ( */}
-                  {/* <img src={foto} alt={nome} /> */}
-                  {/* ) : ( */}
-                  <img
-                    src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                    alt="Imagem do curso"
-                  />
-                  {/* )} */}
-                  <Link to={`/fotoInstrutor/${id}`}>
+                  {fotoInstrutor ? (
+                    <img
+                      src={fotoInstrutor}
+                      alt="Foto de perfil do instrutor"
+                    />
+                  ) : (
+                    <img
+                      src="https://source.unsplash.com/random/270x210?r=1?e=4"
+                      alt="Imagem do curso"
+                    />
+                  )}
+                  <Link to={`/fotoInstrutor/${idInstrutor}`}>
                     <i className="bi bi-pencil-square" />
                   </Link>
                 </FotoDePerfil>
@@ -263,14 +403,18 @@ export default function Configuracoes() {
                 <label htmlFor="biografia">Biografia</label>
                 <textarea
                   name="message"
-                  cols="30"
-                  rows="10"
+                  value={biografia}
+                  onChange={(e) => setBiografia(e.target.value)}
                   placeholder="Sua biografia"
                 />
               </div>
             </Form>
 
-            <button type="submit" className="btn-instrutor">
+            <button
+              type="submit"
+              className="btn-instrutor"
+              onClick={handleConfigInstrutor}
+            >
               Salvar
             </button>
           </Main>

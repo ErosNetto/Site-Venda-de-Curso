@@ -3,7 +3,6 @@ import { get } from 'lodash';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 // import { FaEdit } from 'react-icons/fa';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
@@ -22,12 +21,12 @@ import {
   FotoDePerfil,
   LadoDireitoIntrutor,
 } from './styled';
-// import fotoPerfil from '../../img/Group 5.png';
+import SemFoto from '../../img/Group 5.png';
 
 export default function Configuracoes() {
   const dispatch = useDispatch();
 
-  // Usuario
+  // Usuario Salvo
   const id = useSelector((state) => state.auth.user.id);
   const nomeSalvo = useSelector((state) => state.auth.user.nome);
   const emailSalvo = useSelector((state) => state.auth.user.email);
@@ -253,10 +252,43 @@ export default function Configuracoes() {
       if (errors.length > 0) {
         errors.map((error) => toast.error(error));
       } else {
-        toast.error('Erro desconhecido 1');
+        toast.error('Erro desconhecido');
       }
     }
   }
+
+  const handleFotoInstrutor = async (e) => {
+    const file = e.target.files[0];
+    const fotoURL = URL.createObjectURL(file);
+
+    setFotoInstrutor(fotoURL);
+
+    const formData = new FormData();
+    formData.append('instrutor_id', idInstrutor);
+    formData.append('foto', file);
+
+    try {
+      setIsLoading(true);
+
+      await axios.post('/instrutorFoto/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success('Foto enviada com sucesso!');
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  };
 
   return (
     <>
@@ -379,22 +411,31 @@ export default function Configuracoes() {
               <LadoDireitoIntrutor>
                 <label htmlFor="foto">Foto de perfil</label>
 
-                <FotoDePerfil>
-                  {fotoInstrutor ? (
-                    <img
-                      src={fotoInstrutor}
-                      alt="Foto de perfil do instrutor"
-                    />
-                  ) : (
-                    <img
-                      src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                      alt="Imagem do curso"
-                    />
-                  )}
-                  <Link to={`/fotoInstrutor/${idInstrutor}`}>
-                    <i className="bi bi-pencil-square" />
-                  </Link>
-                </FotoDePerfil>
+                <form>
+                  <FotoDePerfil>
+                    {fotoInstrutor ? (
+                      <img
+                        className="imgfoto"
+                        src={fotoInstrutor}
+                        alt="Foto de perfil do instrutor"
+                      />
+                    ) : (
+                      <img
+                        className="imgfoto"
+                        src={SemFoto}
+                        alt="Imagem do curso"
+                      />
+                    )}
+                    <label htmlFor="foto">
+                      <input
+                        type="file"
+                        id="foto"
+                        onChange={handleFotoInstrutor}
+                      />
+                      <i className="bi bi-pencil-square" />
+                    </label>
+                  </FotoDePerfil>
+                </form>
               </LadoDireitoIntrutor>
             </GridConteudo>
 

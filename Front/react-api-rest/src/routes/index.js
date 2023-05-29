@@ -11,6 +11,7 @@ import Configuracoes from '../pages/Configuracoes';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import CarrinhoDeCompras from '../pages/CarrinhoDeCompras';
 import Curso from '../pages/Curso';
+import Instrutor from '../pages/Instrutor';
 
 import Page404 from '../pages/Page404';
 
@@ -36,6 +37,7 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
+      <MyRoute exact path="/instrutor/:id/" component={Instrutor} isClosed />
 
       <MyRoute path="*" component={Page404} />
     </Switch>

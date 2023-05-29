@@ -29,6 +29,11 @@ export const Main = styled.div`
       background: ${colors.corPrimaria};
       color: #fff;
     }
+
+    &:focus {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
   }
 `;
 
@@ -123,6 +128,11 @@ export const Form = styled.form`
       background: ${colors.corPrimaria};
       color: #fff;
     }
+
+    &:focus {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
   }
 `;
 
@@ -137,14 +147,14 @@ export const LadoDireito = styled.div`
     margin-bottom: 10px;
     font-size: 22px;
     font-weight: 600;
-    color: var(--Cor-do-texto-Nav);
+    color: ${colors.corPrimaria};
   }
 
   p {
     display: block;
     margin-bottom: 15px;
     font-size: 20px;
-    color: var(--Cor-do-texto-Nav);
+    color: ${colors.corPrimaria};
   }
 
   span {
@@ -162,6 +172,11 @@ export const LadoDireito = styled.div`
     transition: all 0.2s ease-in-out;
 
     &:hover {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
+
+    &:focus {
       background: ${colors.corPrimaria};
       color: #fff;
     }
@@ -192,22 +207,37 @@ export const FotoDePerfil = styled.div`
     border: 3px solid ${colors.corPrimaria};
   }
 
-  a {
+  label {
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
+    margin: 0;
     position: absolute;
     color: #fff;
     bottom: 0;
     background: ${colors.corPrimaria};
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+    }
+  }
+
+  input {
+    display: none;
   }
 
   i {
-    margin-top: 4px;
-    font-size: 40px;
+    margin-top: 5px;
+    font-size: 35px;
+    transition: 0.2s;
+
+    &:hover {
+      color: ${colors.corSecundaria};
+    }
   }
 `;

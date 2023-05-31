@@ -13,7 +13,7 @@ import CarrinhoDeCompras from '../pages/CarrinhoDeCompras';
 import Curso from '../pages/Curso';
 import Instrutor from '../pages/Instrutor';
 import MeusCursos from '../pages/MeusCursos';
-// import CriarCurso from '../pages/CriarCurso';
+import CriarCurso from '../pages/CriarCurso';
 
 import Page404 from '../pages/Page404';
 
@@ -41,7 +41,7 @@ export default function Routes() {
       <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
       <MyRoute exact path="/instrutor/:id/" component={Instrutor} isClosed />
       <MyRoute exact path="/cursos/" component={MeusCursos} isClosed />
-      {/* <MyRoute exact path="/criarCurso/" component={CriarCurso} isClosed /> */}
+      <MyRoute exact path="/criarCurso/" component={CriarCurso} isClosed />
 
       <MyRoute path="*" component={Page404} />
     </Switch>

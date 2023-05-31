@@ -1,330 +1,315 @@
-// import React, { useEffect, useState } from 'react';
-// import { get } from 'lodash';
-// import { toast } from 'react-toastify';
-// import { isEmail } from 'validator';
-// import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { get } from 'lodash';
+import { toast } from 'react-toastify';
+import { /* useSelector, */ useDispatch } from 'react-redux';
+import { NumericFormat } from 'react-number-format';
 
-// import { ContainerBack } from '../../styles/GlobalStyles';
-// import Header from '../../components/Header';
-// import axios from '../../services/axios';
+import { ContainerBack } from '../../styles/GlobalStyles';
+import Header from '../../components/Header';
+import axios from '../../services/axios';
 // import history from '../../services/history';
-// import Loading from '../../components/Loading';
-// import * as actions from '../../store/modules/auth/actions';
-// import {
-//   Main,
-//   TituloTexto,
-//   GridConteudo,
-//   Form,
-//   // LadoDireito,
-//   FotoDePerfil,
-//   LadoDireitoIntrutor,
-// } from './styled';
-// import SemFoto from '../../img/Group 5.png';
+import Loading from '../../components/Loading';
+import * as actions from '../../store/modules/auth/actions';
+import {
+  Main,
+  TituloTexto,
+  GridConteudo,
+  Form,
+  LadoDireito,
+  Container1,
+  Container2,
+  FotoDoCurso,
+  VideoCurso,
+} from './styled';
+import SemFoto from '../../img/Group 5.png';
 
-// export default function Configuracoes() {
-//   const dispatch = useDispatch();
+export default function Configuracoes() {
+  const dispatch = useDispatch();
 
-//   // Usuario Salvo
-//   const id = useSelector((state) => state.auth.user.id);
-//   const nomeSalvo = useSelector((state) => state.auth.user.nome);
-//   const emailSalvo = useSelector((state) => state.auth.user.email);
-//   const istrutorSalvo = useSelector((state) => state.auth.user.istrutor);
+  // Curso
+  const [nomeCurso, setNomeCurso] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [cargaHoraria, setCargaHoraria] = useState('');
+  const [preco, setPreco] = useState(0);
+  const [descricao, setDescricao] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  // Foto e video Curso
+  const [fotoCurso, setFotoCurso] = useState('');
+  // const [videoCurso, setVideoCurso] = useState('');
+  // Intrutor
+  const [instrutorId, setInstrutorId] = useState('');
+  // const instrutorId = get(match, 'params.id', '');
 
-//   const [isLoading, setIsLoading] = useState(false);
+  const handlePrecoChange = (value) => {
+    const precoNumber = parseFloat(
+      value.replace(/[^0-9,-]+/g, '').replace(',', '.')
+    );
+    setPreco(precoNumber);
+  };
 
-//   // Instrutor
-//   const [idInstrutor, setIdInstrutor] = useState('');
-//   const [nomeInstrutor, setNomeInstrutor] = useState('');
-//   const [sobrenomeInstrutor, setSobrenomeInstrutor] = useState('');
-//   const [profissao, setProfissao] = useState('');
-//   const [biografia, setBiografia] = useState('');
-//   const [idioma, setIdioma] = useState('Portugues(BR)');
-//   const [fotoInstrutor, setFotoInstrutor] = useState('');
-//   const [intrutorPUT, setIntrutorPUT] = useState('');
+  useEffect(() => {
+    setInstrutorId('32');
+  }, []);
 
-//   // Instrutor
+  async function handleCriarEditarCurso(e) {
+    e.preventDefault();
+    if (!instrutorId) return;
 
-//   useEffect(() => {
-//     if (!id) return;
-//   }, [id, nomeSalvo, emailSalvo]);
+    let formErrors = false;
 
-//   useEffect(() => {
-//     if (!istrutorSalvo) return;
+    if (nomeCurso.length < 3 || nomeCurso.length > 255) {
+      formErrors = true;
+      toast.error('O nome do curso precisa ter entre 3 e 255 caracteres');
+    }
 
-//     async function getData() {
-//       try {
-//         setIsLoading(true);
-//         const { data } = await axios.get('/instrutor/');
-//         const instrutorEncontrado = data.find(
-//           (instrutor) => instrutor.user_id === id
-//         );
-//         const FotoInstrutor = get(
-//           instrutorEncontrado,
-//           'FotoInstrutors[0].url',
-//           ''
-//         );
+    if (!categoria === 'Categoria' || categoria <= 0) {
+      formErrors = true;
+      toast.error('Selecione uma categoria');
+    }
 
-//         if (instrutorEncontrado) {
-//           // const { nome, sobrenome, profissao, biografia } = instrutorEncontrado;
-//           setIdInstrutor(instrutorEncontrado.id);
-//           setNomeInstrutor(instrutorEncontrado.nome);
-//           setSobrenomeInstrutor(instrutorEncontrado.sobrenome);
-//           setProfissao(instrutorEncontrado.profissao);
-//           setBiografia(instrutorEncontrado.biografia);
-//           setIdioma(instrutorEncontrado.idioma);
-//           setFotoInstrutor(FotoInstrutor);
-//           setIntrutorPUT(true);
-//         } else {
-//           setNomeInstrutor('');
-//           setSobrenomeInstrutor('');
-//           setProfissao('');
-//           setBiografia('');
-//           setIdioma('Portugues(BR)');
-//           setFotoInstrutor('');
-//           setIntrutorPUT('');
-//         }
+    if (cargaHoraria <= 0) {
+      formErrors = true;
+      toast.error('Preencha a carga horária');
+    }
 
-//         setIsLoading(false);
-//       } catch (err) {
-//         setIsLoading(false);
-//         const errors = get(err, 'response.data.errors', []);
+    const precoConvetido = parseFloat(preco);
+    setPreco(precoConvetido);
 
-//         if (errors.length > 0) {
-//           errors.map((error) => toast.error(error));
-//         } else {
-//           toast.error('Erro desconhecido');
-//         }
-//       }
-//     }
+    if (preco.length <= 0) {
+      formErrors = true;
+      toast.error('Campo preço é obrigatório');
+    }
 
-//     getData();
-//   }, [istrutorSalvo, id]);
+    if (descricao.length < 10) {
+      formErrors = true;
+      toast.error('Campo descrição precisa ter no minimo 10 caracteres.');
+    }
 
-//   async function handleSubmit(e) {
-//     e.preventDefault();
-//     if (!id) return;
+    if (formErrors) return;
 
-//     let formErrors = false;
+    setIsLoading(true);
 
-//     if (nome.length < 3 || nome.length > 255) {
-//       formErrors = true;
-//       toast.error('Nome deve ter entre 3 e 255 caracteres');
-//     }
+    try {
+      await axios.post('/cursos/', {
+        nome: nomeCurso,
+        descricao,
+        categoria,
+        carga_horaria: cargaHoraria,
+        preco,
+        instrutor_id: instrutorId,
+      });
+      toast.success('Curso criado com sucesso');
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const status = get(err, 'response.status', 0);
+      const data = get(err, 'response.data', {});
+      const errors = get(data, 'errors', []);
 
-//     if (!isEmail(email)) {
-//       formErrors = true;
-//       toast.error('Email inválido');
-//     }
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
 
-//     if (!id && (password.length < 6 || password.length > 50)) {
-//       formErrors = true;
-//       toast.error('Senha precisa ter entre 6 e 50 caracteres');
-//     }
+      if (status === 401) dispatch(actions.loginFailure());
+    }
+  }
 
-//     if (formErrors) return;
+  // Escolhe a opçaõ do Setect (categoria)
+  const handleSelectOpcoes = (e) => {
+    setCategoria(e.target.value);
+  };
 
-//     dispatch(actions.registerRequest({ nome, email, password, emailSalvo }));
-//   }
+  // Input de arquivo
+  const handleInputAquivo = (e) => {
+    document.querySelector('.nome-arquivo').textContent =
+      e.target.files[0].name;
+  };
 
-//   async function handleConfigInstrutor(e) {
-//     e.preventDefault();
-//     let formErrors = false;
+  return (
+    <>
+      <Header />
+      <Loading isLoading={isLoading} />
 
-//     if (nomeInstrutor.length < 3 || nomeInstrutor.length > 255) {
-//       formErrors = true;
-//       toast.error('Nome deve ter entre 3 e 255 caracteres');
-//     }
+      <ContainerBack>
+        <Main>
+          <TituloTexto>
+            <h1>Criar curso</h1>
+            {/* <h1>Edita curso</h1> */}
+          </TituloTexto>
 
-//     if (sobrenomeInstrutor.length < 3 || sobrenomeInstrutor.length > 255) {
-//       formErrors = true;
-//       toast.error('Sobrenome precisa ter entre 3 e 255 caracteres');
-//     }
+          <GridConteudo>
+            <Form>
+              <div className="grupo-form">
+                <label htmlFor="nomeCurso">Nome do curso</label>
+                <input
+                  type="text"
+                  value={nomeCurso}
+                  onChange={(e) => setNomeCurso(e.target.value)}
+                  placeholder="O nome do curso"
+                />
+              </div>
 
-//     if (profissao.length < 3 || profissao.length > 255) {
-//       formErrors = true;
-//       toast.error('Campo profissão precisa ter entre 3 e 255 caracteres');
-//     }
+              <div className="grupo-form">
+                <label htmlFor="categorias">Categoria</label>
+                <select name="categorias" onChange={handleSelectOpcoes}>
+                  <option key={1} id="1" value="">
+                    Categoria
+                  </option>
+                  <option key={2} id="2" value="Desenvolvimento">
+                    Desenvolvimento
+                  </option>
+                  <option key={3} id="3" value="Negócios">
+                    Negócios
+                  </option>
+                  <option key={4} id="4" value="Finanças e contabilidade">
+                    Finanças e contabilidade
+                  </option>
+                  <option key={5} id="5" value="Ti e software">
+                    Ti e software
+                  </option>
+                  <option key={6} id="6" value=" Produtividade no escritório">
+                    Produtividade no escritório
+                  </option>
+                  <option key={7} id="7" value="Desenvolvimento Pessoal">
+                    Desenvolvimento Pessoal
+                  </option>
+                  <option key={8} id="8" value="Design">
+                    Design
+                  </option>
+                  <option key={9} id="9" value="Marketing">
+                    Marketing
+                  </option>
+                  <option key={10} id="10" value="Estilo de vida">
+                    Estilo de vida
+                  </option>
+                  <option key={11} id="11" value="Fotografia e vídeo">
+                    Fotografia e vídeo
+                  </option>
+                  <option key={12} id="12" value="Saúde e fitness">
+                    Saúde e fitness
+                  </option>
+                  <option key={13} id="13" value="Música">
+                    Música
+                  </option>
+                  <option key={14} id="14" value="Ensino e estudo acadêmico">
+                    Ensino e estudo acadêmico
+                  </option>
+                </select>
+              </div>
 
-//     if (biografia.length < 50 || biografia.length > 500) {
-//       formErrors = true;
-//       toast.error('A biografia precisa ter no minimo 50 caracteres');
-//     }
+              <div className="grupo-form">
+                <label htmlFor="cargaHoraria">Carga horária</label>
+                <input
+                  type="number"
+                  value={cargaHoraria}
+                  onChange={(e) => setCargaHoraria(e.target.value)}
+                  placeholder="Coloque a carga horária"
+                />
+              </div>
 
-//     if (idioma.length <= 0) {
-//       formErrors = true;
-//       toast.error('O campo idioma é obrigatorio');
-//     }
+              <div className="grupo-form">
+                <label htmlFor="preco">Preço</label>
+                {/* <NumericFormat
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  prefix="R$ "
+                  decimalScale={2}
+                  fixedDecimalScale
+                  allowNegative={false}
+                  allowLeadingZeros={false}
+                  value={preco}
+                  onChange={(e) => setPreco(e.target.value)}
+                  placeholder="Preço do curso"
+                /> */}
 
-//     if (formErrors) return;
+                <NumericFormat
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  prefix="R$ "
+                  decimalScale={2}
+                  fixedDecimalScale
+                  allowNegative={false}
+                  allowLeadingZeros={false}
+                  value={preco}
+                  onValueChange={(values) =>
+                    handlePrecoChange(values.formattedValue)
+                  }
+                  placeholder="Preço do curso"
+                />
+              </div>
 
-//     setIsLoading(true);
+              <div className="grupo-form">
+                <label htmlFor="descricao">Descrição</label>
+                <textarea
+                  name="descricao"
+                  value={descricao}
+                  onChange={(e) => setDescricao(e.target.value)}
+                  placeholder="A descrição do curso"
+                />
+              </div>
+            </Form>
 
-//     try {
-//       if (intrutorPUT) {
-//         // UPDATE
-//         await axios.put(`/instrutor/${idInstrutor}`, {
-//           nome: nomeInstrutor,
-//           sobrenome: sobrenomeInstrutor,
-//           profissao,
-//           biografia,
-//           idioma,
-//         });
-//         toast.success('Instrutor alterado com sucesso');
-//         setIsLoading(false);
-//       } else {
-//         // CREATE
-//         await axios.post('/instrutor/', {
-//           nome: nomeInstrutor,
-//           sobrenome: sobrenomeInstrutor,
-//           profissao,
-//           biografia,
-//           idioma,
-//           user_id: id,
-//         });
-//         toast.success('Instrutor criado com sucesso');
-//         setIsLoading(false);
-//       }
-//     } catch (err) {
-//       setIsLoading(false);
-//       const errors = get(err, 'response.data.errors', []);
+            <LadoDireito>
+              <Container1>
+                <label htmlFor="foto">Foto do curso</label>
 
-//       if (errors.length > 0) {
-//         errors.map((error) => toast.error(error));
-//       } else {
-//         toast.error('Erro desconhecido');
-//       }
-//     }
-//   }
+                <FotoDoCurso>
+                  {fotoCurso ? (
+                    <img
+                      className="imgfoto"
+                      src={fotoCurso}
+                      alt="Foto de perfil do instrutor"
+                    />
+                  ) : (
+                    <img
+                      className="imgfoto"
+                      src={SemFoto}
+                      alt="Imagem do curso"
+                    />
+                  )}
+                  <label htmlFor="fotoCurso">
+                    <input
+                      type="file"
+                      id="fotoCurso"
+                      //   onChange={handleFotoInstrutor}
+                    />
+                    <i className="bi bi-pencil-square" />
+                  </label>
+                </FotoDoCurso>
+              </Container1>
 
-//   const handleFotoInstrutor = async (e) => {
-//     const file = e.target.files[0];
-//     const fotoURL = URL.createObjectURL(file);
+              <Container2>
+                <label htmlFor="videoCurso">Video do curso</label>
 
-//     setFotoInstrutor(fotoURL);
+                <VideoCurso>
+                  <input
+                    type="file"
+                    id="videoCurso"
+                    onChange={handleInputAquivo}
+                  />
+                  <div>
+                    <label htmlFor="videoCurso">Procurar</label>
+                    <span className="nome-arquivo">
+                      Nenhum arquivo selecionado
+                    </span>
+                  </div>
+                </VideoCurso>
+              </Container2>
+            </LadoDireito>
+          </GridConteudo>
 
-//     const formData = new FormData();
-//     formData.append('instrutor_id', idInstrutor);
-//     formData.append('foto', file);
-
-//     try {
-//       setIsLoading(true);
-
-//       await axios.post('/instrutorFoto/', formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-//       toast.success('Foto enviada com sucesso!');
-
-//       setIsLoading(false);
-//     } catch (err) {
-//       setIsLoading(false);
-//       const errors = get(err, 'response.data.errors', []);
-
-//       if (errors.length > 0) {
-//         errors.map((error) => toast.error(error));
-//       } else {
-//         toast.error('Erro desconhecido');
-//       }
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Header />
-//       <Loading isLoading={isLoading} />
-
-//       <ContainerBack>
-//         <Main>
-//           <TituloTexto>
-//             <h1>Configurações do instrutor</h1>
-//           </TituloTexto>
-
-//           <GridConteudo>
-//             <Form /* onSubmit={handleSubmit} */>
-//               <div className="grupo-form">
-//                 <label htmlFor="nome">Nome</label>
-//                 <input
-//                   type="text"
-//                   value={nomeInstrutor}
-//                   onChange={(e) => setNomeInstrutor(e.target.value)}
-//                   placeholder="Seu nome"
-//                 />
-//               </div>
-
-//               <div className="grupo-form">
-//                 <label htmlFor="Sobrenome">Sobrenome</label>
-//                 <input
-//                   type="text"
-//                   value={sobrenomeInstrutor}
-//                   onChange={(e) => setSobrenomeInstrutor(e.target.value)}
-//                   placeholder="Seu sobrenome"
-//                 />
-//               </div>
-
-//               <div className="grupo-form">
-//                 <label htmlFor="profissao">Profissão</label>
-//                 <input
-//                   type="text"
-//                   value={profissao}
-//                   onChange={(e) => setProfissao(e.target.value)}
-//                   placeholder="Digite sua profissão"
-//                 />
-//               </div>
-//             </Form>
-
-//             <LadoDireitoIntrutor>
-//               <label htmlFor="foto">Foto de perfil</label>
-
-//               <form>
-//                 <FotoDePerfil>
-//                   {fotoInstrutor ? (
-//                     <img
-//                       className="imgfoto"
-//                       src={fotoInstrutor}
-//                       alt="Foto de perfil do instrutor"
-//                     />
-//                   ) : (
-//                     <img
-//                       className="imgfoto"
-//                       src={SemFoto}
-//                       alt="Imagem do curso"
-//                     />
-//                   )}
-//                   <label htmlFor="foto">
-//                     <input
-//                       type="file"
-//                       id="foto"
-//                       onChange={handleFotoInstrutor}
-//                     />
-//                     <i className="bi bi-pencil-square" />
-//                   </label>
-//                 </FotoDePerfil>
-//               </form>
-//             </LadoDireitoIntrutor>
-//           </GridConteudo>
-
-//           <Form>
-//             <div className="grupo-form">
-//               <label htmlFor="biografia">Biografia</label>
-//               <textarea
-//                 name="message"
-//                 value={biografia}
-//                 onChange={(e) => setBiografia(e.target.value)}
-//                 placeholder="Sua biografia"
-//               />
-//             </div>
-//           </Form>
-
-//           <button
-//             type="submit"
-//             className="btn-instrutor"
-//             onClick={handleConfigInstrutor}
-//           >
-//             Salvar
-//           </button>
-//         </Main>
-//       </ContainerBack>
-//     </>
-//   );
-// }
+          <button
+            type="submit"
+            className="btn-largo"
+            onClick={handleCriarEditarCurso}
+          >
+            {/* {!IdCurso ? 'Criar' : 'Salvar'} */}
+            Criar
+          </button>
+        </Main>
+      </ContainerBack>
+    </>
+  );
+}

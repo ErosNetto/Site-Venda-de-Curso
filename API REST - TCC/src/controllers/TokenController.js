@@ -30,10 +30,12 @@ class TokenController {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
+    const { istrutor } = user;
+
     return res.json({
       token,
       user: {
-        nome: user.nome, id, email,
+        nome: user.nome, id, email, istrutor,
       },
     });
   }

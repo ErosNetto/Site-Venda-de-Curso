@@ -15,7 +15,7 @@ export const Main = styled.div`
   /* gap: 20px; */
   height: auto;
 
-  .btn-instrutor {
+  .btn-largo {
     border: 0.5rem solid ${colors.corPrimaria};
     margin: 10px 0 10px 0;
     background: none;
@@ -99,7 +99,7 @@ export const Form = styled.form`
   }
 
   .grupo-form textarea {
-    height: 200px;
+    height: 250px;
     resize: none;
   }
 
@@ -107,6 +107,23 @@ export const Form = styled.form`
     color: #aeaeae;
   }
 
+  select {
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 22px;
+    background: ${colors.corPrimaria};
+    color: #fff;
+
+    &:focus {
+      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+    }
+  }
+
   button {
     border: 0.5rem solid ${colors.corPrimaria};
     margin: 10px 0 10px 0;
@@ -128,58 +145,24 @@ export const Form = styled.form`
     }
   }
 `;
-
 export const LadoDireito = styled.div`
-  display: flex;
-  align-content: space-between;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 55px;
+  color: ${colors.corPrimaria};
+`;
 
-  h3 {
+export const Container1 = styled.div`
+  label {
     display: block;
     margin-bottom: 10px;
-    font-size: 22px;
-    font-weight: 600;
-    color: ${colors.corPrimaria};
-  }
-
-  p {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: ${colors.corPrimaria};
-  }
-
-  span {
-    color: #ff0000d7;
-  }
-
-  button {
-    border: 0.5rem solid ${colors.corPrimaria};
-    margin: 10px 0 10px 0;
-    background: none;
-    color: ${colors.corPrimaria};
-    padding: 12px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background: ${colors.corPrimaria};
-      color: #fff;
-    }
-
-    &:focus {
-      background: ${colors.corPrimaria};
-      color: #fff;
-    }
   }
 `;
 
-export const LadoDireitoIntrutor = styled.div`
+export const Container2 = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  color: ${colors.corPrimaria};
 
   label {
     display: block;
@@ -187,17 +170,17 @@ export const LadoDireitoIntrutor = styled.div`
   }
 `;
 
-export const FotoDePerfil = styled.div`
+export const FotoDoCurso = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 
   img {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
+    width: 370px;
+    height: 270px;
     border: 3px solid ${colors.corPrimaria};
+    background: ${colors.corPrimaria};
   }
 
   label {
@@ -232,5 +215,45 @@ export const FotoDePerfil = styled.div`
     &:hover {
       color: ${colors.corSecundaria};
     }
+  }
+`;
+
+export const VideoCurso = styled.div`
+  width: 100%;
+  color: ${colors.corPrimaria};
+
+  input {
+    display: none;
+  }
+
+  div {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 3px solid ${colors.corPrimaria};
+  }
+
+  label {
+    border: 5px solid ${colors.corPrimaria};
+    margin: 10px 0 10px 0;
+    background: none;
+    color: ${colors.corPrimaria};
+    padding: 12px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
+  }
+
+  span {
+    padding: 10px;
+    font-size: 20px;
   }
 `;

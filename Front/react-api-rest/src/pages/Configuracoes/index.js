@@ -189,6 +189,8 @@ export default function Configuracoes() {
 
   async function handleConfigInstrutor(e) {
     e.preventDefault();
+    if (!istrutorSalvo) return;
+
     let formErrors = false;
 
     if (nomeInstrutor.length < 3 || nomeInstrutor.length > 255) {

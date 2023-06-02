@@ -38,6 +38,7 @@ export default function Instrutor({ match }) {
     const ConverteID = parseInt(id, 10);
     setIdConvertido(ConverteID);
 
+    // Procura o instrutor pelo ID
     async function getData() {
       try {
         setIsLoading(true);
@@ -66,6 +67,7 @@ export default function Instrutor({ match }) {
         history.push('/home');
       }
 
+      // Pega todos os cursos que o instrutor tiver
       try {
         setIsLoading(true);
         const { data } = await axios.get('/cursos/');
@@ -116,31 +118,39 @@ export default function Instrutor({ match }) {
             </LadoDireito>
           </GridConteudo>
 
-          <h3 className="inst-h3">Curos autorais:</h3>
+          <h3 className="inst-h3">
+            {cursos
+              ? 'Curos autorais:'
+              : 'No momento este instrutor não possui nenhum curso'}
+          </h3>
 
           <ConteudoCursos>
-            {cursos.map((curso) => (
-              <Curso key={String(curso.id)}>
-                <ImgCurso>
-                  {get(curso, 'FotoCursos[0].url', false) ? (
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src={curso.FotoCursos[0].url}
-                        alt="Imagem do curso"
-                      />
-                    </Link>
-                  ) : (
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src="https://source.unsplash.com/random/270x210?r=1?e=1"
-                        alt="Imagem do curso"
-                      />
-                    </Link>
-                  )}
-                </ImgCurso>
-                <h4>{curso.nome}</h4>
-              </Curso>
-            ))}
+            {cursos ? (
+              cursos.map((curso) => (
+                <Curso key={String(curso.id)}>
+                  <ImgCurso>
+                    {get(curso, 'FotoCursos[0].url', false) ? (
+                      <Link to={`/cursos/${curso.id}`}>
+                        <img
+                          src={curso.FotoCursos[0].url}
+                          alt="Imagem do curso"
+                        />
+                      </Link>
+                    ) : (
+                      <Link to={`/cursos/${curso.id}`}>
+                        <img
+                          src="https://source.unsplash.com/random/270x210?r=1?e=1"
+                          alt="Imagem do curso"
+                        />
+                      </Link>
+                    )}
+                  </ImgCurso>
+                  <h4>{curso.nome}</h4>
+                </Curso>
+              ))
+            ) : (
+              <></>
+            )}
           </ConteudoCursos>
         </Main>
       </ContainerBack>

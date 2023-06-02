@@ -39,7 +39,6 @@ export default function Login(props) {
     if (formErrors) return;
 
     dispatch(actions.loginRequest({ email, password, prevPath }));
-    // history.push('/register');
   };
 
   // HTML(JSX)

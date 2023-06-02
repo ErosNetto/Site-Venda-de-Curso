@@ -59,7 +59,7 @@ export const SemCursos = styled.div`
 
   h3 {
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     color: ${colors.corPrimaria};
   }

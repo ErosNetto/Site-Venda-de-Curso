@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { /* useSelector, */ useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NumericFormat } from 'react-number-format';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
 import axios from '../../services/axios';
-// import history from '../../services/history';
 import Loading from '../../components/Loading';
 import * as actions from '../../store/modules/auth/actions';
 import {
@@ -23,37 +23,76 @@ import {
 } from './styled';
 import SemFoto from '../../img/Group 5.png';
 
-export default function Configuracoes() {
+export default function CriarCurso({ match }) {
   const dispatch = useDispatch();
 
+  // Intrutor
+  const idInstrutorSalvo = useSelector((state) => state.auth.idDoInstrutor);
+
+  // Curso editar
+  const idCursoEditar = get(match, 'params.id', '');
+
   // Curso
+  const [idCurso, setIdCurso] = useState('');
   const [nomeCurso, setNomeCurso] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [cargaHoraria, setCargaHoraria] = useState('');
   const [preco, setPreco] = useState(0);
   const [descricao, setDescricao] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
   // Foto e video Curso
   const [fotoCurso, setFotoCurso] = useState('');
   // const [videoCurso, setVideoCurso] = useState('');
-  // Intrutor
-  const [instrutorId, setInstrutorId] = useState('');
-  // const instrutorId = get(match, 'params.id', '');
-
-  const handlePrecoChange = (value) => {
-    const precoNumber = parseFloat(
-      value.replace(/[^0-9,-]+/g, '').replace(',', '.')
-    );
-    setPreco(precoNumber);
-  };
 
   useEffect(() => {
-    setInstrutorId('32');
-  }, []);
+    if (!idCursoEditar) return;
+    setIdCurso(idCursoEditar);
+
+    // Seta o curso caso seja para editar
+    async function getCurso() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(`/cursos/${idCursoEditar}`);
+        const FotoCurso = get(data, 'FotoCursos[0].url', '');
+
+        if (data) {
+          setFotoCurso(FotoCurso);
+          setNomeCurso(data.nome);
+          setCategoria(data.categoria);
+          setCategoriaSelecionada(data.categoria);
+          setCargaHoraria(data.carga_horaria);
+          setPreco(data.preco);
+          setDescricao(data.descricao);
+        } else {
+          setFotoCurso('');
+          setNomeCurso('');
+          setCategoria('');
+          setCargaHoraria('');
+          setPreco('');
+          setDescricao('');
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        const errors = get(err, 'response.data.errors', []);
+
+        if (errors.length > 0) {
+          errors.map((error) => toast.error(error));
+        } else {
+          toast.error('Erro desconhecido');
+        }
+      }
+    }
+
+    getCurso();
+  }, [idCursoEditar]);
 
   async function handleCriarEditarCurso(e) {
     e.preventDefault();
-    if (!instrutorId) return;
+    if (!idInstrutorSalvo) return;
 
     let formErrors = false;
 
@@ -75,7 +114,7 @@ export default function Configuracoes() {
     const precoConvetido = parseFloat(preco);
     setPreco(precoConvetido);
 
-    if (preco.length <= 0) {
+    if (preco < 0 || Number.isNaN(preco)) {
       formErrors = true;
       toast.error('Campo preço é obrigatório');
     }
@@ -90,15 +129,44 @@ export default function Configuracoes() {
     setIsLoading(true);
 
     try {
-      await axios.post('/cursos/', {
-        nome: nomeCurso,
-        descricao,
-        categoria,
-        carga_horaria: cargaHoraria,
-        preco,
-        instrutor_id: instrutorId,
-      });
-      toast.success('Curso criado com sucesso');
+      if (idCurso) {
+        // UPDATE
+        await axios
+          .put(`/cursos/${idCurso}`, {
+            nome: nomeCurso,
+            descricao,
+            categoria,
+            carga_horaria: cargaHoraria,
+            preco,
+            instrutor_id: idInstrutorSalvo,
+          })
+          .then((response) => {
+            setIdCurso(response.data.id);
+          })
+          .catch(() => {
+            toast.error('Ocorreu um erro desconhecido');
+          });
+        toast.success('Curso editado com sucesso');
+      } else {
+        // CREATE
+        await axios
+          .post('/cursos/', {
+            nome: nomeCurso,
+            descricao,
+            categoria,
+            carga_horaria: cargaHoraria,
+            preco,
+            instrutor_id: idInstrutorSalvo,
+          })
+          .then((response) => {
+            setIdCurso(response.data.id);
+          })
+          .catch(() => {
+            toast.error('Ocorreu um erro desconhecido');
+          });
+        toast.success('Curso criado com sucesso');
+      }
+
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -116,9 +184,99 @@ export default function Configuracoes() {
     }
   }
 
+  // Envia a foto do curso
+  async function handleFotoCurso(e) {
+    if (!idCurso) {
+      toast.warn(
+        'Tempo expirado você precisa voltar e editar o curso para colocar uma foto nele!'
+      );
+      return;
+    }
+
+    const file = e.target.files[0];
+    const fotoURL = URL.createObjectURL(file);
+
+    setFotoCurso(fotoURL);
+
+    const formData = new FormData();
+    formData.append('curso_id', idCurso);
+    formData.append('foto', file);
+
+    try {
+      setIsLoading(true);
+
+      await axios.post('/fotosCurso/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success('Foto enviada com sucesso!');
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
+
+  // Envia o video do curso
+  async function handleVideoCurso(e) {
+    if (!idCurso) {
+      toast.warn(
+        'Tempo expirado você precisa voltar e editar o curso para colocar um video nele!'
+      );
+      return;
+    }
+
+    const file = e.target.files[0];
+    const fotoURL = URL.createObjectURL(file);
+
+    setFotoCurso(fotoURL);
+
+    const formData = new FormData();
+    formData.append('curso_id', idCurso);
+    formData.append('video', file);
+
+    try {
+      setIsLoading(true);
+
+      await axios.post('/videoCurso/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success('Video enviado com sucesso!');
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
+
   // Escolhe a opçaõ do Setect (categoria)
   const handleSelectOpcoes = (e) => {
     setCategoria(e.target.value);
+  };
+
+  // Tira a Mascara do preço
+  const handlePrecoChange = (value) => {
+    const precoNumber = parseFloat(
+      value.replace(/[^0-9,-]+/g, '').replace(',', '.')
+    );
+    setPreco(precoNumber);
   };
 
   // Input de arquivo
@@ -135,8 +293,7 @@ export default function Configuracoes() {
       <ContainerBack>
         <Main>
           <TituloTexto>
-            <h1>Criar curso</h1>
-            {/* <h1>Edita curso</h1> */}
+            <h1>{idCurso ? 'Editar Curso' : 'Criar curso'}</h1>
           </TituloTexto>
 
           <GridConteudo>
@@ -153,9 +310,13 @@ export default function Configuracoes() {
 
               <div className="grupo-form">
                 <label htmlFor="categorias">Categoria</label>
-                <select name="categorias" onChange={handleSelectOpcoes}>
+                <select
+                  name="categorias"
+                  onChange={handleSelectOpcoes}
+                  value={categoriaSelecionada}
+                >
                   <option key={1} id="1" value="">
-                    Categoria
+                    Selecione uma opção
                   </option>
                   <option key={2} id="2" value="Desenvolvimento">
                     Desenvolvimento
@@ -211,19 +372,6 @@ export default function Configuracoes() {
 
               <div className="grupo-form">
                 <label htmlFor="preco">Preço</label>
-                {/* <NumericFormat
-                  thousandSeparator="."
-                  decimalSeparator=","
-                  prefix="R$ "
-                  decimalScale={2}
-                  fixedDecimalScale
-                  allowNegative={false}
-                  allowLeadingZeros={false}
-                  value={preco}
-                  onChange={(e) => setPreco(e.target.value)}
-                  placeholder="Preço do curso"
-                /> */}
-
                 <NumericFormat
                   thousandSeparator="."
                   decimalSeparator=","
@@ -273,7 +421,7 @@ export default function Configuracoes() {
                     <input
                       type="file"
                       id="fotoCurso"
-                      //   onChange={handleFotoInstrutor}
+                      onChange={handleFotoCurso}
                     />
                     <i className="bi bi-pencil-square" />
                   </label>
@@ -287,7 +435,7 @@ export default function Configuracoes() {
                   <input
                     type="file"
                     id="videoCurso"
-                    onChange={handleInputAquivo}
+                    onChange={(handleInputAquivo, handleVideoCurso)}
                   />
                   <div>
                     <label htmlFor="videoCurso">Procurar</label>
@@ -305,11 +453,14 @@ export default function Configuracoes() {
             className="btn-largo"
             onClick={handleCriarEditarCurso}
           >
-            {/* {!IdCurso ? 'Criar' : 'Salvar'} */}
-            Criar
+            {!idCurso ? 'Criar' : 'Salvar'}
           </button>
         </Main>
       </ContainerBack>
     </>
   );
 }
+
+CriarCurso.propTypes = {
+  match: PropTypes.shape({}).isRequired,
+};

@@ -3,7 +3,6 @@ import { get } from 'lodash';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useSelector, useDispatch } from 'react-redux';
-// import { FaEdit } from 'react-icons/fa';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
@@ -30,7 +29,7 @@ export default function Configuracoes() {
   const id = useSelector((state) => state.auth.user.id);
   const nomeSalvo = useSelector((state) => state.auth.user.nome);
   const emailSalvo = useSelector((state) => state.auth.user.email);
-  const istrutorSalvo = useSelector((state) => state.auth.user.istrutor);
+  const userIstrutorSalvo = useSelector((state) => state.auth.user.istrutor);
   const isLoadingSalvo = useSelector((state) => state.auth.isLoading);
 
   // Usuario
@@ -41,16 +40,15 @@ export default function Configuracoes() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Instrutor
-  const [idInstrutor, setIdInstrutor] = useState('');
+  const idInstrutorSalvo = useSelector((state) => state.auth.idDoInstrutor);
+
+  // Instrutor
   const [nomeInstrutor, setNomeInstrutor] = useState('');
   const [sobrenomeInstrutor, setSobrenomeInstrutor] = useState('');
   const [profissao, setProfissao] = useState('');
   const [biografia, setBiografia] = useState('');
   const [idioma, setIdioma] = useState('Portugues(BR)');
   const [fotoInstrutor, setFotoInstrutor] = useState('');
-  const [intrutorPUT, setIntrutorPUT] = useState('');
-
-  // Instrutor
 
   useEffect(() => {
     if (!id) return;
@@ -61,31 +59,22 @@ export default function Configuracoes() {
   }, [id, nomeSalvo, emailSalvo]);
 
   useEffect(() => {
-    if (!istrutorSalvo) return;
+    if (!idInstrutorSalvo) return;
 
+    // Seta as informaçoes do instrutor para atualizar
     async function getData() {
       try {
         setIsLoading(true);
-        const { data } = await axios.get('/instrutor/');
-        const instrutorEncontrado = data.find(
-          (instrutor) => instrutor.user_id === id
-        );
-        const FotoInstrutor = get(
-          instrutorEncontrado,
-          'FotoInstrutors[0].url',
-          ''
-        );
+        const { data } = await axios.get(`/instrutor/${idInstrutorSalvo}`);
+        const FotoInstrutor = get(data, 'FotoInstrutors[0].url', '');
 
-        if (instrutorEncontrado) {
-          // const { nome, sobrenome, profissao, biografia } = instrutorEncontrado;
-          setIdInstrutor(instrutorEncontrado.id);
-          setNomeInstrutor(instrutorEncontrado.nome);
-          setSobrenomeInstrutor(instrutorEncontrado.sobrenome);
-          setProfissao(instrutorEncontrado.profissao);
-          setBiografia(instrutorEncontrado.biografia);
-          setIdioma(instrutorEncontrado.idioma);
+        if (data) {
+          setNomeInstrutor(data.nome);
+          setSobrenomeInstrutor(data.sobrenome);
+          setProfissao(data.profissao);
+          setBiografia(data.biografia);
+          setIdioma(data.idioma);
           setFotoInstrutor(FotoInstrutor);
-          setIntrutorPUT(true);
         } else {
           setNomeInstrutor('');
           setSobrenomeInstrutor('');
@@ -93,7 +82,6 @@ export default function Configuracoes() {
           setBiografia('');
           setIdioma('Portugues(BR)');
           setFotoInstrutor('');
-          setIntrutorPUT('');
         }
 
         setIsLoading(false);
@@ -110,9 +98,10 @@ export default function Configuracoes() {
     }
 
     getData();
-  }, [istrutorSalvo, id]);
+  }, [userIstrutorSalvo, idInstrutorSalvo]);
 
-  async function handleSubmit(e) {
+  // Atualiza usuario
+  async function handleAtualizaUsuario(e) {
     e.preventDefault();
     if (!id) return;
 
@@ -138,6 +127,7 @@ export default function Configuracoes() {
     dispatch(actions.registerRequest({ nome, email, password, emailSalvo }));
   }
 
+  // Vira um instrutor
   async function handleViraInstrutor(e) {
     e.preventDefault();
 
@@ -147,7 +137,7 @@ export default function Configuracoes() {
       await axios.put('/users', {
         istrutor,
       });
-      dispatch(actions.intrutorUpdatedSuccess({ istrutor }));
+      dispatch(actions.virarUmIntrutorSuccess({ istrutor }));
 
       setIsLoading(false);
       toast.success('Você virou um intrutor!');
@@ -163,7 +153,8 @@ export default function Configuracoes() {
     }
   }
 
-  async function handleDelete(e) {
+  // Deleta a conta
+  async function handleDeletarConta(e) {
     e.preventDefault();
     if (!id) return;
 
@@ -187,9 +178,10 @@ export default function Configuracoes() {
     }
   }
 
+  // Criar e Atualiza Instrutor
   async function handleConfigInstrutor(e) {
     e.preventDefault();
-    if (!istrutorSalvo) return;
+    if (!userIstrutorSalvo) return;
 
     let formErrors = false;
 
@@ -223,9 +215,9 @@ export default function Configuracoes() {
     setIsLoading(true);
 
     try {
-      if (intrutorPUT) {
+      if (idInstrutorSalvo) {
         // UPDATE
-        await axios.put(`/instrutor/${idInstrutor}`, {
+        await axios.put(`/instrutor/${idInstrutorSalvo}`, {
           nome: nomeInstrutor,
           sobrenome: sobrenomeInstrutor,
           profissao,
@@ -236,14 +228,24 @@ export default function Configuracoes() {
         setIsLoading(false);
       } else {
         // CREATE
-        await axios.post('/instrutor/', {
-          nome: nomeInstrutor,
-          sobrenome: sobrenomeInstrutor,
-          profissao,
-          biografia,
-          idioma,
-          user_id: id,
-        });
+        await axios
+          .post('/instrutor/', {
+            nome: nomeInstrutor,
+            sobrenome: sobrenomeInstrutor,
+            profissao,
+            biografia,
+            idioma,
+            user_id: id,
+          })
+          .then((response) => {
+            dispatch(
+              actions.criarUmInstrutor({ idInstrutor: response.data.id })
+            );
+          })
+          .catch(() => {
+            toast.error('Ocorreu um erro desconhecido');
+          });
+
         toast.success('Instrutor criado com sucesso');
         setIsLoading(false);
       }
@@ -259,14 +261,22 @@ export default function Configuracoes() {
     }
   }
 
+  // Envia a foto do instrutor
   const handleFotoInstrutor = async (e) => {
+    if (!idInstrutorSalvo) {
+      toast.warn(
+        'Por favor preencha as informações e salve antes de enviar a foto!'
+      );
+      return;
+    }
+
     const file = e.target.files[0];
     const fotoURL = URL.createObjectURL(file);
 
     setFotoInstrutor(fotoURL);
 
     const formData = new FormData();
-    formData.append('instrutor_id', idInstrutor);
+    formData.append('instrutor_id', idInstrutorSalvo);
     formData.append('foto', file);
 
     try {
@@ -305,7 +315,7 @@ export default function Configuracoes() {
           </TituloTexto>
 
           <GridConteudo>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleAtualizaUsuario}>
               <div className="grupo-form">
                 <label htmlFor="nome">Nome</label>
                 <input
@@ -341,7 +351,7 @@ export default function Configuracoes() {
 
             <LadoDireito>
               <div>
-                {istrutorSalvo ? (
+                {userIstrutorSalvo ? (
                   <h3>Você já é um instrutor.</h3>
                 ) : (
                   <>
@@ -360,7 +370,7 @@ export default function Configuracoes() {
                   descadastrado de todos os seus cursos e perderá o acesso para
                   sempre.
                 </p>
-                <button type="submit" onClick={handleDelete}>
+                <button type="submit" onClick={handleDeletarConta}>
                   Encerrar conta
                 </button>
               </div>
@@ -371,7 +381,7 @@ export default function Configuracoes() {
         <MainEspaco />
         <Loading isLoading={isLoading} />
 
-        {istrutorSalvo ? (
+        {userIstrutorSalvo ? (
           <Main>
             <TituloTexto>
               <h1>Configurações do instrutor</h1>

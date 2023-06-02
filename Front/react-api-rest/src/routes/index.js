@@ -42,6 +42,12 @@ export default function Routes() {
       <MyRoute exact path="/instrutor/:id/" component={Instrutor} isClosed />
       <MyRoute exact path="/cursos/" component={MeusCursos} isClosed />
       <MyRoute exact path="/criarCurso/" component={CriarCurso} isClosed />
+      <MyRoute
+        exact
+        path="/meusCursos/:id/editar/"
+        component={CriarCurso}
+        isClosed
+      />
 
       <MyRoute path="*" component={Page404} />
     </Switch>

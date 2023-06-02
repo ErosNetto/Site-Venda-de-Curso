@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
-import { get } from 'lodash';
+// import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import * as actions from '../../store/modules/auth/actions';
-import axios from '../../services/axios';
+// import axios from '../../services/axios';
 import history from '../../services/history';
 // import Loading from '../Loading';
 import { HeaderInicio, SearchBox, MenuSuspeso, Nav } from './style';
@@ -23,7 +22,7 @@ export default function Header() {
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [fotoUser, setFotoUser] = useState('');
+  // const [fotoUser, setFotoUser] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
 
   function handleExpandir() {
@@ -43,26 +42,26 @@ export default function Header() {
     setNome(nomeStored);
     setEmail(emailStored);
 
-    async function getData() {
-      try {
-        // setIsLoading(true);
-        const { data } = await axios.get(`/user/${id}`);
-        const FotoUser = get(data, 'FotoUser[0].url', '');
+    // async function getData() {
+    //   try {
+    //     // setIsLoading(true);
+    //     const { data } = await axios.get(`/user/${id}`);
+    //     const FotoUser = get(data, 'FotoUser[0].url', '');
 
-        setFotoUser(FotoUser);
+    //     setFotoUser(FotoUser);
 
-        // setIsLoading(false);
-      } catch (err) {
-        // setIsLoading(false);
-        const status = get(err, 'response.status', 0);
-        const errors = get(err, 'response.data.errors', []);
+    //     // setIsLoading(false);
+    //   } catch (err) {
+    //     // setIsLoading(false);
+    //     const status = get(err, 'response.status', 0);
+    //     const errors = get(err, 'response.data.errors', []);
 
-        if (status === 400) errors.map((error) => toast.error(error));
-        // toast.error('Erro ao carregar a imagem de usuario!');
-      }
-    }
+    //     if (status === 400) errors.map((error) => toast.error(error));
+    //     // toast.error('Erro ao carregar a imagem de usuario!');
+    //   }
+    // }
 
-    getData();
+    // getData();
   }, [id, nomeStored, emailStored]);
 
   return (
@@ -113,11 +112,11 @@ export default function Header() {
                 <div className="info-conteudo">
                   <Link to="/perfil">
                     <div className="info-img">
-                      {fotoUser ? (
-                        <img src={fotoUser} alt="Foto de perfil" />
-                      ) : (
-                        <img src={fotoPerfil} alt="Foto de perfil" />
-                      )}
+                      {/* {fotoUser ? ( */}
+                      {/* <img src={fotoUser} alt="Foto de perfil" /> */}
+                      {/* ) : ( */}
+                      <img src={fotoPerfil} alt="Foto de perfil" />
+                      {/* )} */}
                     </div>
                     <div className="info-text">
                       <h3>{nome}</h3>

@@ -1,5 +1,6 @@
 import * as types from '../types';
 
+// LOGIN
 export function loginRequest(payload) {
   return {
     type: types.LOGIN_REQUEST,
@@ -21,6 +22,7 @@ export function loginFailure(payload) {
   };
 }
 
+// REGISTER
 export function registerRequest(payload) {
   return {
     type: types.REGISTER_REQUEST,
@@ -35,13 +37,6 @@ export function registerUpdatedSuccess(payload) {
   };
 }
 
-export function intrutorUpdatedSuccess(payload) {
-  return {
-    type: types.INSTRUTOR_UPDATED_SUCCESS,
-    payload,
-  };
-}
-
 export function registerCreatedSuccess(payload) {
   return {
     type: types.REGISTER_CREATED_SUCCESS,
@@ -52,6 +47,28 @@ export function registerCreatedSuccess(payload) {
 export function registerFailure(payload) {
   return {
     type: types.REGISTER_FAILURE,
+    payload,
+  };
+}
+
+// INSTRUTOR
+export function virarUmIntrutorSuccess(payload) {
+  return {
+    type: types.VIRAR_UM_INSTRUTOR,
+    payload,
+  };
+}
+
+export function criarUmInstrutor(payload) {
+  return {
+    type: types.CRIAR_ISNTRUTOR,
+    payload,
+  };
+}
+
+export function idIntrutorData(payload) {
+  return {
+    type: types.LOGIN_ID_INSTRUTOR,
     payload,
   };
 }

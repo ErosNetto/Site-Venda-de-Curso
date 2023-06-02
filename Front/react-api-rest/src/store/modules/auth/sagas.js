@@ -6,19 +6,33 @@ import * as types from '../types';
 import axios from '../../../services/axios';
 import history from '../../../services/history';
 
+// Para fazer login
 function* loginRequest({ payload }) {
   try {
     const response = yield call(axios.post, '/tokens', payload);
+
     yield put(actions.loginSuccess({ ...response.data }));
+
+    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
     toast.success('Você fez login');
 
-    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+    if (response.data.user.istrutor) {
+      try {
+        const { data } = yield call(axios.get, `/instrutor/`);
+        const UserInstrutor = data.filter(
+          (instrutor) => instrutor.user_id === response.data.user.id
+        );
+
+        yield put(actions.idIntrutorData({ ...UserInstrutor }));
+      } catch (err) {
+        // toast.error('Erro ao setar o idInstrutor');
+      }
+    }
 
     history.push('/home');
   } catch (e) {
     toast.error('Usuário ou senha inválidos.');
-
     yield put(actions.loginFailure());
   }
 }

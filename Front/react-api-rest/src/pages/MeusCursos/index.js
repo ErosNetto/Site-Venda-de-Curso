@@ -21,52 +21,28 @@ import {
 } from './styled';
 
 export default function Configuracoes() {
-  const id = useSelector((state) => state.auth.user.id);
-  const [idInstrutor, setIdInstrutor] = useState('');
+  // Instrutor
+  const idInstrutorSalvo = useSelector((state) => state.auth.idDoInstrutor);
+
+  // Cursos
   const [cursos, setCursos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
+    if (!idInstrutorSalvo) return;
 
-    async function getIntrutor() {
-      try {
-        setIsLoading(true);
-        const { data } = await axios.get('/instrutor/');
-        const instrutorEncontrado = data.find(
-          (instrutor) => instrutor.user_id === id
-        );
-
-        if (instrutorEncontrado) {
-          setIdInstrutor(instrutorEncontrado.id);
-        } else {
-          setIdInstrutor('');
-        }
-
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        const errors = get(err, 'response.data.errors', []);
-
-        if (errors.length > 0) {
-          errors.map((error) => toast.error(error));
-        } else {
-          toast.error('Erro desconhecido');
-          history.push('/home');
-        }
-      }
-    }
-
+    // Acha os cursos do instrutor
     async function getCursos() {
-      if (!idInstrutor) return;
+      if (!idInstrutorSalvo) return;
 
       try {
         setIsLoading(true);
         const { data } = await axios.get('/cursos/');
         const cursosFiltrados = data.filter(
-          (curso) => curso.Instrutor.id === idInstrutor
+          (curso) => curso.Instrutor.id === idInstrutorSalvo
         );
         setCursos(cursosFiltrados);
+
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
@@ -81,10 +57,10 @@ export default function Configuracoes() {
       }
     }
 
-    getIntrutor();
     getCursos();
-  }, [id, idInstrutor]);
+  }, [idInstrutorSalvo]);
 
+  // Confimar se quer mesmo deletar o curso
   function handleDeleteConfirme(e) {
     e.preventDefault();
     const confirmacao = e.currentTarget.nextSibling;
@@ -92,6 +68,7 @@ export default function Configuracoes() {
     e.currentTarget.remove();
   }
 
+  // Delete o curso
   async function handleDeleteCurso(e, idCurso, index) {
     e.persist();
 
@@ -131,7 +108,7 @@ export default function Configuracoes() {
           </CriarCurso>
 
           <ConteudoCursos>
-            {!cursos ? (
+            {cursos.length <= 0 ? (
               <SemCursos>
                 <h3>Você não possui nenhum curso</h3>
               </SemCursos>
@@ -157,7 +134,9 @@ export default function Configuracoes() {
                   </ImgCurso>
                   <h4>{curso.nome}</h4>
                   <Botoes>
-                    <Link to={`/criarCurso/${curso.id}`}>Editar curso</Link>
+                    <Link to={`/meusCursos/${curso.id}/editar`}>
+                      Editar curso
+                    </Link>
 
                     <button type="button" onClick={handleDeleteConfirme}>
                       <i className="bi bi-trash3" />

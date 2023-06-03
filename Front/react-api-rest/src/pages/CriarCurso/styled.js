@@ -219,7 +219,6 @@ export const FotoDoCurso = styled.div`
 `;
 
 export const VideoCurso = styled.div`
-  width: 100%;
   color: ${colors.corPrimaria};
 
   input {
@@ -252,7 +251,8 @@ export const VideoCurso = styled.div`
     }
   }
 
-  span {
+  .nome-arquivo {
+    word-break: break-all;
     padding: 10px;
     font-size: 20px;
   }

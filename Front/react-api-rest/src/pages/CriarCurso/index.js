@@ -36,7 +36,6 @@ export default function CriarCurso({ match }) {
   const [idCurso, setIdCurso] = useState('');
   const [nomeCurso, setNomeCurso] = useState('');
   const [categoria, setCategoria] = useState('');
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [cargaHoraria, setCargaHoraria] = useState('');
   const [preco, setPreco] = useState(0);
   const [descricao, setDescricao] = useState('');
@@ -44,7 +43,7 @@ export default function CriarCurso({ match }) {
 
   // Foto e video Curso
   const [fotoCurso, setFotoCurso] = useState('');
-  // const [videoCurso, setVideoCurso] = useState('');
+  const [videoCurso, setVideoCurso] = useState('');
 
   useEffect(() => {
     if (!idCursoEditar) return;
@@ -56,17 +55,17 @@ export default function CriarCurso({ match }) {
         setIsLoading(true);
         const { data } = await axios.get(`/cursos/${idCursoEditar}`);
         const FotoCurso = get(data, 'FotoCursos[0].url', '');
+        const VideoDoCurso = get(data, 'VideoCursos[0].originalname', '');
 
         if (data) {
           setFotoCurso(FotoCurso);
+          setVideoCurso(VideoDoCurso);
           setNomeCurso(data.nome);
           setCategoria(data.categoria);
-          setCategoriaSelecionada(data.categoria);
           setCargaHoraria(data.carga_horaria);
           setPreco(data.preco);
           setDescricao(data.descricao);
         } else {
-          setFotoCurso('');
           setNomeCurso('');
           setCategoria('');
           setCargaHoraria('');
@@ -235,9 +234,6 @@ export default function CriarCurso({ match }) {
     }
 
     const file = e.target.files[0];
-    const fotoURL = URL.createObjectURL(file);
-
-    setFotoCurso(fotoURL);
 
     const formData = new FormData();
     formData.append('curso_id', idCurso);
@@ -313,7 +309,7 @@ export default function CriarCurso({ match }) {
                 <select
                   name="categorias"
                   onChange={handleSelectOpcoes}
-                  value={categoriaSelecionada}
+                  value={categoria}
                 >
                   <option key={1} id="1" value="">
                     Selecione uma opção
@@ -408,7 +404,7 @@ export default function CriarCurso({ match }) {
                     <img
                       className="imgfoto"
                       src={fotoCurso}
-                      alt="Foto de perfil do instrutor"
+                      alt="Imagem do curso"
                     />
                   ) : (
                     <img
@@ -429,18 +425,23 @@ export default function CriarCurso({ match }) {
               </Container1>
 
               <Container2>
-                <label htmlFor="videoCurso">Video do curso</label>
+                <label>Video do curso</label>
 
                 <VideoCurso>
                   <input
                     type="file"
                     id="videoCurso"
-                    onChange={(handleInputAquivo, handleVideoCurso)}
+                    onChange={(e) => {
+                      handleInputAquivo(e);
+                      handleVideoCurso(e);
+                    }}
                   />
                   <div>
                     <label htmlFor="videoCurso">Procurar</label>
                     <span className="nome-arquivo">
-                      Nenhum arquivo selecionado
+                      {idCursoEditar && videoCurso
+                        ? videoCurso
+                        : 'Nenhum arquivo selecionado'}
                     </span>
                   </div>
                 </VideoCurso>

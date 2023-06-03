@@ -61,7 +61,7 @@ class CursoController {
           },
           {
             model: VideoCurso,
-            attributes: ['url', 'filename'],
+            attributes: ['url', 'filename', 'originalname'],
           },
         ],
       });

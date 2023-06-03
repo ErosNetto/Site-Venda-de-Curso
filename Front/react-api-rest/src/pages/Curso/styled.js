@@ -140,6 +140,7 @@ export const LadoDireito = styled.div`
   flex-wrap: wrap;
 
   p {
+    word-break: break-all;
     font-weight: 400;
     font-size: 22px;
     line-height: 30px;

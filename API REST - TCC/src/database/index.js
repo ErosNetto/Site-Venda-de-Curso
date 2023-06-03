@@ -7,8 +7,19 @@ import FotoInstrutor from '../models/FotoInstrutor';
 import Curso from '../models/Curso';
 import FotoCurso from '../models/FotoCurso';
 import VideoCurso from '../models/VideoCurso';
+import CarrinhoDeCompras from '../models/CarrinhoDeCompras';
+import Favoritos from '../models/Favoritos';
 
-const models = [User, Instrutor, FotoInstrutor, Curso, FotoCurso, VideoCurso];
+const models = [
+  User,
+  Instrutor,
+  FotoInstrutor,
+  Curso,
+  FotoCurso,
+  VideoCurso,
+  CarrinhoDeCompras,
+  Favoritos,
+];
 
 const connection = new Sequelize(databaseConfig);
 

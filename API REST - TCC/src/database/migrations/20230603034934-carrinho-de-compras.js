@@ -1,58 +1,32 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('cursos', {
+    return queryInterface.createTable('carrinhoDeCompras', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      nome: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      descricao: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-      },
-      categoria: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      preco: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      originalname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      filename: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      user_id: {
+      curso_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'user',
+          model: 'cursos',
           key: 'id',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      foto_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'fotoUser',
+          model: 'users',
           key: 'id',
         },
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      
-
 
       created_at: { // Salva registro na base de dados
         type: Sequelize.DATE,
@@ -65,5 +39,5 @@ module.exports = {
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable('cursos'),
+  down: (queryInterface) => queryInterface.dropTable('carrinhoDeCompras'),
 };

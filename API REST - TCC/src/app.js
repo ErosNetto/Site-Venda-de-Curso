@@ -17,6 +17,8 @@ import fotoInstrutorRoutes from './routes/fotoInstrutorRoutes';
 import cursoRoutes from './routes/cursoRoutes';
 import fotoCursoRoutes from './routes/fotoCursoRoutes';
 import videoCursoRoutes from './routes/videoCursoRoutes';
+import carrinhoDeComprasRoutes from './routes/carrinhoDeComprasRoutes';
+import favoritosRoutes from './routes/favoritosRoutes';
 
 const whitelist = [
   'http://localhost:3000',
@@ -57,6 +59,8 @@ class App {
     this.app.use('/cursos/', cursoRoutes);
     this.app.use('/fotosCurso/', fotoCursoRoutes);
     this.app.use('/videoCurso/', videoCursoRoutes);
+    this.app.use('/carrinhoDeCompras/', carrinhoDeComprasRoutes);
+    this.app.use('/favoritos/', favoritosRoutes);
   }
 }
 

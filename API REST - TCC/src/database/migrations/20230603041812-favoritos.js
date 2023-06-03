@@ -1,41 +1,43 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('fotoCurso', {
+    return queryInterface.createTable('favoritos', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      originalname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      filename: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       curso_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'curso',
+          model: 'cursos',
           key: 'id',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      
-      created_at: {
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
+
+      created_at: { // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updated_at: {
+      updated_at: { // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable('fotoCurso'),
+  down: (queryInterface) => queryInterface.dropTable('favoritos'),
 };

@@ -60,4 +60,15 @@ export default class User extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  static associate(models) {
+    this.hasMany(models.CarrinhoDeCompras, { foreignKey: 'user_id', as: 'carrinhos' });
+    this.hasMany(models.Favoritos, { foreignKey: 'user_id', as: 'favoritos' });
+
+    // TESTE
+    // this.hasOne(models.Instrutor, { foreignKey: 'usuario_id' });
+
+    // eslint-disable-next-line
+    // this.belongsToMany(models.Instrutor, { through: 'UserInstrutor', foreignKey: 'user_id', as: 'instrutores' });
+  }
 }

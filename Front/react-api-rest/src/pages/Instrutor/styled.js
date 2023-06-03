@@ -56,6 +56,7 @@ export const LadoEsquerdo = styled.div`
   }
 
   p {
+    word-break: break-all;
     font-size: 30px;
     font-weight: 600;
     margin-top: 10px;
@@ -80,6 +81,7 @@ export const LadoDireito = styled.div`
   }
 
   p {
+    word-break: break-all;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;

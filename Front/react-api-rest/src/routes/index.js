@@ -25,6 +25,7 @@ export default function Routes() {
       <MyRoute exact path="/register/" component={Register} isClosed={false} />
 
       <MyRoute exact path="/home/" component={Home} isClosed />
+      <MyRoute exact path="/home/:categoria" component={Home} isClosed />
       <MyRoute
         exact
         path="/configuracoes/"

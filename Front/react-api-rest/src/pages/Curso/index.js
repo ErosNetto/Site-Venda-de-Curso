@@ -90,7 +90,7 @@ export default function Curso({ match }) {
                   Carga horária: <span>{cargaHoraria}h</span>
                 </h4>
                 <h4>
-                  Categoria: <Link to="/home">{categoria}</Link>
+                  Categoria: <Link to={`/home/${categoria}`}>{categoria}</Link>
                 </h4>
               </ConteudoCurso>
               <Botoes>

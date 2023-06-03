@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { get } from 'lodash';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
@@ -18,6 +18,9 @@ import {
 import axios from '../../services/axios';
 
 export default function Home() {
+  const { categoria } = useParams();
+  const buscaCategoria = decodeURI(categoria);
+
   const [cursos, setCursos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,12 +28,27 @@ export default function Home() {
     async function getData() {
       setIsLoading(true);
       const response = await axios.get('/cursos');
-      setCursos(response.data);
-      setIsLoading(false);
+
+      if (buscaCategoria) {
+        const cursosFiltrados = response.data.filter(
+          (curso) => curso.categoria === buscaCategoria
+        );
+
+        if (cursosFiltrados.length > 0) {
+          setCursos(cursosFiltrados);
+        } else {
+          setCursos(response.data);
+        }
+
+        setIsLoading(false);
+      } else {
+        setCursos(response.data);
+        setIsLoading(false);
+      }
     }
 
     getData();
-  }, []);
+  }, [buscaCategoria]);
 
   return (
     <>
@@ -112,7 +130,11 @@ export default function Home() {
                 <Descricao>
                   <h3>{curso.nome}</h3>
                   <h4>{curso.Instrutor.nome}</h4>
-                  <p>{curso.preco}</p>
+                  <p>
+                    {Number.isInteger(curso.preco)
+                      ? `R$ ${curso.preco}.00`
+                      : `R$ ${curso.preco}`}
+                  </p>
                 </Descricao>
                 <Botoes>
                   <button type="button">Adiconar ao carrinho</button>

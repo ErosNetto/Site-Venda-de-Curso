@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { get } from 'lodash';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
+import axios from '../../services/axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import {
@@ -15,12 +18,16 @@ import {
   Descricao,
   Botoes,
 } from './styled';
-import axios from '../../services/axios';
 
 export default function Home() {
+  // Usuario
+  const userId = useSelector((state) => state.auth.user.id);
+
+  // Filtro de pesquisa
   const { categoria } = useParams();
   const buscaCategoria = decodeURI(categoria);
 
+  // Curso
   const [cursos, setCursos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,6 +56,82 @@ export default function Home() {
 
     getData();
   }, [buscaCategoria]);
+
+  async function handleCarrinhodeCompras(cursoId) {
+    if (!cursoId) return;
+
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get('/carrinhoDeCompras/');
+      const carrinho = response.data;
+
+      const cursoNoCarrinho = carrinho.find(
+        (item) => item.curso_id === cursoId && item.user_id === userId
+      );
+
+      if (cursoNoCarrinho) {
+        setIsLoading(false);
+        toast.warn('Esse curso já está no carrinho!');
+        return;
+      }
+
+      await axios.post('/carrinhoDeCompras/', {
+        curso_id: cursoId,
+        user_id: userId,
+      });
+
+      setIsLoading(false);
+      toast.success('Curso adicionado ao carrinho');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
+
+  async function handleFavoritos(cursoId) {
+    if (!cursoId) return;
+
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get('/favoritos/');
+      const favoritos = response.data;
+
+      const cursoNosFavoritos = favoritos.find(
+        (item) => item.curso_id === cursoId && item.user_id === userId
+      );
+
+      if (cursoNosFavoritos) {
+        setIsLoading(false);
+        toast.warn('Esse curso já está nos favoritos!');
+        return;
+      }
+
+      await axios.post('/favoritos/', {
+        curso_id: cursoId,
+        user_id: userId,
+      });
+
+      setIsLoading(false);
+      toast.success('Curso adicionado aos favoritos');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
 
   return (
     <>
@@ -137,8 +220,14 @@ export default function Home() {
                   </p>
                 </Descricao>
                 <Botoes>
-                  <button type="button">Adiconar ao carrinho</button>
-                  <div>
+                  <button
+                    type="button"
+                    onClick={() => handleCarrinhodeCompras(curso.id)}
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                  {/* eslint-disable-next-line */}
+                  <div onClick={() => handleFavoritos(curso.id)}>
                     <i className="bi bi-heart-fill" />
                   </div>
                 </Botoes>

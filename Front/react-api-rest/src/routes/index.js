@@ -10,6 +10,7 @@ import Home from '../pages/Home';
 import Configuracoes from '../pages/Configuracoes';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import CarrinhoDeCompras from '../pages/CarrinhoDeCompras';
+import Favoritos from '../pages/Favoritos';
 import Curso from '../pages/Curso';
 import Instrutor from '../pages/Instrutor';
 import MeusCursos from '../pages/MeusCursos';
@@ -39,6 +40,7 @@ export default function Routes() {
         component={CarrinhoDeCompras}
         isClosed
       />
+      <MyRoute exact path="/favoritos/" component={Favoritos} isClosed />
       <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
       <MyRoute exact path="/instrutor/:id/" component={Instrutor} isClosed />
       <MyRoute exact path="/cursos/" component={MeusCursos} isClosed />

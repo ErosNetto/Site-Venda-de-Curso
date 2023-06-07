@@ -95,7 +95,7 @@ export default function Header() {
             </li>
 
             <li>
-              <Link to="/lista-de-desejo" className="a-horizontal">
+              <Link to="/favoritos" className="a-horizontal">
                 <i className="bi bi-heart he1" />
                 <i className="bi bi-heart-fill he2" />
               </Link>
@@ -133,7 +133,7 @@ export default function Header() {
                     <Link to="/carrinho-de-compras">Meu Carrinho</Link>
                   </li>
                   <li>
-                    <Link to="/lista-de-desejo">Lista de desejos</Link>
+                    <Link to="/favoritos">Lista de desejos</Link>
                   </li>
                   <li>
                     <Link to="/configuracoes">Configurações da Conta</Link>

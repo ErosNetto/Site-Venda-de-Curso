@@ -45,17 +45,6 @@ export const TituloTexto = styled.div`
     border-right: 1px solid ${colors.corPrimaria};
     padding-right: 20px;
 
-    & h2 {
-      color: ${colors.corPrimaria};
-      font-size: 28px;
-      font-weight: 100;
-    }
-  }
-
-  .favoritos {
-    border-left: 1px solid ${colors.corPrimaria};
-    padding-left: 20px;
-
     & a {
       color: #b4b3b3;
       font-size: 28px;
@@ -65,6 +54,17 @@ export const TituloTexto = styled.div`
       &:hover {
         color: ${colors.corSecundaria};
       }
+    }
+  }
+
+  .favoritos {
+    border-left: 1px solid ${colors.corPrimaria};
+    padding-left: 20px;
+
+    & h2 {
+      color: ${colors.corPrimaria};
+      font-size: 28px;
+      font-weight: 100;
     }
   }
 `;
@@ -152,36 +152,7 @@ export const PrecoCurso = styled.div`
   }
 `;
 
-export const FooterTexto = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  margin: 0 30px 25px 30px;
-
-  button {
-    border: 0.5rem solid ${colors.corPrimaria};
-    margin: 10px 0 10px 0;
-    background: none;
-    color: ${colors.corPrimaria};
-    padding: 12px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background: ${colors.corPrimaria};
-      color: #fff;
-    }
-  }
-
-  h4 {
-    color: var(--Cor-do-texto-Nav);
-    font-size: 30px;
-    font-weight: 800;
-  }
-`;
-
-export const CarrinhoVazio = styled.h3`
+export const FavoritoVazio = styled.h3`
   font-size: 25px;
   text-align: center;
 `;

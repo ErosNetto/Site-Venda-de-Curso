@@ -35,5 +35,6 @@ module.exports = {
     'react/jsx-no-useless-fragment': 'off',
     // 'no-unused-vars': 'off',
     'jsx-a11y/label-has-associated-control': 0,
+    'consistent-return': 'off',
   },
 };

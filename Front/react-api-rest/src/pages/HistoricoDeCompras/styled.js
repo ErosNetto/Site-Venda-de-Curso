@@ -5,7 +5,7 @@ import * as colors from '../../config/colors';
 export const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px 50px;
+  padding: 15px 15px;
   border-radius: 50px;
   background: #fff;
 
@@ -14,10 +14,57 @@ export const Main = styled.div`
   grid-template-columns: 1fr;
   /* gap: 20px; */
   height: auto;
+`;
 
-  .btn-instrutor {
+export const TituloPag = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  border-bottom: 5px solid ${colors.corSecundaria};
+
+  h2 {
+    font-size: 50px;
+    font-weight: 800;
+    color: ${colors.corPrimaria};
+  }
+`;
+
+export const ResponsiveTable = styled.div`
+  overflow: hidden;
+  overflow-x: auto;
+  /* margin-bottom: 25px; */
+  margin: 25px 0 25px 0;
+`;
+
+export const Tabela = styled.table`
+  min-width: 360px;
+  width: 100%;
+  border-collapse: collapse;
+
+  td,
+  th {
+    border-bottom: 2px solid ${colors.corSecundaria};
+    white-space: nowrap;
+    padding: 13px;
+    text-align: left;
+    font-size: 20px;
+    color: ${colors.corPrimaria};
+  }
+
+  th {
+    font-size: 22px;
+  }
+
+  td:nth-child(1) {
+    white-space: normal;
+  }
+
+  td:last-child {
+    text-align: center;
+  }
+
+  button {
     border: 0.5rem solid ${colors.corPrimaria};
-    margin: 10px 0 10px 0;
     background: none;
     color: ${colors.corPrimaria};
     padding: 12px 20px;
@@ -29,130 +76,22 @@ export const Main = styled.div`
       background: ${colors.corPrimaria};
       color: #fff;
     }
-  }
-`;
 
-export const TituloTexto = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: left;
-  padding-bottom: 15px;
-  border-bottom: 5px solid ${colors.corSecundaria};
-  margin-bottom: 25px;
-
-  .carrinho {
-    margin-left: 30px;
-    border-right: 1px solid ${colors.corPrimaria};
-    padding-right: 20px;
-
-    & a {
-      color: #b4b3b3;
-      font-size: 28px;
-      cursor: pointer;
-      font-weight: 300;
-
-      &:hover {
-        color: ${colors.corSecundaria};
-      }
-    }
-  }
-
-  .favoritos {
-    border-left: 1px solid ${colors.corPrimaria};
-    padding-left: 20px;
-
-    & h2 {
-      color: ${colors.corPrimaria};
-      font-size: 28px;
-      font-weight: 100;
+    &:focus {
+      background: ${colors.corPrimaria};
+      color: #fff;
     }
   }
 `;
 
-export const GridListCurso = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2.5fr 0.7fr;
-  border-bottom: 1px solid ${colors.corPrimaria};
-  padding: 0 25px 25px 25px;
-  margin-bottom: 25px;
-
-  img {
-    width: 100%;
-    height: 134px;
-  }
-`;
-
-export const TextoCurso = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-left: 25px;
+export const SemCursos = styled.div`
+  margin-top: 10px;
+  width: 100%;
 
   h3 {
-    font-size: 0;
-  }
-
-  h3 a {
-    color: ${colors.corPrimaria};
+    text-align: center;
     font-size: 28px;
     font-weight: 600;
-
-    &:hover {
-      color: ${colors.corSecundaria};
-    }
-  }
-`;
-
-export const BotoesCurso = styled.div`
-  font-size: 20px;
-
-  & a:first-child {
-    /* color: #3fd304; */
-    color: #3fd30469;
-    padding-right: 10px;
-    border-right: 2px solid ${colors.corPrimaria};
-  }
-
-  & a:first-child:hover {
-    color: #3fd30494;
-  }
-
-  & a:nth-child(2) {
-    color: #ff0000d7;
-    padding: 0 10px 0 10px;
-  }
-
-  & a:nth-child(2):hover {
-    color: ${colors.corSecundaria};
-  }
-
-  & a:nth-child(3) {
-    color: #0077ff;
-    padding-left: 10px;
-    border-left: 2px solid ${colors.corPrimaria};
-  }
-
-  & a:nth-child(3):hover {
-    color: #0455b1d7;
-  }
-`;
-
-export const PrecoCurso = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: end;
-  align-items: center;
-
-  h4 {
     color: ${colors.corPrimaria};
-    font-size: 30px;
-    font-weight: 600;
   }
-`;
-
-export const FavoritoVazio = styled.h3`
-  font-size: 25px;
-  text-align: center;
 `;

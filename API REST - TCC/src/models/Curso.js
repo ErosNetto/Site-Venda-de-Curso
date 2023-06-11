@@ -71,5 +71,6 @@ export default class Curso extends Model {
     this.belongsTo(models.Instrutor, { foreignKey: 'instrutor_id' });
     this.hasMany(models.CarrinhoDeCompras, { foreignKey: 'curso_id' });
     this.hasMany(models.Favoritos, { foreignKey: 'curso_id' });
+    this.hasMany(models.HistoricoDeCompras, { foreignKey: 'curso_id' });
   }
 }

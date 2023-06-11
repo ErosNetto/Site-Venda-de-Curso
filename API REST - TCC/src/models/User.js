@@ -64,6 +64,7 @@ export default class User extends Model {
   static associate(models) {
     this.hasMany(models.CarrinhoDeCompras, { foreignKey: 'user_id', as: 'carrinhos' });
     this.hasMany(models.Favoritos, { foreignKey: 'user_id', as: 'favoritos' });
+    this.hasMany(models.HistoricoDeCompras, { foreignKey: 'user_id', as: 'historicoDeCompras' });
 
     // TESTE
     // this.hasOne(models.Instrutor, { foreignKey: 'usuario_id' });

@@ -172,6 +172,11 @@ export const FooterTexto = styled.div`
       background: ${colors.corPrimaria};
       color: #fff;
     }
+
+    &:focus {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
   }
 `;
 

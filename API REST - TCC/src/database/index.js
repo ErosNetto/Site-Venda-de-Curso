@@ -9,6 +9,7 @@ import FotoCurso from '../models/FotoCurso';
 import VideoCurso from '../models/VideoCurso';
 import CarrinhoDeCompras from '../models/CarrinhoDeCompras';
 import Favoritos from '../models/Favoritos';
+import HistoricoDeCompras from '../models/HistoricoDeCompras';
 
 const models = [
   User,
@@ -19,6 +20,7 @@ const models = [
   VideoCurso,
   CarrinhoDeCompras,
   Favoritos,
+  HistoricoDeCompras,
 ];
 
 const connection = new Sequelize(databaseConfig);

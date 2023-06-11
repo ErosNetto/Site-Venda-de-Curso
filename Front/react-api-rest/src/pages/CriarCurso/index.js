@@ -8,6 +8,7 @@ import { NumericFormat } from 'react-number-format';
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
 import axios from '../../services/axios';
+import history from '../../services/history';
 import Loading from '../../components/Loading';
 import * as actions from '../../store/modules/auth/actions';
 import {
@@ -46,6 +47,19 @@ export default function CriarCurso({ match }) {
   const [videoCurso, setVideoCurso] = useState('');
 
   useEffect(() => {
+    if (!idInstrutorSalvo) {
+      toast.warn('Preencha as informaçoes do instrutor!');
+      history.push('/configuracoes');
+      setTimeout(() => {
+        const elemento = document.getElementById('instrutor');
+        if (elemento) {
+          const offset = elemento.offsetTop;
+          const scrollTop = offset - 115;
+          window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+
     if (!idCursoEditar) return;
     setIdCurso(idCursoEditar);
 
@@ -87,7 +101,7 @@ export default function CriarCurso({ match }) {
     }
 
     getCurso();
-  }, [idCursoEditar]);
+  }, [idCursoEditar, idInstrutorSalvo]);
 
   async function handleCriarEditarCurso(e) {
     e.preventDefault();
@@ -363,6 +377,7 @@ export default function CriarCurso({ match }) {
                   value={cargaHoraria}
                   onChange={(e) => setCargaHoraria(e.target.value)}
                   placeholder="Coloque a carga horária"
+                  min={1}
                 />
               </div>
 

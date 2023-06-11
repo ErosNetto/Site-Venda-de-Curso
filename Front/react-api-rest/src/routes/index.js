@@ -11,6 +11,7 @@ import Configuracoes from '../pages/Configuracoes';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import CarrinhoDeCompras from '../pages/CarrinhoDeCompras';
 import Favoritos from '../pages/Favoritos';
+import HistoricoDeCompras from '../pages/HistoricoDeCompras';
 import Curso from '../pages/Curso';
 import Instrutor from '../pages/Instrutor';
 import MeusCursos from '../pages/MeusCursos';
@@ -38,6 +39,12 @@ export default function Routes() {
         exact
         path="/carrinho-de-compras/"
         component={CarrinhoDeCompras}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/historico-de-compras/"
+        component={HistoricoDeCompras}
         isClosed
       />
       <MyRoute exact path="/favoritos/" component={Favoritos} isClosed />

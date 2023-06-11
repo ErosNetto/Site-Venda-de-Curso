@@ -29,12 +29,21 @@ export default function Configuracoes() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!idInstrutorSalvo) return;
+    if (!idInstrutorSalvo) {
+      toast.warn('Preencha as informaçoes do instrutor!');
+      history.push('/configuracoes');
+      setTimeout(() => {
+        const elemento = document.getElementById('instrutor');
+        if (elemento) {
+          const offset = elemento.offsetTop;
+          const scrollTop = offset - 115;
+          window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+        }
+      }, 100);
+    }
 
     // Acha os cursos do instrutor
     async function getCursos() {
-      if (!idInstrutorSalvo) return;
-
       try {
         setIsLoading(true);
         const { data } = await axios.get('/cursos/');

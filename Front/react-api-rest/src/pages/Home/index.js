@@ -215,8 +215,8 @@ export default function Home() {
                   <h4>{curso.Instrutor.nome}</h4>
                   <p>
                     {Number.isInteger(curso.preco)
-                      ? `R$ ${curso.preco}.00`
-                      : `R$ ${curso.preco}`}
+                      ? `R$ ${curso.preco},00`
+                      : `R$ ${curso.preco.toString().replace('.', ',')}`}
                   </p>
                 </Descricao>
                 <Botoes>

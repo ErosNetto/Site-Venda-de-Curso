@@ -382,7 +382,7 @@ export default function Configuracoes() {
         <Loading isLoading={isLoading} />
 
         {userIstrutorSalvo ? (
-          <Main>
+          <Main id="instrutor">
             <TituloTexto>
               <h1>Configurações do instrutor</h1>
             </TituloTexto>

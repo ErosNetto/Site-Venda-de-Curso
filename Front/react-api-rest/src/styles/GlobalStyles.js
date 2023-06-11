@@ -82,13 +82,6 @@ export const Container1 = styled.section`
 
 // Container e Backgroud
 export const ContainerBack = styled.section`
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-
-  /* margin: 100px 0 0 0; */
-  /* padding-top: 30px; */
-
   padding: 130px 0 50px 113px;
 
   min-height: 100vh;

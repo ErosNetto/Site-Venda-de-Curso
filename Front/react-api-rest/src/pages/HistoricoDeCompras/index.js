@@ -11,13 +11,11 @@ import Loading from '../../components/Loading';
 import {
   Main,
   TituloTexto,
-  FooterTexto,
   GridListCurso,
   TextoCurso,
   BotoesCurso,
   PrecoCurso,
-  Total,
-  CarrinhoVazio,
+  FavoritoVazio,
 } from './styled';
 import Html from '../../img/HTML-5.jpg';
 
@@ -26,27 +24,19 @@ export default function CarrinhoDeCompras() {
   const userId = useSelector((state) => state.auth.user.id);
 
   // Carrinho de Compras
-  const [carrinhoMaisCursos, setCarrinhoMaisCursos] = useState([]);
+  const [favoritosMaisCursos, setFavoritosMaisCursos] = useState([]);
   const [carrinholength, setCarrinholength] = useState(0);
   const [favoritoslength, setFavoritoslength] = useState(0);
-  const [precoTotal, setPrecoTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
 
-    // Get carrinho de compras
+    // Get favoritos
     async function getData() {
       setIsLoading(true);
 
       try {
-        // Favoritos
-        const responseFav = await axios.get('/favoritos/');
-        const favoritoFiltrado = responseFav.data.filter(
-          (favorito) => favorito.user_id === userId
-        );
-        setFavoritoslength(favoritoFiltrado.length);
-
         // Carrinho de Compras
         const responseCar = await axios.get('/carrinhoDeCompras/');
         const carrinhoFiltrado = responseCar.data.filter(
@@ -54,20 +44,26 @@ export default function CarrinhoDeCompras() {
         );
         setCarrinholength(carrinhoFiltrado.length);
 
-        const cursoPromises = carrinhoFiltrado.map((carrinho) =>
-          axios.get(`/cursos/${carrinho.curso_id}`)
+        // Favoritos
+        const responseFav = await axios.get('/favoritos/');
+        const favoritoFiltrado = responseFav.data.filter(
+          (favorito) => favorito.user_id === userId
+        );
+        setFavoritoslength(favoritoFiltrado.length);
+
+        const cursoPromises = favoritoFiltrado.map((favorito) =>
+          axios.get(`/cursos/${favorito.curso_id}`)
         );
 
         const cursoResponses = await Promise.all(cursoPromises);
 
-        const carrinhoComCursos = carrinhoFiltrado.map((carrinho, index) => {
+        const favoritoComCursos = favoritoFiltrado.map((favorito, index) => {
           const curso = cursoResponses[index].data;
-          const idCarrinho = carrinho.id;
-          setPrecoTotal((precoAnterior) => precoAnterior + curso.preco);
-          return { idCarrinho, curso };
+          const idFavoritos = favorito.id;
+          return { idFavoritos, curso };
         });
 
-        setCarrinhoMaisCursos(carrinhoComCursos);
+        setFavoritosMaisCursos(favoritoComCursos);
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
@@ -86,24 +82,19 @@ export default function CarrinhoDeCompras() {
     getData();
   }, [userId]);
 
-  // Excluir o curso do carrinho de compras
-  async function handleDeleteItem(e, idCarrinho, index) {
+  // Excluir o curso dos favoritos
+  async function handleDeleteItem(e, idFavoritos, index) {
     e.persist();
-    if (!idCarrinho) return;
+    if (!idFavoritos) return;
 
     try {
       setIsLoading(true);
 
-      await axios.delete(`/carrinhoDeCompras/${idCarrinho}`);
-      const novosCursos = [...carrinhoMaisCursos];
-
-      setPrecoTotal(
-        (precoAnterior) => precoAnterior - novosCursos[index].curso.preco
-      );
-
+      await axios.delete(`/favoritos/${idFavoritos}`);
+      const novosCursos = [...favoritosMaisCursos];
       novosCursos.splice(index, 1);
-      setCarrinhoMaisCursos(novosCursos);
-      setCarrinholength(novosCursos.length);
+      setFavoritosMaisCursos(novosCursos);
+      setFavoritoslength(novosCursos.length);
 
       setIsLoading(false);
       toast.success('Curso excluido');
@@ -119,46 +110,41 @@ export default function CarrinhoDeCompras() {
     }
   }
 
-  // Mover o curso para os favoritos
-  async function handleAddFavoritos(e, idCarrinho, idCurso, index) {
+  // Mover o curso para o carrinho de compras
+  async function handleMovCarrrinho(e, idFavoritos, idCurso, index) {
     e.persist();
-    if (!idCarrinho) return;
+    if (!idFavoritos) return;
 
     try {
       setIsLoading(true);
 
-      const response = await axios.get('/favoritos/');
+      const response = await axios.get('/carrinhoDeCompras/');
       const favoritos = response.data;
 
-      const cursoNosFavoritos = favoritos.find(
+      const cursoNoCarrinho = favoritos.find(
         (item) => item.curso_id === idCurso && item.user_id === userId
       );
 
-      if (cursoNosFavoritos) {
+      if (cursoNoCarrinho) {
         setIsLoading(false);
-        toast.warn('Esse curso já está nos favoritos!');
+        toast.warn('Esse curso já está no seu carrinho!');
         return;
       }
 
-      await axios.delete(`/carrinhoDeCompras/${idCarrinho}`);
-      const novosCursos = [...carrinhoMaisCursos];
-
-      setPrecoTotal(
-        (precoAnterior) => precoAnterior - novosCursos[index].curso.preco
-      );
-
+      await axios.delete(`/favoritos/${idFavoritos}`);
+      const novosCursos = [...favoritosMaisCursos];
       novosCursos.splice(index, 1);
-      setCarrinhoMaisCursos(novosCursos);
-      setCarrinholength(novosCursos.length);
-      setFavoritoslength((prevLength) => prevLength + 1);
+      setFavoritosMaisCursos(novosCursos);
+      setFavoritoslength(novosCursos.length);
+      setCarrinholength((prevLength) => prevLength + 1);
 
-      await axios.post('/favoritos/', {
+      await axios.post('/carrinhoDeCompras/', {
         curso_id: idCurso,
         user_id: userId,
       });
 
       setIsLoading(false);
-      toast.success('Curso adicionado aos favoritos');
+      toast.success('Curso adicionado ao carrinho');
     } catch (err) {
       setIsLoading(false);
       const errors = get(err, 'response.data.errors', []);
@@ -166,7 +152,7 @@ export default function CarrinhoDeCompras() {
       if (errors.length > 0) {
         errors.map((error) => toast.error(error));
       } else {
-        toast.error('Erro ao adicionar aos favoritos');
+        toast.error('Erro ao adicionar no carrinho');
       }
     }
   }
@@ -180,16 +166,16 @@ export default function CarrinhoDeCompras() {
         <Main>
           <TituloTexto>
             <div className="carrinho">
-              <h2>Carrinho({carrinholength})</h2>
+              <Link to="/carrinho-de-compras/">Carrinho({carrinholength})</Link>
             </div>
             <div className="favoritos">
-              <Link to="/favoritos/">Favoritos({favoritoslength})</Link>
+              <h2>Favoritos({favoritoslength})</h2>
             </div>
           </TituloTexto>
 
-          {carrinhoMaisCursos.length > 0 ? (
-            carrinhoMaisCursos.map((item, index) => (
-              <GridListCurso key={String(item.idCarrinho)}>
+          {favoritosMaisCursos.length > 0 ? (
+            favoritosMaisCursos.map((item, index) => (
+              <GridListCurso key={String(item.idFavoritos)}>
                 {get(item.curso, 'FotoCursos[0].url', false) ? (
                   <div className="imagen-curso">
                     <img
@@ -209,57 +195,40 @@ export default function CarrinhoDeCompras() {
                     </Link>
                   </h3>
                   <BotoesCurso>
-                    <Link to="/comprarAgora">Comprar agora</Link>
                     <Link
-                      to="/carrinho-de-compras/"
+                      to="/favoritos/"
                       onClick={(e) =>
-                        handleDeleteItem(e, item.idCarrinho, index)
+                        handleDeleteItem(e, item.idFavoritos, index)
                       }
                     >
                       Excluir
                     </Link>
                     <Link
-                      to="/carrinho-de-compras/"
+                      to="/favoritos/"
                       onClick={(e) =>
-                        handleAddFavoritos(
+                        handleMovCarrrinho(
                           e,
-                          item.idCarrinho,
+                          item.idFavoritos,
                           item.curso.id,
                           index
                         )
                       }
                     >
-                      Mover para os favoritos
+                      Adicionar ao carrinho de compras
                     </Link>
                   </BotoesCurso>
                 </TextoCurso>
                 <PrecoCurso>
                   <h4>
                     {Number.isInteger(item.curso.preco)
-                      ? `R$ ${item.curso.preco},00`
-                      : `R$ ${item.curso.preco.toString().replace('.', ',')}`}
+                      ? `R$ ${item.curso.preco}.00`
+                      : `R$ ${item.curso.preco}`}
                   </h4>
                 </PrecoCurso>
               </GridListCurso>
             ))
           ) : (
-            <CarrinhoVazio>Carrinho vazio</CarrinhoVazio>
-          )}
-
-          {carrinhoMaisCursos.length > 0 ? (
-            <FooterTexto>
-              <button type="button">Finalizar comprar</button>
-              <Total>
-                <h5>Total:</h5>
-                <h4>
-                  {Number.isInteger(precoTotal)
-                    ? `R$ ${precoTotal},00`
-                    : `R$ ${precoTotal.toFixed(2).replace('.', ',')}`}
-                </h4>
-              </Total>
-            </FooterTexto>
-          ) : (
-            <></>
+            <FavoritoVazio>Você não tem nenhum favorito</FavoritoVazio>
           )}
         </Main>
       </ContainerBack>

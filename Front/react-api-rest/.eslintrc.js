@@ -36,5 +36,6 @@ module.exports = {
     // 'no-unused-vars': 'off',
     'jsx-a11y/label-has-associated-control': 0,
     'consistent-return': 'off',
+    'no-plusplus': 0,
   },
 };

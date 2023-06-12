@@ -11,6 +11,7 @@ import Configuracoes from '../pages/Configuracoes';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import CarrinhoDeCompras from '../pages/CarrinhoDeCompras';
 import Favoritos from '../pages/Favoritos';
+import MetodosDePagamento from '../pages/MetodosDePagamento';
 import HistoricoDeCompras from '../pages/HistoricoDeCompras';
 import Curso from '../pages/Curso';
 import Instrutor from '../pages/Instrutor';
@@ -39,6 +40,12 @@ export default function Routes() {
         exact
         path="/carrinho-de-compras/"
         component={CarrinhoDeCompras}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/metodos-de-pagamento"
+        component={MetodosDePagamento}
         isClosed
       />
       <MyRoute

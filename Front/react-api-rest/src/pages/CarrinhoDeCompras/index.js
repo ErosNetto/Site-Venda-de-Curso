@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
+import history from '../../services/history';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import {
@@ -31,6 +32,9 @@ export default function CarrinhoDeCompras() {
   const [favoritoslength, setFavoritoslength] = useState(0);
   const [precoTotal, setPrecoTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Finalizar carrinho
+  // const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
     if (!userId) return;
@@ -171,6 +175,27 @@ export default function CarrinhoDeCompras() {
     }
   }
 
+  function finalizarCarrinho() {
+    const rotaDeOrigem = '/carrinho-de-compras';
+    const todosOsCursos = carrinhoMaisCursos.map(
+      (carrinho) => carrinho.curso.id
+    );
+
+    let parametros = '';
+    for (let index = 0; index < todosOsCursos.length; index++) {
+      parametros += `curso${index}=${todosOsCursos[index]}&`;
+    }
+    const url = `/metodos-de-pagamento?${parametros}precoTotal=${precoTotal}&rotaDeOrigem=${rotaDeOrigem}`;
+    history.push(url);
+  }
+
+  function comprarAgora(e, idCurso, preco) {
+    e.preventDefault();
+    const rotaDeOrigem = '/carrinho-de-compras';
+    const url = `/metodos-de-pagamento?curso=${idCurso}&precoTotal=${preco}&rotaDeOrigem=${rotaDeOrigem}`;
+    history.push(url);
+  }
+
   return (
     <>
       <Header />
@@ -209,7 +234,14 @@ export default function CarrinhoDeCompras() {
                     </Link>
                   </h3>
                   <BotoesCurso>
-                    <Link to="/comprarAgora">Comprar agora</Link>
+                    <Link
+                      to="/carrinho-de-compras"
+                      onClick={(e) =>
+                        comprarAgora(e, item.curso.id, item.curso.preco)
+                      }
+                    >
+                      Comprar agora
+                    </Link>
                     <Link
                       to="/carrinho-de-compras/"
                       onClick={(e) =>
@@ -248,7 +280,9 @@ export default function CarrinhoDeCompras() {
 
           {carrinhoMaisCursos.length > 0 ? (
             <FooterTexto>
-              <button type="button">Finalizar comprar</button>
+              <button type="button" onClick={finalizarCarrinho}>
+                Finalizar comprar
+              </button>
               <Total>
                 <h5>Total:</h5>
                 <h4>

@@ -57,6 +57,7 @@ export default function Home() {
     getData();
   }, [buscaCategoria]);
 
+  // Adiciona o curso no carrinho de compras
   async function handleCarrinhodeCompras(cursoId) {
     if (!cursoId) return;
 

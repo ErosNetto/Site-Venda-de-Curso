@@ -175,25 +175,83 @@ export default function CarrinhoDeCompras() {
     }
   }
 
-  function finalizarCarrinho() {
+  // Finaliza a compra, verificando se já possui o curso e enviado para metodos de pagamento
+  async function finalizarCarrinho() {
     const rotaDeOrigem = '/carrinho-de-compras';
     const todosOsCursos = carrinhoMaisCursos.map(
       (carrinho) => carrinho.curso.id
     );
 
-    let parametros = '';
-    for (let index = 0; index < todosOsCursos.length; index++) {
-      parametros += `curso${index}=${todosOsCursos[index]}&`;
+    try {
+      setIsLoading(true);
+      const response = await axios.get('/perfil/');
+
+      let cursoNoCarrinho = false;
+      todosOsCursos.forEach((value) => {
+        const itemEncontrado = response.data.find(
+          (item) => item.curso_id === value && item.user_id === userId
+        );
+
+        if (itemEncontrado) cursoNoCarrinho = true;
+      });
+
+      if (cursoNoCarrinho) {
+        setIsLoading(false);
+        toast.warn('Você já comprou esse curso!');
+        return;
+      }
+
+      let parametros = '';
+      for (let index = 0; index < todosOsCursos.length; index++) {
+        parametros += `curso${index}=${todosOsCursos[index]}&`;
+      }
+      const url = `/metodos-de-pagamento?${parametros}precoTotal=${precoTotal}&rotaDeOrigem=${rotaDeOrigem}`;
+
+      setIsLoading(false);
+      history.push(url);
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
     }
-    const url = `/metodos-de-pagamento?${parametros}precoTotal=${precoTotal}&rotaDeOrigem=${rotaDeOrigem}`;
-    history.push(url);
   }
 
-  function comprarAgora(e, idCurso, preco) {
+  // Comprar agora, verificando se já possui o curso e enviado para metodos de pagamento
+  async function comprarAgora(e, idCurso, preco) {
     e.preventDefault();
     const rotaDeOrigem = '/carrinho-de-compras';
-    const url = `/metodos-de-pagamento?curso=${idCurso}&precoTotal=${preco}&rotaDeOrigem=${rotaDeOrigem}`;
-    history.push(url);
+
+    try {
+      setIsLoading(true);
+      const response = await axios.get('/perfil/');
+
+      const cursoNoCarrinho = response.data.find(
+        (item) => item.curso_id === idCurso && item.user_id === userId
+      );
+
+      if (cursoNoCarrinho) {
+        setIsLoading(false);
+        toast.warn('Você já comprou esse curso!');
+        return;
+      }
+
+      const url = `/metodos-de-pagamento?curso=${idCurso}&precoTotal=${preco}&rotaDeOrigem=${rotaDeOrigem}`;
+      history.push(url);
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
   }
 
   return (

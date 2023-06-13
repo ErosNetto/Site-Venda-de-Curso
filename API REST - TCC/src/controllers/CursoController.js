@@ -6,7 +6,7 @@ import Instrutor from '../models/Instrutor';
 class CursoController {
   async index(req, res) {
     const cursos = await Curso.findAll({
-      attributes: ['id', 'nome', 'descricao', 'categoria', 'carga_horaria', 'preco'],
+      attributes: ['id', 'nome', 'categoria', 'preco'],
       order: [['id', 'DESC'], [Instrutor, 'id', 'DESC'], [FotoCurso, 'id', 'DESC']],
       include: [
         {

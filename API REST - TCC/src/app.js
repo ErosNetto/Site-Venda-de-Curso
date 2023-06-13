@@ -20,6 +20,7 @@ import videoCursoRoutes from './routes/videoCursoRoutes';
 import carrinhoDeComprasRoutes from './routes/carrinhoDeComprasRoutes';
 import favoritosRoutes from './routes/favoritosRoutes';
 import historicoDeComprasRoutes from './routes/historicoDeComprasRoutes';
+import perfilDoUsuarioRoutes from './routes/perfilDoUsuarioRoutes';
 
 const whitelist = [
   'http://localhost:3000',
@@ -63,6 +64,7 @@ class App {
     this.app.use('/carrinhoDeCompras/', carrinhoDeComprasRoutes);
     this.app.use('/favoritos/', favoritosRoutes);
     this.app.use('/historicoDeCompras/', historicoDeComprasRoutes);
+    this.app.use('/perfil/', perfilDoUsuarioRoutes);
   }
 }
 

@@ -59,17 +59,18 @@ export default createGlobalStyle`
   }
 `;
 
-export const Container = styled.section`
-  max-width: 480px;
-  background: #fff;
-  margin: 30px auto;
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+export const Container404 = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(${imgBack});
+  background-size: cover;
+  background-position: center center;
 `;
 
 // Container de LOGIN E CADASTRO
-export const Container1 = styled.section`
+export const Container = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,7 +84,6 @@ export const Container1 = styled.section`
 // Container e Backgroud
 export const ContainerBack = styled.section`
   padding: 130px 0 50px 113px;
-
   min-height: 100vh;
   background-image: url(${imgBack});
   background-size: cover;

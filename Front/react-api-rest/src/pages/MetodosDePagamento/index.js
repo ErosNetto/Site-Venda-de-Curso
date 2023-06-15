@@ -32,12 +32,6 @@ export default function MetodosDePagamento() {
     if (!rotaDeOrigem || String(rotaDeOrigem) !== '/carrinho-de-compras') {
       toast.warn('Você não pode acessar essa página!');
       history.push('/home');
-    } else if (searchParams.size === 3) {
-      const curso = searchParams.get('curso');
-      const preco = searchParams.get('precoTotal');
-
-      setCursos([curso]);
-      setprecoTotal(preco);
     } else {
       const parametrosCursos = [];
       let index = 0;
@@ -72,16 +66,16 @@ export default function MetodosDePagamento() {
       // Verifica se já comprou o curso
       const responseVerifica = await axios.get('/perfil/');
 
-      let cursoNoCarrinho = false;
+      let cursoJaComprado = false;
       cursos.forEach((value) => {
         const itemEncontrado = responseVerifica.data.find(
           (item) => item.curso_id === value && item.user_id === userId
         );
 
-        if (itemEncontrado) cursoNoCarrinho = true;
+        if (itemEncontrado) cursoJaComprado = true;
       });
 
-      if (cursoNoCarrinho) {
+      if (cursoJaComprado) {
         setIsLoading(false);
         toast.warn('Você já comprou esse curso!');
         history.push('home');
@@ -102,13 +96,19 @@ export default function MetodosDePagamento() {
           formaDePagamento,
         });
 
-        await axios.delete(`/carrinhoDeCompras/${value}`);
+        const responseCar = await axios.get('/carrinhoDeCompras/');
+        const itemEncontradoCar = responseCar.data.find(
+          (item) => item.curso_id === Number(value) && item.user_id === userId
+        );
+        if (itemEncontradoCar)
+          await axios.delete(`/carrinhoDeCompras/${itemEncontradoCar.id}`);
 
         const responseFav = await axios.get('/favoritos/');
-        const itemEncontrado = responseFav.data.find(
-          (item) => item.curso_id === value && item.user_id === userId
+        const itemEncontradoFav = responseFav.data.find(
+          (item) => item.curso_id === Number(value) && item.user_id === userId
         );
-        if (itemEncontrado) await axios.delete(`/favoritos/${value}`);
+        if (itemEncontradoFav)
+          await axios.delete(`/favoritos/${itemEncontradoFav.id}`);
       });
       setIsLoading(false);
 

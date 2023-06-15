@@ -15,6 +15,7 @@ import {
   Curso,
   ImgCurso,
   Barra,
+  SemCursos,
 } from './styled';
 
 export default function Configuracoes() {
@@ -59,7 +60,7 @@ export default function Configuracoes() {
             VideoCursos,
           };
         });
-        console.log(perfilComCursos);
+
         setCursos(perfilComCursos);
         setIsLoading(false);
       } catch (err) {
@@ -87,8 +88,7 @@ export default function Configuracoes() {
           <TituloPag>
             <h2>Perfil do usuário</h2>
           </TituloPag>
-
-          <h3>Meu progresso:</h3>
+          {cursos.length > 0 ? <h3>Meu progresso:</h3> : <></>}
 
           <ConteudoCursos>
             {cursos.length > 0 ? (
@@ -98,8 +98,8 @@ export default function Configuracoes() {
                     <ImgCurso>
                       <Link
                         to={
-                          curso.VideoCursos && curso.VideoCursos.url
-                            ? 'http://localhost:3005/videos/1686634302496_17240.mp4'
+                          curso.cursoNome
+                            ? `videos/${curso.cursoNome}/${curso.cursoId}`
                             : '/perfil'
                         }
                       >
@@ -110,8 +110,8 @@ export default function Configuracoes() {
                     <ImgCurso>
                       <Link
                         to={
-                          curso.VideoCursos && curso.VideoCursos.url
-                            ? 'http://localhost:3005/videos/1686634302496_17240.mp4'
+                          curso.cursoNome
+                            ? `videos/${curso.cursoNome}/${curso.cursoId}`
                             : '/perfil'
                         }
                       >
@@ -131,7 +131,9 @@ export default function Configuracoes() {
                 </Curso>
               ))
             ) : (
-              <></>
+              <SemCursos>
+                <h3>Parece que você ainda não adquiriu nenhum curso</h3>
+              </SemCursos>
             )}
           </ConteudoCursos>
         </Main>

@@ -102,3 +102,15 @@ export const Barra = styled.div`
     top: -36px;
   }
 `;
+
+export const SemCursos = styled.div`
+  margin-top: 10px;
+  width: 100%;
+
+  h3 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: ${colors.corPrimaria};
+  }
+`;

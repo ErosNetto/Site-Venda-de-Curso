@@ -6,7 +6,7 @@ export const HeaderInicio = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px; /*120px*/
+  height: 85px; // 100px
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,8 +20,8 @@ export const HeaderInicio = styled.header`
     align-items: center;
 
     & i {
-      font-size: 40px;
-      margin: 0 22px 0 40px;
+      font-size: 35px; // 40
+      margin: 0 18px 0 26px; // 0 22px 0 27px;
       cursor: pointer;
       color: ${colors.corPrimaria};
     }
@@ -91,15 +91,21 @@ export const HeaderInicio = styled.header`
     display: block;
   }
 
+  .img-user img {
+    display: flex;
+    align-items: center;
+    width: 65px;
+    height: 65px;
+  }
+
   /* Menu suspenso */
   .menu-hover:hover::after {
     content: '';
     position: absolute;
-    top: 80px;
+    top: 80px; // 80
     right: 22px;
-    width: 125px;
-    height: 30px;
-    background: red;
+    width: 105px; // 125
+    height: 23px; // 30
   }
 
   .menu-hover:hover #menu-sus {
@@ -177,17 +183,15 @@ export const SearchBox = styled.div`
 export const MenuSuspeso = styled.div`
   z-index: 1;
   position: absolute;
-  top: 105px; /*125px*/
+  top: 92px; // 105
   right: 22px;
-
-  width: 316px; /*420px*/
-  height: 462px; /*577px*/
-
+  width: 316px;
+  height: 438px; // 462
   background: #fff;
   transition: 0.2s;
   visibility: hidden;
   opacity: 0;
-  display: none;
+  display: block;
 
   .info-conteudo a {
     display: grid;
@@ -195,7 +199,7 @@ export const MenuSuspeso = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding: 10px; /*20px*/
+    padding: 10px;
     transition: 0.2s;
 
     &:hover h3 {
@@ -203,24 +207,38 @@ export const MenuSuspeso = styled.div`
     }
   }
 
-  .info-img img {
-    width: 80px; /*110px*/
-    height: 80px;
+  .info-img {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
   }
 
-  .info-text h3 {
-    font-size: 18px; /*22px*/
-    margin: 0 0 10px 0;
-    color: ${colors.corPrimaria};
+  .info-text {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+      color: ${colors.corPrimaria};
+    }
+
+    p {
+      margin: 0;
+    }
   }
 
   .info-text p {
-    font-size: 12px; /*18px*/
+    font-size: 12px;
     color: #aeaeae;
   }
 
   ul {
-    padding: 20px;
+    padding: 10px 20px; // 20
     display: flex;
     flex-direction: column;
   }
@@ -231,8 +249,8 @@ export const MenuSuspeso = styled.div`
 
   ul li a {
     width: 100%;
-    padding: 15px;
-    font-size: 18px; /*22px*/
+    padding: 12px; // 15
+    font-size: 18px;
     color: ${colors.corPrimaria};
     transition: 0.2s;
 
@@ -251,21 +269,19 @@ export const MenuSuspeso = styled.div`
 `;
 
 export const Nav = styled.nav`
-  /* margin-top: 120px; */
-  top: 100px; /*120px*/
+  top: 85px; /*100px*/
   left: 0;
   position: fixed;
   z-index: 1;
-  width: 110px;
+  width: 85px; // 97px
   height: 100%;
   background: #fff;
-  padding: 0 0 40px 13px;
   box-shadow: 3px 0 0 ${colors.corSecundaria};
   overflow: hidden;
   transition: 0.3s;
 
   &.expandir {
-    width: 300px;
+    width: 255px; // 300
   }
 
   ul {
@@ -291,7 +307,7 @@ export const Nav = styled.nav`
     font-size: 25px;
     padding: 20px 4%;
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 5px; // 20
     line-height: 40px;
   }
 
@@ -310,7 +326,7 @@ export const Nav = styled.nav`
   }
 
   a .icon i {
-    font-size: 40px;
-    margin-left: 23px;
+    font-size: 35px; // 40
+    margin-left: 22px; //23
   }
 `;

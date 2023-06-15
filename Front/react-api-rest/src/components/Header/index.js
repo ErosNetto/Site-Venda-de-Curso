@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { get } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -13,6 +13,8 @@ import fotoPerfil from '../../img/Group 5.png';
 
 export default function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const [expanded, setExpanded] = useState(false);
 
   const id = useSelector((state) => state.auth.user.id);
@@ -24,6 +26,8 @@ export default function Header() {
   const [email, setEmail] = useState('');
   // const [fotoUser, setFotoUser] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
+
+  const [pagina, setPagina] = useState('');
 
   function handleExpandir() {
     setExpanded(!expanded);
@@ -38,6 +42,9 @@ export default function Header() {
 
   useEffect(() => {
     if (!id) return;
+
+    const paginaAtual = location.pathname;
+    setPagina(paginaAtual);
 
     setNome(nomeStored);
     setEmail(emailStored);
@@ -62,7 +69,7 @@ export default function Header() {
     // }
 
     // getData();
-  }, [id, nomeStored, emailStored]);
+  }, [id, nomeStored, emailStored, location]);
 
   return (
     <>
@@ -133,7 +140,7 @@ export default function Header() {
                     <Link to="/carrinho-de-compras">Meu Carrinho</Link>
                   </li>
                   <li>
-                    <Link to="/favoritos">Lista de desejos</Link>
+                    <Link to="/favoritos">Favoritos</Link>
                   </li>
                   <li>
                     <Link to="/configuracoes">Configurações da Conta</Link>
@@ -156,7 +163,9 @@ export default function Header() {
       <aside>
         <Nav className={expanded ? 'expandir' : ''}>
           <ul>
-            <li className="item-menu ativo">
+            <li
+              className={pagina === '/home' ? 'item-menu ativo' : 'item-menu'}
+            >
               <Link to="/home">
                 <span className="icon">
                   <i className="bi bi-house-door" />
@@ -165,7 +174,9 @@ export default function Header() {
               </Link>
             </li>
 
-            <li className="item-menu">
+            <li
+              className={pagina === '/perfil' ? 'item-menu ativo' : 'item-menu'}
+            >
               <Link to="/perfil">
                 <span className="icon">
                   <i className="bi bi-person-circle" />
@@ -175,7 +186,11 @@ export default function Header() {
             </li>
 
             {istrutor ? (
-              <li className="item-menu">
+              <li
+                className={
+                  pagina === '/cursos' ? 'item-menu ativo' : 'item-menu'
+                }
+              >
                 <Link to="/cursos">
                   <span className="icon">
                     <i className="bi bi-folder" />
@@ -187,7 +202,11 @@ export default function Header() {
               <></>
             )}
 
-            <li className="item-menu">
+            <li
+              className={
+                pagina === '/configuracoes' ? 'item-menu ativo' : 'item-menu'
+              }
+            >
               <Link to="/configuracoes">
                 <span className="icon">
                   <i className="bi bi-gear" />

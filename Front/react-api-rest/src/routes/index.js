@@ -17,6 +17,7 @@ import Curso from '../pages/Curso';
 import Instrutor from '../pages/Instrutor';
 import MeusCursos from '../pages/MeusCursos';
 import CriarCurso from '../pages/CriarCurso';
+import Video from '../pages/Video';
 
 import Page404 from '../pages/Page404';
 
@@ -65,6 +66,7 @@ export default function Routes() {
         component={CriarCurso}
         isClosed
       />
+      <MyRoute exact path="/videos/:nomeCurso/:id" component={Video} isClosed />
 
       <MyRoute path="*" component={Page404} />
     </Switch>

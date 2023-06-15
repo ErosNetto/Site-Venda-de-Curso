@@ -240,7 +240,7 @@ export default function CarrinhoDeCompras() {
         return;
       }
 
-      const url = `/metodos-de-pagamento?curso=${idCurso}&precoTotal=${preco}&rotaDeOrigem=${rotaDeOrigem}`;
+      const url = `/metodos-de-pagamento?curso0=${idCurso}&precoTotal=${preco}&rotaDeOrigem=${rotaDeOrigem}`;
       history.push(url);
     } catch (err) {
       setIsLoading(false);
@@ -333,7 +333,7 @@ export default function CarrinhoDeCompras() {
               </GridListCurso>
             ))
           ) : (
-            <CarrinhoVazio>Carrinho vazio</CarrinhoVazio>
+            <CarrinhoVazio>Seu carrinho está vazio</CarrinhoVazio>
           )}
 
           {carrinhoMaisCursos.length > 0 ? (

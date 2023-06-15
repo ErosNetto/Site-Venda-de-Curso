@@ -4,7 +4,7 @@ import { isEmail } from 'validator';
 import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { Container1 } from '../../styles/GlobalStyles';
+import { Container } from '../../styles/GlobalStyles';
 import { RegisterBox, Form } from './styled';
 import Loading from '../../components/Loading';
 import axios from '../../services/axios';
@@ -57,7 +57,7 @@ export default function Register() {
   }
 
   return (
-    <Container1>
+    <Container>
       <Loading isLoading={isLoading} />
 
       <RegisterBox>
@@ -105,6 +105,6 @@ export default function Register() {
           </div>
         </div>
       </RegisterBox>
-    </Container1>
+    </Container>
   );
 }

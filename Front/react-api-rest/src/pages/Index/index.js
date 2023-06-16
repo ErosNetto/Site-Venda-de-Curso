@@ -1,13 +1,43 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { get } from 'lodash';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import axios from '../../services/axios';
 import './styled.css';
 import javaScritpImg from '../../img/javascript-img.svg';
 
 export default function Index() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  // Curso
+  const [cursos, setCursos] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const { data } = await axios.get('/cursos');
+
+        let ultimosCursos = [];
+        for (let index = 0; index < 6; index++) {
+          ultimosCursos += data[data.length - index];
+        }
+
+        console.log(ultimosCursos);
+        setCursos(data);
+      } catch (err) {
+        const errors = get(err, 'response.data.errors', []);
+
+        if (errors.length > 0) {
+          toast.error('Erro desconhecido');
+        } else {
+          toast.error('Erro desconhecido');
+        }
+      }
+    }
+
+    getData();
+  }, []);
 
   return (
     <>
@@ -71,23 +101,17 @@ export default function Index() {
         <div className="main-content top3-content">
           <h2>Quem Somos</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
+            Bem-vindo ao EducaOnline, o seu destino definitivo para cursos
+            online de qualidade! Somos uma plataforma especializada em oferecer
+            uma ampla variedade de cursos ministrados por profissionais
+            experientes e apaixonados em suas áreas de atuação.
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
+            Nosso objetivo é proporcionar a você a oportunidade de adquirir
+            novos conhecimentos, desenvolver habilidades e expandir horizontes,
+            tudo isso no conforto do seu próprio ritmo e local de preferência.
           </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
-          </p>
+          <p />
         </div>
       </section>
 
@@ -134,107 +158,34 @@ export default function Index() {
           <h2 className="grid-main-heading">Cursos mais procurados</h2>
           <p className="grid-description">Lorem</p>
           <div className="grid">
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=1"
-                alt="random image from unsplash"
-              /> */}
-            </div>
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=2"
-                alt="random image from unsplash"
-              /> */}
-            </div>
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=3"
-                alt="random image from unsplash"
-              /> */}
-            </div>
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=4"
-                alt="random image from unsplash"
-              /> */}
-            </div>
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=5"
-                alt="random image from unsplash"
-              /> */}
-            </div>
-            <div className="gallery-img">
-              {/* <img
-                src="https://source.unsplash.com/random/360x360?r=6"
-                alt="random image from unsplash"
-              /> */}
-            </div>
+            {cursos.length > 0 ? (
+              cursos.map((curso) =>
+                get(curso, 'FotoCursos[0].url', false) ? (
+                  <div className="gallery-img" key={String(curso.id)}>
+                    <Link to={`/cursos/${curso.id}`}>
+                      <img
+                        src={curso.FotoCursos[0].url}
+                        alt="Imagem do curso"
+                      />
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="gallery-img" key={String(curso.id)}>
+                    <Link to={`/cursos/${curso.id}`}>
+                      <img
+                        src="https://source.unsplash.com/random/360x360?r=1"
+                        alt=""
+                      />
+                    </Link>
+                  </div>
+                )
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </section>
-
-      {/* <!-- Section 5 -->
-      <section id="grid-two" className="grid-one main-bg section">
-        <div className="main-content grid-one-content">
-          <h2 className="grid-main-heading">My Grid 2</h2>
-          <p className="grid-description">Uma breve descrição.</p>
-          <div className="grid">
-            <article>
-              <h3>Texto 1</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
-              </p>
-            </article>
-            <article>
-              <h3>Texto 2</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
-              </p>
-            </article>
-            <article>
-              <h3>Texto 3</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section> */}
-
-      {/* <!-- Section 6 -->
-      <section id="intro" className="white-bg section">
-        <div className="main-content top3-content">
-          <h2>Quem Somos</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem velit saepe quidem ipsa reiciendis nesciunt commodi
-            labore, voluptatem laborum expedita atque tenetur dolorem
-            praesentium similique iusto ab reprehenderit perferendis aliquam.
-          </p>
-        </div>
-      </section> */}
 
       {/* <!-- Section 7 --> */}
       <section id="contact" className="intro main-bg section">

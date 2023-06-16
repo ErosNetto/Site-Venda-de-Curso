@@ -16,20 +16,22 @@ export default function Index() {
   useEffect(() => {
     async function getData() {
       try {
-        const { data } = await axios.get('/cursos');
+        const { data } = await axios.get('/home/');
 
-        let ultimosCursos = [];
+        const ultimosCursos = [];
         for (let index = 0; index < 6; index++) {
-          ultimosCursos += data[data.length - index];
+          const curso = data[data.length - index];
+          if (curso) {
+            ultimosCursos.push(curso);
+          }
         }
 
-        console.log(ultimosCursos);
-        setCursos(data);
+        setCursos(ultimosCursos);
       } catch (err) {
         const errors = get(err, 'response.data.errors', []);
 
         if (errors.length > 0) {
-          toast.error('Erro desconhecido');
+          errors.map((error) => toast.error(error));
         } else {
           toast.error('Erro desconhecido');
         }

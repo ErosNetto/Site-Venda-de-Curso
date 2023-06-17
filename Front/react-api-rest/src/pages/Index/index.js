@@ -157,35 +157,43 @@ export default function Index() {
       {/* <!-- Section 4 --> */}
       <section id="gallery" className="grid-one white-bg section">
         <div className="main-content grid-one-content">
-          <h2 className="grid-main-heading">Cursos mais procurados</h2>
-          <p className="grid-description">Lorem</p>
-          <div className="grid">
-            {cursos.length > 0 ? (
-              cursos.map((curso) =>
-                get(curso, 'FotoCursos[0].url', false) ? (
-                  <div className="gallery-img" key={String(curso.id)}>
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src={curso.FotoCursos[0].url}
-                        alt="Imagem do curso"
-                      />
-                    </Link>
-                  </div>
+          {cursos.length === 0 ? (
+            <h2 className="grid-main-heading-center">
+              Não foi possível carregar os cursos
+            </h2>
+          ) : (
+            <>
+              <h2 className="grid-main-heading">Cursos mais procurados</h2>
+              <p className="grid-description">Lorem</p>
+              <div className="grid">
+                {cursos.length > 0 ? (
+                  cursos.map((curso) =>
+                    get(curso, 'FotoCursos[0].url', false) ? (
+                      <div className="gallery-img" key={String(curso.id)}>
+                        <Link to={`/cursos/${curso.id}`}>
+                          <img
+                            src={curso.FotoCursos[0].url}
+                            alt="Imagem do curso"
+                          />
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="gallery-img" key={String(curso.id)}>
+                        <Link to={`/cursos/${curso.id}`}>
+                          <img
+                            src="https://source.unsplash.com/random/360x360?r=1"
+                            alt=""
+                          />
+                        </Link>
+                      </div>
+                    )
+                  )
                 ) : (
-                  <div className="gallery-img" key={String(curso.id)}>
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src="https://source.unsplash.com/random/360x360?r=1"
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                )
-              )
-            ) : (
-              <></>
-            )}
-          </div>
+                  <></>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </section>
 

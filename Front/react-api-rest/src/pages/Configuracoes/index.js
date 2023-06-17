@@ -153,6 +153,14 @@ export default function Configuracoes() {
     }
   }
 
+  // Confimar se quer mesmo virar um instrutor
+  function handleViraInstrutorConfirme(e) {
+    e.preventDefault();
+    const confirmacao = e.currentTarget.nextSibling;
+    confirmacao.style.display = 'block';
+    e.currentTarget.remove();
+  }
+
   // Deleta a conta
   async function handleDeletarConta(e) {
     e.preventDefault();
@@ -176,6 +184,14 @@ export default function Configuracoes() {
         toast.error('Erro desconhecido');
       }
     }
+  }
+
+  // Confimar se quer mesmo deletar a conta
+  function handleDeletarContaConfirme(e) {
+    e.preventDefault();
+    const confirmacao = e.currentTarget.nextSibling;
+    confirmacao.style.display = 'block';
+    e.currentTarget.remove();
   }
 
   // Criar e Atualiza Instrutor
@@ -356,8 +372,21 @@ export default function Configuracoes() {
                 ) : (
                   <>
                     <h3>Deseja ser um instrutor?</h3>
-                    <button type="submit" onClick={handleViraInstrutor}>
+                    <button
+                      className="btn"
+                      type="submit"
+                      onClick={handleViraInstrutorConfirme}
+                    >
                       Virar instrutor
+                    </button>
+
+                    <button
+                      className="btn"
+                      type="button"
+                      style={{ display: 'none' }}
+                      onClick={handleViraInstrutor}
+                    >
+                      Confimar
                     </button>
                   </>
                 )}
@@ -370,8 +399,16 @@ export default function Configuracoes() {
                   descadastrado de todos os seus cursos e perderá o acesso para
                   sempre.
                 </p>
-                <button type="submit" onClick={handleDeletarConta}>
+                <button type="submit" onClick={handleDeletarContaConfirme}>
                   Encerrar conta
+                </button>
+
+                <button
+                  style={{ display: 'none' }}
+                  type="button"
+                  onClick={handleDeletarConta}
+                >
+                  Encerrar agora
                 </button>
               </div>
             </LadoDireito>

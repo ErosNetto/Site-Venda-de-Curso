@@ -225,6 +225,12 @@ body .full-width {
   margin-bottom: 1rem;
 }
 
+.grid-main-heading-center {
+  font-size: 4rem !important;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 .grid-description {
   padding-bottom: 5rem;
 }

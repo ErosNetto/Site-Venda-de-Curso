@@ -84,5 +84,10 @@ export const Form1 = styled.form`
       background: #fff;
       color: ${colors.corPrimaria};
     }
+
+    &:focus {
+      background: #fff;
+      color: ${colors.corPrimaria};
+    }
   }
 `;

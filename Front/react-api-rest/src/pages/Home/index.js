@@ -192,48 +192,52 @@ export default function Home() {
           </TituloPag>
 
           <ConteudoCurso>
-            {cursos.map((curso) => (
-              <Curso key={String(curso.id)}>
-                <ImgCurso>
-                  {get(curso, 'FotoCursos[0].url', false) ? (
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src={curso.FotoCursos[0].url}
-                        alt="Imagem do curso"
-                      />
-                    </Link>
-                  ) : (
-                    <Link to={`/cursos/${curso.id}`}>
-                      <img
-                        src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                        alt="Imagem do curso"
-                      />
-                    </Link>
-                  )}
-                </ImgCurso>
-                <Descricao>
-                  <h3>{curso.nome}</h3>
-                  <h4>{curso.Instrutor.nome}</h4>
-                  <p>
-                    {Number.isInteger(curso.preco)
-                      ? `R$ ${curso.preco},00`
-                      : `R$ ${curso.preco.toString().replace('.', ',')}`}
-                  </p>
-                </Descricao>
-                <Botoes>
-                  <button
-                    type="button"
-                    onClick={() => handleCarrinhodeCompras(curso.id)}
-                  >
-                    Adicionar ao carrinho
-                  </button>
-                  {/* eslint-disable-next-line */}
-                  <div onClick={() => handleFavoritos(curso.id)}>
-                    <i className="bi bi-heart-fill" />
-                  </div>
-                </Botoes>
-              </Curso>
-            ))}
+            {cursos.length === 0 ? (
+              <h2>Não foi possível carregar os cursos</h2>
+            ) : (
+              cursos.map((curso) => (
+                <Curso key={String(curso.id)}>
+                  <ImgCurso>
+                    {get(curso, 'FotoCursos[0].url', false) ? (
+                      <Link to={`/cursos/${curso.id}`}>
+                        <img
+                          src={curso.FotoCursos[0].url}
+                          alt="Imagem do curso"
+                        />
+                      </Link>
+                    ) : (
+                      <Link to={`/cursos/${curso.id}`}>
+                        <img
+                          src="https://source.unsplash.com/random/270x210?r=1?e=4"
+                          alt="Imagem do curso"
+                        />
+                      </Link>
+                    )}
+                  </ImgCurso>
+                  <Descricao>
+                    <h3>{curso.nome}</h3>
+                    <h4>{curso.Instrutor.nome}</h4>
+                    <p>
+                      {Number.isInteger(curso.preco)
+                        ? `R$ ${curso.preco},00`
+                        : `R$ ${curso.preco.toString().replace('.', ',')}`}
+                    </p>
+                  </Descricao>
+                  <Botoes>
+                    <button
+                      type="button"
+                      onClick={() => handleCarrinhodeCompras(curso.id)}
+                    >
+                      Adicionar ao carrinho
+                    </button>
+                    {/* eslint-disable-next-line */}
+                    <div onClick={() => handleFavoritos(curso.id)}>
+                      <i className="bi bi-heart-fill" />
+                    </div>
+                  </Botoes>
+                </Curso>
+              ))
+            )}
           </ConteudoCurso>
         </Main>
       </ContainerBack>

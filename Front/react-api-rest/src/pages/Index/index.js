@@ -4,9 +4,10 @@ import { get } from 'lodash';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import './styled.css';
-import javaScritpImg from '../../img/javascript-img.svg';
+import imgInicial from '../../img/img-inicial.svg';
 
 export default function Index() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -17,14 +18,9 @@ export default function Index() {
     async function getData() {
       try {
         const { data } = await axios.get('/home/');
-
-        const ultimosCursos = [];
-        for (let index = 0; index < 6; index++) {
-          const curso = data[data.length - index];
-          if (curso) {
-            ultimosCursos.push(curso);
-          }
-        }
+        const ultimosCursos = data
+          .filter((curso) => curso && curso.FotoCursos.length > 0)
+          .slice(-6);
 
         setCursos(ultimosCursos);
       } catch (err) {
@@ -55,7 +51,7 @@ export default function Index() {
                 <a href="#intro">Quem Somos</a>
               </li>
               <li>
-                <a href="#grid-one">Primeira Grid</a>
+                <a href="#grid-one">Aprenda Conosco</a>
               </li>
               <li>
                 <a href="#gallery">Cursos</a>
@@ -84,16 +80,15 @@ export default function Index() {
       <section id="home" className="intro main-bg section">
         <div className="main-content intro-content">
           <div className="intro-text-content">
-            <h2>Mergulhe na Tecnologia</h2>
+            <h2>Descubra o aprendizado online!</h2>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-              aliquid deserunt ea. Quia adipisci nobis tempora explicabo? Animi
-              dolor, quis similique exercitationem voluptate ad itaque eum quo
-              fugit, cumque quia!
+              Explore cursos online de alta qualidade, desenvolvidos por
+              especialistas. Aprenda no seu ritmo e alcance seus objetivos de
+              aprendizado.
             </p>
           </div>
           <div className="intro-img">
-            <img src={javaScritpImg} alt="Logo de HTML, CSS e JavaScript." />
+            <img src={imgInicial} alt="Logo de HTML, CSS e JavaScript." />
           </div>
         </div>
       </section>
@@ -103,51 +98,65 @@ export default function Index() {
         <div className="main-content top3-content">
           <h2>Quem Somos</h2>
           <p>
-            Bem-vindo ao EducaOnline, o seu destino definitivo para cursos
-            online de qualidade! Somos uma plataforma especializada em oferecer
-            uma ampla variedade de cursos ministrados por profissionais
-            experientes e apaixonados em suas áreas de atuação.
+            Somos uma equipe apaixonada pela educação online e pela
+            democratização do conhecimento. Oferecemos cursos de alta qualidade,
+            acessíveis a todos, independentemente de sua localização ou
+            recursos.
           </p>
           <p>
-            Nosso objetivo é proporcionar a você a oportunidade de adquirir
-            novos conhecimentos, desenvolver habilidades e expandir horizontes,
-            tudo isso no conforto do seu próprio ritmo e local de preferência.
+            Nossa equipe de instrutores altamente qualificados, provenientes de
+            diversas áreas de conhecimento, traz consigo experiência prática e
+            conhecimentos especializados. Garantimos acesso a conteúdos
+            atualizados e relevantes para o seu sucesso pessoal e profissional.
           </p>
-          <p />
+          <p>
+            Nosso compromisso vai além de cursos excepcionais, buscamos
+            proporcionar uma experiência de usuário única. Nossa equipe de
+            suporte está sempre disponível para ajudar, garantindo uma jornada
+            de aprendizado tranquila. Estamos aqui para apoiá-lo desde a escolha
+            do curso até a conclusão bem-sucedida.
+          </p>
         </div>
       </section>
 
       {/* <!-- Section 3 --> */}
       <section id="grid-one" className="grid-one main-bg section">
         <div className="main-content grid-one-content">
-          <h2 className="grid-main-heading">Grid</h2>
-          <p className="grid-description">Uma breve descrição.</p>
+          <h2 className="grid-main-heading">Aprenda Conosco</h2>
+          <p className="grid-description">
+            Descubra por que somos a melhor opção para o seu aprendizado online.
+          </p>
           <div className="grid">
             <article>
-              <h3>Teste 1</h3>
+              <h3>-</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
+                Nossa plataforma foi projetada com foco na facilidade de uso e
+                na navegabilidade. Você encontrará uma interface intuitiva, que
+                permite explorar facilmente os cursos, visualizar o conteúdo e
+                acompanhar seu progresso. Além disso, oferecemos recursos como
+                fóruns de discussão e atividades práticas, para que você possa
+                interagir com outros alunos e aplicar o que aprendeu.
               </p>
             </article>
             <article>
-              <h3>Teste 2</h3>
+              <h3>-</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
+                Todos os nossos cursos são cuidadosamente elaborados por
+                especialistas em suas áreas, garantindo que você receba
+                conhecimentos de alta qualidade e atualizados. Valorizamos o
+                aprendizado prático, fornecendo exemplos do mundo real e
+                exercícios que o ajudarão a aplicar o que aprendeu em situações
+                reais.
               </p>
             </article>
             <article>
-              <h3>Teste 3</h3>
+              <h3>-</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                cumque sed exercitationem ducimus voluptatem ipsam, soluta,
-                dolor quibusdam libero quas quam adipisci itaque molestias,
-                corporis ex fuga? Autem, dolor quas.
+                Estamos comprometidos em oferecer um ambiente de aprendizado
+                inclusivo e acessível. Nossa plataforma suporta recursos de
+                acessibilidade, como legendas em vídeos e opções de contraste de
+                cores. Além disso, buscamos manter preços acessíveis para nossos
+                cursos, para que o conhecimento esteja ao alcance de todos.
               </p>
             </article>
           </div>
@@ -159,35 +168,26 @@ export default function Index() {
         <div className="main-content grid-one-content">
           {cursos.length === 0 ? (
             <h2 className="grid-main-heading-center">
-              Não foi possível carregar os cursos
+              Não foi possível carregar os cursos no momento.
             </h2>
           ) : (
             <>
               <h2 className="grid-main-heading">Cursos mais procurados</h2>
-              <p className="grid-description">Lorem</p>
+              {/* <p className="grid-description">Lorem</p> */}
               <div className="grid">
                 {cursos.length > 0 ? (
-                  cursos.map((curso) =>
-                    get(curso, 'FotoCursos[0].url', false) ? (
-                      <div className="gallery-img" key={String(curso.id)}>
-                        <Link to={`/cursos/${curso.id}`}>
-                          <img
-                            src={curso.FotoCursos[0].url}
-                            alt="Imagem do curso"
-                          />
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="gallery-img" key={String(curso.id)}>
-                        <Link to={`/cursos/${curso.id}`}>
-                          <img
-                            src="https://source.unsplash.com/random/360x360?r=1"
-                            alt=""
-                          />
-                        </Link>
-                      </div>
-                    )
-                  )
+                  cursos.map((curso) => (
+                    <div className="gallery-img" key={String(curso.id)}>
+                      <Link to={`/cursos/${curso.id}`}>
+                        <ImagemResponsiva
+                          imageUrl={curso.FotoCursos[0].url}
+                          width={300}
+                          height={300}
+                          alt="Imagem do curso"
+                        />
+                      </Link>
+                    </div>
+                  ))
                 ) : (
                   <></>
                 )}
@@ -199,10 +199,10 @@ export default function Index() {
 
       {/* <!-- Section 7 --> */}
       <section id="contact" className="intro main-bg section">
-        <div className="main-content intro-content">
+        <div className="main-content intro-content intro-content-contato">
           <div className="intro-text-content">
-            <h2>Fale conosco</h2>
-            <p>Talvez um Texto</p>
+            <h2>Entre em contato conosco</h2>
+            {/* <p>Talvez um Texto</p> */}
           </div>
           <div className="contact-form">
             <fieldset className="form-grid">

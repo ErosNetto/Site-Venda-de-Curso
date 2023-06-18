@@ -7,6 +7,7 @@ import { NumericFormat } from 'react-number-format';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -22,7 +23,7 @@ import {
   FotoDoCurso,
   VideoCurso,
 } from './styled';
-import SemFoto from '../../img/Group 5.png';
+import SemFoto from '../../img/sem-foto3.png';
 
 export default function CriarCurso({ match }) {
   const dispatch = useDispatch();
@@ -416,9 +417,10 @@ export default function CriarCurso({ match }) {
 
                 <FotoDoCurso>
                   {fotoCurso ? (
-                    <img
-                      className="imgfoto"
-                      src={fotoCurso}
+                    <ImagemResponsiva
+                      imageUrl={fotoCurso}
+                      width={370}
+                      height={270}
                       alt="Imagem do curso"
                     />
                   ) : (

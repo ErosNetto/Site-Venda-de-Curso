@@ -52,6 +52,9 @@ export const ConteudoCurso = styled.div`
 export const Curso = styled.div`
   width: 300px;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 5px;
   padding: 15px;
   border-radius: 20px;
@@ -64,6 +67,7 @@ export const ImgCurso = styled.div`
   max-height: 210px;
   overflow: hidden;
   border-radius: 20px;
+  border: 1px solid rgb(21 29 66);
 
   img {
     transition: all 300ms ease-in-out;

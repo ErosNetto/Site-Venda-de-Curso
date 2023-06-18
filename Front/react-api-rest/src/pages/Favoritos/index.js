@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import Loading from '../../components/Loading';
 import {
   Main,
@@ -17,7 +18,6 @@ import {
   PrecoCurso,
   FavoritoVazio,
 } from './styled';
-import Html from '../../img/HTML-5.jpg';
 
 export default function CarrinhoDeCompras() {
   // Usuario
@@ -176,18 +176,15 @@ export default function CarrinhoDeCompras() {
           {favoritosMaisCursos.length > 0 ? (
             favoritosMaisCursos.map((item, index) => (
               <GridListCurso key={String(item.idFavoritos)}>
-                {get(item.curso, 'FotoCursos[0].url', false) ? (
-                  <div className="imagen-curso">
-                    <img
-                      src={item.curso.FotoCursos[0].url}
-                      alt="Imagem do curso"
-                    />
-                  </div>
-                ) : (
-                  <div className="imagen-curso">
-                    <img src={Html} alt="Imagem do curso" />
-                  </div>
-                )}
+                <div className="imagen-curso">
+                  <ImagemResponsiva
+                    imageUrl={item.curso.FotoCursos[0].url}
+                    width={250}
+                    height={134}
+                    alt="Imagem do curso"
+                  />
+                </div>
+
                 <TextoCurso>
                   <h3>
                     <Link to={`/cursos/${item.curso.id}`}>

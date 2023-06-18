@@ -97,11 +97,11 @@ export const Form = styled.form`
     color: #fff;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 
@@ -223,7 +223,7 @@ export const FotoDePerfil = styled.div`
     transition: 0.2s;
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 

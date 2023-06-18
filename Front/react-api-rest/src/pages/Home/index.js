@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import Loading from '../../components/Loading';
 import {
   Main,
@@ -34,23 +35,40 @@ export default function Home() {
   useEffect(() => {
     async function getData() {
       setIsLoading(true);
-      const response = await axios.get('/cursos');
+      try {
+        const response = await axios.get('/cursos');
+        const cursosComFotos = [];
 
-      if (buscaCategoria) {
-        const cursosFiltrados = response.data.filter(
-          (curso) => curso.categoria === buscaCategoria
-        );
+        if (buscaCategoria) {
+          const cursosFiltrados = response.data.filter(
+            (curso) =>
+              curso.categoria === buscaCategoria && curso.FotoCursos.length > 0
+          );
 
-        if (cursosFiltrados.length > 0) {
-          setCursos(cursosFiltrados);
+          if (cursosFiltrados.length > 0) {
+            setCursos(cursosFiltrados);
+          } else {
+            response.data
+              .filter((curso) => curso.FotoCursos.length > 0)
+              .forEach((curso) => cursosComFotos.push(curso));
+          }
         } else {
-          setCursos(response.data);
+          response.data
+            .filter((curso) => curso.FotoCursos.length > 0)
+            .forEach((curso) => cursosComFotos.push(curso));
         }
 
+        setCursos(cursosComFotos);
         setIsLoading(false);
-      } else {
-        setCursos(response.data);
+      } catch (err) {
         setIsLoading(false);
+        const errors = get(err, 'response.data.errors', []);
+
+        if (errors.length > 0) {
+          errors.map((error) => toast.error(error));
+        } else {
+          toast.error('Erro desconhecido');
+        }
       }
     }
 
@@ -96,6 +114,7 @@ export default function Home() {
     }
   }
 
+  // Adiciona o curso nos favoritos
   async function handleFavoritos(cursoId) {
     if (!cursoId) return;
 
@@ -197,32 +216,27 @@ export default function Home() {
             ) : (
               cursos.map((curso) => (
                 <Curso key={String(curso.id)}>
-                  <ImgCurso>
-                    {get(curso, 'FotoCursos[0].url', false) ? (
+                  <div>
+                    <ImgCurso>
                       <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src={curso.FotoCursos[0].url}
+                        <ImagemResponsiva
+                          imageUrl={curso.FotoCursos[0].url}
+                          width={268}
+                          height={210}
                           alt="Imagem do curso"
                         />
                       </Link>
-                    ) : (
-                      <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                          alt="Imagem do curso"
-                        />
-                      </Link>
-                    )}
-                  </ImgCurso>
-                  <Descricao>
-                    <h3>{curso.nome}</h3>
-                    <h4>{curso.Instrutor.nome}</h4>
-                    <p>
-                      {Number.isInteger(curso.preco)
-                        ? `R$ ${curso.preco},00`
-                        : `R$ ${curso.preco.toString().replace('.', ',')}`}
-                    </p>
-                  </Descricao>
+                    </ImgCurso>
+                    <Descricao>
+                      <h3>{curso.nome}</h3>
+                      <h4>{curso.Instrutor.nome}</h4>
+                      <p>
+                        {Number.isInteger(curso.preco)
+                          ? `R$ ${curso.preco},00`
+                          : `R$ ${curso.preco.toString().replace('.', ',')}`}
+                      </p>
+                    </Descricao>
+                  </div>
                   <Botoes>
                     <button
                       type="button"

@@ -43,12 +43,15 @@ export const ConteudoCursos = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: left;
-  gap: 20px;
+  gap: 14px;
 `;
 
 export const Curso = styled.div`
-  width: 300px;
+  width: 272px;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 5px;
   padding: 15px;
   border-radius: 20px;
@@ -70,6 +73,7 @@ export const ImgCurso = styled.div`
   max-height: 210px;
   overflow: hidden;
   border-radius: 20px;
+  border: 1px solid rgb(21 29 66);
 
   img {
     transition: all 0.2s ease-in-out;

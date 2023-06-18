@@ -15,6 +15,7 @@ import tokenRoutes from './routes/tokenRoutes';
 import instrutorRoutes from './routes/instrutorRoutes';
 import fotoInstrutorRoutes from './routes/fotoInstrutorRoutes';
 import cursoRoutes from './routes/cursoRoutes';
+import meusCursoRoutes from './routes/meusCursoRoutes';
 import fotoCursoRoutes from './routes/fotoCursoRoutes';
 import videoCursoRoutes from './routes/videoCursoRoutes';
 import carrinhoDeComprasRoutes from './routes/carrinhoDeComprasRoutes';
@@ -59,6 +60,7 @@ class App {
     this.app.use('/instrutor/', instrutorRoutes);
     this.app.use('/instrutorFoto/', fotoInstrutorRoutes);
     this.app.use('/cursos/', cursoRoutes);
+    this.app.use('/meusCursos/', meusCursoRoutes);
     this.app.use('/fotosCurso/', fotoCursoRoutes);
     this.app.use('/videoCurso/', videoCursoRoutes);
     this.app.use('/carrinhoDeCompras/', carrinhoDeComprasRoutes);

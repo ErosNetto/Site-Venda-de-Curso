@@ -58,11 +58,11 @@ export const Form = styled.form`
     transition: all 0.2s;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -19,6 +20,8 @@ import {
   CriarCurso,
   SemCursos,
 } from './styled';
+
+import cursoSemFoto from '../../img/sem-foto.png';
 
 export default function Configuracoes() {
   // Instrutor
@@ -46,10 +49,27 @@ export default function Configuracoes() {
     async function getCursos() {
       try {
         setIsLoading(true);
-        const { data } = await axios.get('/cursos/');
+        const { data } = await axios.get('/meusCursos/');
         const cursosFiltrados = data.filter(
           (curso) => curso.Instrutor.id === idInstrutorSalvo
         );
+
+        const semFoto = cursosFiltrados.filter(
+          (curso) => curso.FotoCursos.length === 0
+        );
+
+        const semVideo = cursosFiltrados.filter(
+          (curso) => curso.VideoCursos.length === 0
+        );
+
+        if (semFoto.length > 0 && semVideo.length > 0) {
+          toast.warn('Aviso: Existem cursos sem foto e sem vídeo.');
+        } else {
+          if (semFoto.length > 0) toast.warn('Aviso: Existem cursos sem foto.');
+          if (semVideo.length > 0)
+            toast.warn('Aviso: Existem cursos sem vídeo.');
+        }
+
         setCursos(cursosFiltrados);
 
         setIsLoading(false);
@@ -61,7 +81,7 @@ export default function Configuracoes() {
           errors.map((error) => toast.error(error));
         } else {
           toast.error('Erro desconhecido');
-          history.push('/home');
+          // history.push('/home');
         }
       }
     }
@@ -124,24 +144,25 @@ export default function Configuracoes() {
             ) : (
               cursos.map((curso, index) => (
                 <Curso key={String(curso.id)}>
-                  <ImgCurso>
-                    {get(curso, 'FotoCursos[0].url', false) ? (
-                      <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src={curso.FotoCursos[0].url}
-                          alt="Imagem do curso"
-                        />
-                      </Link>
-                    ) : (
-                      <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src="https://source.unsplash.com/random/270x210?r=1?e=4"
-                          alt="Imagem do curso"
-                        />
-                      </Link>
-                    )}
-                  </ImgCurso>
-                  <h4>{curso.nome}</h4>
+                  <div>
+                    <ImgCurso>
+                      {get(curso, 'FotoCursos[0].url', false) ? (
+                        <Link to={`/cursos/${curso.id}`}>
+                          <ImagemResponsiva
+                            imageUrl={curso.FotoCursos[0].url}
+                            width={240}
+                            height={188}
+                            alt="Imagem do curso"
+                          />
+                        </Link>
+                      ) : (
+                        <Link to={`/cursos/${curso.id}`}>
+                          <img src={cursoSemFoto} alt="Curso sem foto" />
+                        </Link>
+                      )}
+                    </ImgCurso>
+                    <h4>{curso.nome}</h4>
+                  </div>
                   <Botoes>
                     <Link to={`/meusCursos/${curso.id}/editar`}>
                       Editar curso

@@ -79,6 +79,7 @@ export const GridListCurso = styled.div`
   img {
     width: 100%;
     height: 134px;
+    border: 1px solid rgb(21 29 66);
   }
 `;
 

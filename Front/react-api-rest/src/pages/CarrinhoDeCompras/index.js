@@ -8,6 +8,7 @@ import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import Loading from '../../components/Loading';
 import {
   Main,
@@ -20,7 +21,6 @@ import {
   Total,
   CarrinhoVazio,
 } from './styled';
-import Html from '../../img/HTML-5.jpg';
 
 export default function CarrinhoDeCompras() {
   // Usuario
@@ -273,18 +273,15 @@ export default function CarrinhoDeCompras() {
           {carrinhoMaisCursos.length > 0 ? (
             carrinhoMaisCursos.map((item, index) => (
               <GridListCurso key={String(item.idCarrinho)}>
-                {get(item.curso, 'FotoCursos[0].url', false) ? (
-                  <div className="imagen-curso">
-                    <img
-                      src={item.curso.FotoCursos[0].url}
-                      alt="Imagem do curso"
-                    />
-                  </div>
-                ) : (
-                  <div className="imagen-curso">
-                    <img src={Html} alt="Imagem do curso" />
-                  </div>
-                )}
+                <div className="imagen-curso">
+                  <ImagemResponsiva
+                    imageUrl={item.curso.FotoCursos[0].url}
+                    width={250}
+                    height={134}
+                    alt="Imagem do curso"
+                  />
+                </div>
+
                 <TextoCurso>
                   <h3>
                     <Link to={`/cursos/${item.curso.id}`}>

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -104,11 +105,18 @@ export default function Instrutor({ match }) {
 
           <GridConteudo>
             <LadoEsquerdo>
-              {foto ? (
-                <img src={foto} alt="Foto do Instrutor" />
-              ) : (
-                <img src={SemFoto} alt="Foto do Instrutor" />
-              )}
+              <div>
+                {foto ? (
+                  <ImagemResponsiva
+                    imageUrl={foto}
+                    width={250}
+                    height={250}
+                    alt="Imagem do curso"
+                  />
+                ) : (
+                  <img src={SemFoto} alt="Foto do Instrutor" />
+                )}
+              </div>
               <p>{`${nome} ${sobrenome}`}</p>
             </LadoEsquerdo>
 

@@ -114,12 +114,16 @@ export const LadoEsquerdo = styled.form`
     color: #fff;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
+  }
+
+  .grupo-form select {
+    padding: 10px 20px;
   }
 
   .grupo-form-2 {
@@ -165,12 +169,16 @@ export const LadoDireito = styled.form`
     color: #fff;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
+  }
+
+  .grupo-form select {
+    padding: 10px 20px;
   }
 `;
 

@@ -190,6 +190,10 @@ body .full-width {
   min-height: 100vh;
 }
 
+.intro-content-contato {
+  grid-template-columns: 1fr;
+}
+
 .intro-text-content, .intro-img {
   display: flex;
   flex-flow: column wrap;
@@ -264,8 +268,8 @@ body .full-width {
 
 .gallery-img {
   width: 100%;
-  max-width: 36rem;
-  max-height: 36rem;
+  max-width: 30rem;
+  max-height: 30rem;
   overflow: hidden;
 }
 
@@ -308,13 +312,19 @@ body .full-width {
 .form-group input, .form-group textarea {
   border: none;
   background: var(--white-color);
-  padding: 1.5rem 2rem;
+  padding: 1.2rem 2rem;
   width: 100%;
-  font-size: 3rem;
+  height: 65px;
+  font-size: 2.7rem;
   outline: none;
+  transition: 0.2s;
 }
 
-.form-group input:focus, .form-group textarea:focus {
+.form-group textarea {
+  height: 350px;
+}
+
+.form-group input:focus, .form-group input:hover, .form-group textarea:hover, .form-group textarea:focus {
   box-shadow: 0 0 10px 2px var(--secondary-color);
 }
 
@@ -323,7 +333,7 @@ body .full-width {
   background: none;
   color: var(--white-color);
   padding: 1.5rem 2rem;
-  font-size: 3rem;
+  font-size: 2.7rem;
   cursor: pointer;
   transition: all 300ms ease-in-out;
 }
@@ -333,8 +343,13 @@ body .full-width {
   color: var(--primary-color);
 }
 
+.form-group button:focus {
+  background: var(--white-color);
+  color: var(--primary-color);
+}
+
 .form-group ::placeholder {
-  color: var(--light-gray-color);
+  color: #aeaeae;
 }
 
 /*  Footer  */

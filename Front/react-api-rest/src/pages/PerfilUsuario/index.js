@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import Loading from '../../components/Loading';
 import {
   Main,
@@ -94,7 +95,7 @@ export default function Configuracoes() {
             {cursos.length > 0 ? (
               cursos.map((curso) => (
                 <Curso key={String(curso.cursoId)}>
-                  {get(curso, 'FotoCursos.url', false) ? (
+                  <div>
                     <ImgCurso>
                       <Link
                         to={
@@ -103,27 +104,18 @@ export default function Configuracoes() {
                             : '/perfil'
                         }
                       >
-                        <img src={curso.FotoCursos.url} alt="Imagem do curso" />
-                      </Link>
-                    </ImgCurso>
-                  ) : (
-                    <ImgCurso>
-                      <Link
-                        to={
-                          curso.cursoNome
-                            ? `videos/${curso.cursoNome}/${curso.cursoId}`
-                            : '/perfil'
-                        }
-                      >
-                        <img
-                          src="https://source.unsplash.com/random/270x210?r=1?e=4"
+                        <ImagemResponsiva
+                          imageUrl={curso.FotoCursos.url}
+                          width={240}
+                          height={188}
                           alt="Imagem do curso"
                         />
                       </Link>
                     </ImgCurso>
-                  )}
 
-                  <h4>{curso.cursoNome}</h4>
+                    <h4>{curso.cursoNome}</h4>
+                  </div>
+
                   <Barra>
                     <div />
                     <h5>{curso.progresso}%</h5>

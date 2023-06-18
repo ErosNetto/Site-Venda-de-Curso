@@ -90,11 +90,11 @@ export const Form = styled.form`
     color: #fff;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 
@@ -116,11 +116,11 @@ export const Form = styled.form`
     color: #fff;
 
     &:focus {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 
@@ -179,8 +179,8 @@ export const FotoDoCurso = styled.div`
   img {
     width: 370px;
     height: 270px;
-    border: 3px solid ${colors.corPrimaria};
-    background: ${colors.corPrimaria};
+    border: 2px solid rgb(167 164 164);
+    background: #fff;
   }
 
   label {
@@ -199,7 +199,7 @@ export const FotoDoCurso = styled.div`
     transition: 0.2s;
 
     &:hover {
-      box-shadow: 0 0 10px 1px ${colors.corSecundaria};
+      box-shadow: 0 0 10px 2px ${colors.corSecundaria};
     }
   }
 

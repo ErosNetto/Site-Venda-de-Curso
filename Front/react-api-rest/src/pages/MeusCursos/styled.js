@@ -50,7 +50,7 @@ export const ConteudoCursos = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: left;
-  gap: 20px;
+  gap: 14px;
 `;
 
 export const SemCursos = styled.div`
@@ -66,8 +66,11 @@ export const SemCursos = styled.div`
 `;
 
 export const Curso = styled.div`
-  width: 300px;
+  width: 272px;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 5px;
   padding: 15px;
   border-radius: 20px;
@@ -84,10 +87,11 @@ export const Curso = styled.div`
 
 export const ImgCurso = styled.div`
   width: 100%;
-  max-width: 270px;
-  max-height: 210px;
+  max-width: 242px;
+  max-height: 188px;
   overflow: hidden;
   border-radius: 20px;
+  border: 1px solid rgb(21 29 66);
 
   img {
     transition: all 300ms ease-in-out;
@@ -111,7 +115,7 @@ export const Botoes = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 180px;
+    width: 160px;
     height: 50px;
     outline: none;
     border: 3px solid #fff;

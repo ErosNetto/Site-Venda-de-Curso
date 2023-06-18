@@ -50,9 +50,15 @@ export const LadoEsquerdo = styled.div`
   flex-direction: column;
   align-items: center;
 
+  div {
+    /* width: 250px; */
+    /* height: 250px; */
+    border-radius: 100%;
+    overflow: hidden;
+  }
+
   img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
   }
 
   p {

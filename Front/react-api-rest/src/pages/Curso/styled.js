@@ -25,6 +25,7 @@ export const TituloTexto = styled.div`
   border-bottom: 5px solid ${colors.corSecundaria};
 
   h1 {
+    word-break: break-all;
     font-size: 50px;
     color: ${colors.corPrimaria};
   }
@@ -91,7 +92,7 @@ export const Botoes = styled.div`
   margin-top: 15px;
 
   button {
-    width: 180px;
+    width: 185px;
     height: 50px;
     outline: none;
     border: 5px solid ${colors.corPrimaria};
@@ -115,7 +116,6 @@ export const Botoes = styled.div`
     border: 3px solid ${colors.corPrimaria};
     display: flex;
     justify-content: center;
-    border-radius: 50%;
     background: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;

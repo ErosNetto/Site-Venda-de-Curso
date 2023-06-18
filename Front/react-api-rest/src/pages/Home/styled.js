@@ -32,7 +32,6 @@ export const Filtro = styled.div`
 
   select {
     padding: 10px;
-    border-radius: 20px;
     font-size: 22px;
     width: 314px; /*200px*/
     height: 50px;
@@ -80,6 +79,7 @@ export const Descricao = styled.div`
   color: #fff;
 
   h3 {
+    word-break: break-all;
     font-size: 15px;
     font-weight: 600;
     display: block;
@@ -109,7 +109,7 @@ export const Botoes = styled.div`
   margin-top: 15px;
 
   button {
-    width: 180px;
+    width: 185px;
     height: 50px;
     outline: none;
     border: 3px solid #fff;
@@ -133,7 +133,6 @@ export const Botoes = styled.div`
     border: 3px solid #fff;
     display: flex;
     justify-content: center;
-    border-radius: 50%;
     background: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;

@@ -153,14 +153,6 @@ export default function Configuracoes() {
     }
   }
 
-  // Confimar se quer mesmo virar um instrutor
-  function handleViraInstrutorConfirme(e) {
-    e.preventDefault();
-    const confirmacao = e.currentTarget.nextSibling;
-    confirmacao.style.display = 'block';
-    e.currentTarget.remove();
-  }
-
   // Deleta a conta
   async function handleDeletarConta(e) {
     e.preventDefault();
@@ -375,18 +367,9 @@ export default function Configuracoes() {
                     <button
                       className="btn"
                       type="submit"
-                      onClick={handleViraInstrutorConfirme}
-                    >
-                      Virar instrutor
-                    </button>
-
-                    <button
-                      className="btn"
-                      type="button"
-                      style={{ display: 'none' }}
                       onClick={handleViraInstrutor}
                     >
-                      Confimar
+                      Virar instrutor
                     </button>
                   </>
                 )}

@@ -108,6 +108,7 @@ export const Curso = styled.div`
   background: ${colors.corPrimaria};
 
   h4 {
+    word-break: break-all;
     font-size: 18px;
     font-weight: 600;
     display: block;

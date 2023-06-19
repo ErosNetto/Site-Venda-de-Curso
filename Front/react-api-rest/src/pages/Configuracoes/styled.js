@@ -51,7 +51,7 @@ export const TituloTexto = styled.div`
   padding-bottom: 15px;
   border-bottom: 5px solid ${colors.corSecundaria};
 
-  h1 {
+  h2 {
     font-size: 50px;
     color: ${colors.corPrimaria};
   }

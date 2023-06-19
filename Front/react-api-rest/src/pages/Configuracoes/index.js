@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -20,7 +21,7 @@ import {
   FotoDePerfil,
   LadoDireitoIntrutor,
 } from './styled';
-import SemFoto from '../../img/Group 5.png';
+import SemFoto from '../../img/sem-foto4.png';
 
 export default function Configuracoes() {
   const dispatch = useDispatch();
@@ -319,7 +320,7 @@ export default function Configuracoes() {
       <ContainerBack>
         <Main>
           <TituloTexto>
-            <h1>Configurações da conta</h1>
+            <h2>Configurações da conta</h2>
           </TituloTexto>
 
           <GridConteudo>
@@ -404,7 +405,7 @@ export default function Configuracoes() {
         {userIstrutorSalvo ? (
           <Main id="instrutor">
             <TituloTexto>
-              <h1>Configurações do instrutor</h1>
+              <h2>Configurações do instrutor</h2>
             </TituloTexto>
 
             <GridConteudo>
@@ -446,10 +447,11 @@ export default function Configuracoes() {
                 <form>
                   <FotoDePerfil>
                     {fotoInstrutor ? (
-                      <img
-                        className="imgfoto"
-                        src={fotoInstrutor}
-                        alt="Foto de perfil do instrutor"
+                      <ImagemResponsiva
+                        imageUrl={fotoInstrutor}
+                        width={260}
+                        height={260}
+                        alt="Imagem do curso"
                       />
                     ) : (
                       <img

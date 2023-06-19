@@ -38,27 +38,24 @@ export default function Home() {
       try {
         const response = await axios.get('/cursos');
         const cursosComFotos = [];
+        response.data
+          .filter((curso) => curso.FotoCursos.length > 0)
+          .forEach((curso) => cursosComFotos.push(curso));
 
         if (buscaCategoria) {
-          const cursosFiltrados = response.data.filter(
-            (curso) =>
-              curso.categoria === buscaCategoria && curso.FotoCursos.length > 0
+          const cursosFiltrados = cursosComFotos.filter(
+            (curso) => curso.categoria === buscaCategoria
           );
 
           if (cursosFiltrados.length > 0) {
             setCursos(cursosFiltrados);
           } else {
-            response.data
-              .filter((curso) => curso.FotoCursos.length > 0)
-              .forEach((curso) => cursosComFotos.push(curso));
+            setCursos(cursosComFotos);
           }
         } else {
-          response.data
-            .filter((curso) => curso.FotoCursos.length > 0)
-            .forEach((curso) => cursosComFotos.push(curso));
+          setCursos(cursosComFotos);
         }
 
-        setCursos(cursosComFotos);
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);

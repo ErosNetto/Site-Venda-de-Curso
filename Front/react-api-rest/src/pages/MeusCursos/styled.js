@@ -20,6 +20,7 @@ export const TituloPag = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding-bottom: 15px;
   border-bottom: 5px solid ${colors.corSecundaria};
 
   h2 {

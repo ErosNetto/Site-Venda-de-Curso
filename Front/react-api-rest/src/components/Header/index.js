@@ -191,7 +191,7 @@ export default function Header() {
                   pagina === '/cursos' ? 'item-menu ativo' : 'item-menu'
                 }
               >
-                <Link to="/cursos">
+                <Link to="/meusCursos">
                   <span className="icon">
                     <i className="bi bi-folder" />
                   </span>

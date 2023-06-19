@@ -31,7 +31,7 @@ export const Filtro = styled.div`
   /* margin: 22px 0 0 30px; */
 
   select {
-    padding: 10px;
+    padding: 8px 10px;
     font-size: 22px;
     width: 314px; /*200px*/
     height: 50px;

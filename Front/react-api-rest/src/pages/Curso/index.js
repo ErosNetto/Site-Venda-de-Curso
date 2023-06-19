@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -40,6 +41,10 @@ export default function Curso({ match }) {
         const { data } = await axios.get(`/cursos/${id}`);
         const FotoCursos = get(data, 'FotoCursos[0].url', '');
 
+        if (!FotoCursos) {
+          toast.warn('Não foi possivel acessar esse curso');
+          history.push('/home');
+        }
         setFotoCursos(FotoCursos);
 
         setNome(data.nome);
@@ -76,11 +81,12 @@ export default function Curso({ match }) {
           </TituloTexto>
           <GridConteudo>
             <LadoEsquerdo>
-              {fotoCursos ? (
-                <img src={fotoCursos} alt="Imagem do curso" />
-              ) : (
-                <img src="" alt="Imagem do curso" />
-              )}
+              <ImagemResponsiva
+                imageUrl={fotoCursos}
+                width={522}
+                height={275}
+                alt="Imagem do curso"
+              />
               <ConteudoCurso>
                 <h4>
                   Professor:{' '}

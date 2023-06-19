@@ -156,9 +156,11 @@ export default function Configuracoes() {
                           />
                         </Link>
                       ) : (
-                        <Link to={`/cursos/${curso.id}`}>
-                          <img src={cursoSemFoto} alt="Curso sem foto" />
-                        </Link>
+                        <img
+                          src={cursoSemFoto}
+                          alt="Curso sem foto"
+                          style={{ cursor: 'not-allowed' }}
+                        />
                       )}
                     </ImgCurso>
                     <h4>{curso.nome}</h4>

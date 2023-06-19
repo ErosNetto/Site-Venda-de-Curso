@@ -20,7 +20,7 @@ import {
   Curso,
   ImgCurso,
 } from './styled';
-import SemFoto from '../../img/Group 5.png';
+import SemFoto from '../../img/sem-foto-instrutor.png';
 
 export default function Instrutor({ match }) {
   const id = get(match, 'params.id', '');
@@ -75,7 +75,13 @@ export default function Instrutor({ match }) {
         const cursosFiltrados = data.filter(
           (curso) => curso.Instrutor.id === idConvertido
         );
-        setCursos(cursosFiltrados);
+
+        const cursosComFotos = [];
+        cursosFiltrados
+          .filter((curso) => curso.FotoCursos.length > 0)
+          .forEach((curso) => cursosComFotos.push(curso));
+
+        setCursos(cursosComFotos);
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
@@ -100,23 +106,22 @@ export default function Instrutor({ match }) {
       <ContainerBack>
         <Main>
           <TituloTexto>
-            <h1>Perfil do instrutor</h1>
+            <h2>Perfil do instrutor</h2>
           </TituloTexto>
 
           <GridConteudo>
             <LadoEsquerdo>
-              <div>
-                {foto ? (
-                  <ImagemResponsiva
-                    imageUrl={foto}
-                    width={250}
-                    height={250}
-                    alt="Imagem do curso"
-                  />
-                ) : (
-                  <img src={SemFoto} alt="Foto do Instrutor" />
-                )}
-              </div>
+              {foto ? (
+                <ImagemResponsiva
+                  imageUrl={foto}
+                  width={250}
+                  height={250}
+                  alt="Imagem do curso"
+                />
+              ) : (
+                <img src={SemFoto} alt="Foto do Instrutor" />
+              )}
+
               <p>{`${nome} ${sobrenome}`}</p>
             </LadoEsquerdo>
 
@@ -137,21 +142,14 @@ export default function Instrutor({ match }) {
               cursos.map((curso) => (
                 <Curso key={String(curso.id)}>
                   <ImgCurso>
-                    {get(curso, 'FotoCursos[0].url', false) ? (
-                      <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src={curso.FotoCursos[0].url}
-                          alt="Imagem do curso"
-                        />
-                      </Link>
-                    ) : (
-                      <Link to={`/cursos/${curso.id}`}>
-                        <img
-                          src="https://source.unsplash.com/random/270x210?r=1?e=1"
-                          alt="Imagem do curso"
-                        />
-                      </Link>
-                    )}
+                    <Link to={`/cursos/${curso.id}`}>
+                      <ImagemResponsiva
+                        imageUrl={curso.FotoCursos[0].url}
+                        width={240}
+                        height={188}
+                        alt="Imagem do curso"
+                      />
+                    </Link>
                   </ImgCurso>
                   <h4>{curso.nome}</h4>
                 </Curso>

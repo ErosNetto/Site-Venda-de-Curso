@@ -5,7 +5,7 @@ import * as colors from '../../config/colors';
 export const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px 50px;
+  padding: 15px 15px;
   border-radius: 50px;
   background: #fff;
 
@@ -18,7 +18,7 @@ export const Main = styled.div`
   .inst-h3 {
     margin-top: 20px;
     font-size: 24px;
-    font-weight: 800;
+    /* font-weight: 800; */
     color: ${colors.corPrimaria};
   }
 `;
@@ -30,7 +30,7 @@ export const TituloTexto = styled.div`
   padding-bottom: 15px;
   border-bottom: 5px solid ${colors.corSecundaria};
 
-  h1 {
+  h2 {
     font-size: 50px;
     color: ${colors.corPrimaria};
   }
@@ -50,15 +50,11 @@ export const LadoEsquerdo = styled.div`
   flex-direction: column;
   align-items: center;
 
-  div {
-    /* width: 250px; */
-    /* height: 250px; */
-    border-radius: 100%;
-    overflow: hidden;
-  }
-
   img {
-    width: 100%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 3px solid ${colors.corPrimaria};
   }
 
   p {
@@ -102,11 +98,11 @@ export const ConteudoCursos = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: left;
-  gap: 20px;
+  gap: 14px;
 `;
 
 export const Curso = styled.div`
-  width: 300px;
+  width: 272px;
   height: auto;
   margin: 5px;
   padding: 15px;
@@ -129,6 +125,7 @@ export const ImgCurso = styled.div`
   max-height: 210px;
   overflow: hidden;
   border-radius: 20px;
+  border: 1px solid rgb(21 29 66);
 
   img {
     transition: all 300ms ease-in-out;

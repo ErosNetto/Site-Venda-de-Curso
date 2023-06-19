@@ -58,7 +58,7 @@ export default function Routes() {
       <MyRoute exact path="/favoritos/" component={Favoritos} isClosed />
       <MyRoute exact path="/cursos/:id/" component={Curso} isClosed />
       <MyRoute exact path="/instrutor/:id/" component={Instrutor} isClosed />
-      <MyRoute exact path="/cursos/" component={MeusCursos} isClosed />
+      <MyRoute exact path="/meusCursos/" component={MeusCursos} isClosed />
       <MyRoute exact path="/criarCurso/" component={CriarCurso} isClosed />
       <MyRoute
         exact

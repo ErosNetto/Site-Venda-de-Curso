@@ -475,7 +475,7 @@ export default function Configuracoes() {
 
             <Form>
               <div className="grupo-form">
-                <label htmlFor="biografia">Biografia</label>
+                <label htmlFor="biografia">Sobre</label>
                 <textarea
                   name="message"
                   value={biografia}

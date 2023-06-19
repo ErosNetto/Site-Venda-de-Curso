@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
@@ -316,7 +317,6 @@ export default function Configuracoes() {
       <Header />
       <Loading isLoading={isLoading} />
       <Loading isLoading={isLoadingSalvo} />
-
       <ContainerBack>
         <Main>
           <TituloTexto>
@@ -497,6 +497,7 @@ export default function Configuracoes() {
           <> </>
         )}
       </ContainerBack>
+      <Footer />
     </>
   );
 }

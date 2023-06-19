@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import ImagemResponsiva from '../../components/ImgResponsive';
 import axios from '../../services/axios';
 import history from '../../services/history';
@@ -21,7 +23,11 @@ import {
 } from './styled';
 
 export default function Curso({ match }) {
-  const id = get(match, 'params.id', '');
+  // Usuario
+  const userId = useSelector((state) => state.auth.user.id);
+
+  // Curso
+  const idCurso = Number(get(match, 'params.id', ''));
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
@@ -33,12 +39,12 @@ export default function Curso({ match }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
+    if (!idCurso) return;
 
     async function getData() {
       try {
         setIsLoading(true);
-        const { data } = await axios.get(`/cursos/${id}`);
+        const { data } = await axios.get(`/cursos/${idCurso}`);
         const FotoCursos = get(data, 'FotoCursos[0].url', '');
 
         if (!FotoCursos) {
@@ -67,7 +73,85 @@ export default function Curso({ match }) {
     }
 
     getData();
-  }, [id]);
+  }, [idCurso]);
+
+  // Adiciona o curso no carrinho de compras
+  async function handleCarrinhodeCompras(cursoId) {
+    if (!cursoId) return;
+
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get('/carrinhoDeCompras/');
+      const carrinho = response.data;
+
+      const cursoNoCarrinho = carrinho.find(
+        (item) => item.curso_id === cursoId && item.user_id === userId
+      );
+
+      if (cursoNoCarrinho) {
+        setIsLoading(false);
+        toast.warn('Esse curso já está no carrinho!');
+        return;
+      }
+
+      await axios.post('/carrinhoDeCompras/', {
+        curso_id: cursoId,
+        user_id: userId,
+      });
+
+      setIsLoading(false);
+      toast.success('Curso adicionado ao carrinho');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
+
+  // Adiciona o curso nos favoritos
+  async function handleFavoritos(cursoId) {
+    if (!cursoId) return;
+
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get('/favoritos/');
+      const favoritos = response.data;
+
+      const cursoNosFavoritos = favoritos.find(
+        (item) => item.curso_id === cursoId && item.user_id === userId
+      );
+
+      if (cursoNosFavoritos) {
+        setIsLoading(false);
+        toast.warn('Esse curso já está nos favoritos!');
+        return;
+      }
+
+      await axios.post('/favoritos/', {
+        curso_id: cursoId,
+        user_id: userId,
+      });
+
+      setIsLoading(false);
+      toast.success('Curso adicionado aos favoritos');
+    } catch (err) {
+      setIsLoading(false);
+      const errors = get(err, 'response.data.errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Erro desconhecido');
+      }
+    }
+  }
 
   return (
     <>
@@ -100,8 +184,14 @@ export default function Curso({ match }) {
                 </h4>
               </ConteudoCurso>
               <Botoes>
-                <button type="button">Adiconar ao carrinho</button>
-                <div>
+                <button
+                  type="button"
+                  onClick={() => handleCarrinhodeCompras(idCurso)}
+                >
+                  Adiconar ao carrinho
+                </button>
+                {/* eslint-disable-next-line */}
+                <div onClick={() => handleFavoritos(idCurso)}>
                   <i className="bi bi-heart-fill" />
                 </div>
               </Botoes>
@@ -112,6 +202,8 @@ export default function Curso({ match }) {
           </GridConteudo>
         </Main>
       </ContainerBack>
+
+      <Footer />
     </>
   );
 }

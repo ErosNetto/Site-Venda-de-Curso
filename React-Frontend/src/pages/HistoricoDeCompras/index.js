@@ -5,6 +5,7 @@ import { get } from 'lodash';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import axios from '../../services/axios';
 import Loading from '../../components/Loading';
 import { Main, TituloPag, ResponsiveTable, Tabela, SemCursos } from './styled';
@@ -147,6 +148,8 @@ export default function HistoricoDeCompras() {
           </ResponsiveTable>
         </Main>
       </ContainerBack>
+
+      <Footer />
     </>
   );
 }

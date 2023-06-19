@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Loading from '../../components/Loading';
@@ -382,6 +383,8 @@ export default function MetodosDePagamento() {
           </Conteudo>
         </Main>
       </ContainerBack>
+
+      <Footer />
     </>
   );
 }

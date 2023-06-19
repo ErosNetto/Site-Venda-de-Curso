@@ -8,6 +8,7 @@ import store, { persistor } from './store';
 import history from './services/history';
 import GlobalStyles from './styles/GlobalStyles';
 // import Header from './components/Header';
+// import Footer from './components/Footer';
 import Routes from './routes';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Routes />
           <GlobalStyles />
           <ToastContainer autoClose={3000} className="toast-container" />
+          {/* <Footer /> */}
         </Router>
       </PersistGate>
     </Provider>

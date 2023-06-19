@@ -30,6 +30,32 @@ export const Filtro = styled.div`
   align-items: center;
   /* margin: 22px 0 0 30px; */
 
+  button {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border: 3px solid ${colors.corPrimaria};
+    display: flex;
+    justify-content: center;
+    /* border-radius: 50%; */
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: ${colors.corPrimaria};
+    margin-right: 20px;
+
+    & i {
+      position: relative;
+      top: 2px;
+      font-size: 25px;
+    }
+
+    &:hover {
+      background: ${colors.corPrimaria};
+      color: #fff;
+    }
+  }
+
   select {
     padding: 8px 10px;
     font-size: 22px;

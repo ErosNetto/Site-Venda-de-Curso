@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { get } from 'lodash';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -14,6 +14,9 @@ import fotoPerfil from '../../img/Group 5.png';
 export default function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  const { categoria } = useParams();
+  const buscaCategoria = categoria ? decodeURI(categoria) : '';
 
   const [expanded, setExpanded] = useState(false);
 
@@ -164,7 +167,11 @@ export default function Header() {
         <Nav className={expanded ? 'expandir' : ''}>
           <ul>
             <li
-              className={pagina === '/home' ? 'item-menu ativo' : 'item-menu'}
+              className={
+                pagina === '/home' || buscaCategoria
+                  ? 'item-menu ativo'
+                  : 'item-menu'
+              }
             >
               <Link to="/home">
                 <span className="icon">

@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 
 import { ContainerBack } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
+import history from '../../services/history';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import ImagemResponsiva from '../../components/ImgResponsive';
 import Loading from '../../components/Loading';
 import {
@@ -24,15 +26,21 @@ export default function Home() {
   // Usuario
   const userId = useSelector((state) => state.auth.user.id);
 
-  // Filtro de pesquisa
+  // Filtro de pesquisa pela url
   const { categoria } = useParams();
-  const buscaCategoria = decodeURI(categoria);
+  const buscaCategoria = categoria ? decodeURI(categoria) : '';
+
+  // Função categoria
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
+  const [cursosFiltrados2, setCursosFiltrados] = useState([]);
 
   // Curso
   const [cursos, setCursos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (!userId) return;
+
     async function getData() {
       setIsLoading(true);
       try {
@@ -42,19 +50,7 @@ export default function Home() {
           .filter((curso) => curso.FotoCursos.length > 0)
           .forEach((curso) => cursosComFotos.push(curso));
 
-        if (buscaCategoria) {
-          const cursosFiltrados = cursosComFotos.filter(
-            (curso) => curso.categoria === buscaCategoria
-          );
-
-          if (cursosFiltrados.length > 0) {
-            setCursos(cursosFiltrados);
-          } else {
-            setCursos(cursosComFotos);
-          }
-        } else {
-          setCursos(cursosComFotos);
-        }
+        setCursos(cursosComFotos);
 
         setIsLoading(false);
       } catch (err) {
@@ -70,7 +66,33 @@ export default function Home() {
     }
 
     getData();
+    // setCategoriaSelecionada('');
+  }, [userId]);
+
+  // Filtra por cateria seja ela pela url ou select
+  useEffect(() => {
+    setCategoriaSelecionada(buscaCategoria);
   }, [buscaCategoria]);
+
+  useEffect(() => {
+    const handleFiltraPorCategoria = () => {
+      const cursosFiltrados = cursos.filter(
+        (item) => item.categoria === categoriaSelecionada
+      );
+      setCursosFiltrados(cursosFiltrados);
+    };
+
+    handleFiltraPorCategoria();
+  }, [categoriaSelecionada, cursos]);
+
+  // Cancela a filtragem do select ou URL
+  function handleCancelarFiltragem() {
+    if (buscaCategoria) {
+      history.push('/home');
+    } else {
+      setCategoriaSelecionada('');
+    }
+  }
 
   // Adiciona o curso no carrinho de compras
   async function handleCarrinhodeCompras(cursoId) {
@@ -160,47 +182,58 @@ export default function Home() {
           <TituloPag>
             <h2>Cursos</h2>
             <Filtro>
-              <select name="categorias">
-                <option id="1" value="valor1">
-                  Categoria
+              {categoriaSelecionada && (
+                <button type="button" onClick={handleCancelarFiltragem}>
+                  <i className="bi bi-x-lg" />
+                </button>
+              )}
+              <select
+                name="categorias"
+                value={categoriaSelecionada}
+                onChange={(event) =>
+                  setCategoriaSelecionada(event.target.value)
+                }
+              >
+                <option id="1" value="">
+                  Selecione uma categoria
                 </option>
-                <option id="2" value="valor2">
+                <option id="2" value="Desenvolvimento">
                   Desenvolvimento
                 </option>
-                <option id="3" value="valor3">
+                <option id="3" value="Negócios">
                   Negócios
                 </option>
-                <option id="4" value="valor4">
+                <option id="4" value="Finanças e contabilidade">
                   Finanças e contabilidade
                 </option>
-                <option id="5" value="valor5">
+                <option id="5" value="Ti e software">
                   Ti e software
                 </option>
-                <option id="6" value="valor6">
+                <option id="6" value="Produtividade no escritório">
                   Produtividade no escritório
                 </option>
-                <option id="7" value="valor7">
+                <option id="7" value="Desenvolvimento Pessoal">
                   Desenvolvimento Pessoal
                 </option>
-                <option id="8" value="valor8">
+                <option id="8" value="Design">
                   Design
                 </option>
-                <option id="9" value="valor9">
+                <option id="9" value="Marketing">
                   Marketing
                 </option>
-                <option id="10" value="valor10">
+                <option id="10" value="Estilo de vida">
                   Estilo de vida
                 </option>
-                <option id="11" value="valor11">
+                <option id="11" value="Fotografia e vídeo">
                   Fotografia e vídeo
                 </option>
-                <option id="12" value="valor12">
+                <option id="12" value="Saúde e fitness">
                   Saúde e fitness
                 </option>
-                <option id="13" value="valor12">
+                <option id="13" value="Música">
                   Música
                 </option>
-                <option id="14" value="valor14">
+                <option id="14" value="Ensino e estudo acadêmico">
                   Ensino e estudo acadêmico
                 </option>
               </select>
@@ -208,8 +241,49 @@ export default function Home() {
           </TituloPag>
 
           <ConteudoCurso>
-            {cursos.length === 0 ? (
-              <h2>Não foi possível carregar os cursos</h2>
+            {/* eslint-disable-next-line */}
+            {categoriaSelecionada ? (
+              cursosFiltrados2.length === 0 ? (
+                <h2>Não foram encontrados cursos nessa categoria.</h2>
+              ) : (
+                cursosFiltrados2.map((curso) => (
+                  <Curso key={String(curso.id)}>
+                    <div>
+                      <ImgCurso>
+                        <Link to={`/cursos/${curso.id}`}>
+                          <ImagemResponsiva
+                            imageUrl={curso.FotoCursos[0].url}
+                            width={268}
+                            height={210}
+                            alt="Imagem do curso"
+                          />
+                        </Link>
+                      </ImgCurso>
+                      <Descricao>
+                        <h3>{curso.nome}</h3>
+                        <h4>{curso.Instrutor.nome}</h4>
+                        <p>
+                          {Number.isInteger(curso.preco)
+                            ? `R$ ${curso.preco},00`
+                            : `R$ ${curso.preco.toString().replace('.', ',')}`}
+                        </p>
+                      </Descricao>
+                    </div>
+                    <Botoes>
+                      <button
+                        type="button"
+                        onClick={() => handleCarrinhodeCompras(curso.id)}
+                      >
+                        Adicionar ao carrinho
+                      </button>
+                      {/* eslint-disable-next-line */}
+                      <div onClick={() => handleFavoritos(curso.id)}>
+                        <i className="bi bi-heart-fill" />
+                      </div>
+                    </Botoes>
+                  </Curso>
+                ))
+              )
             ) : (
               cursos.map((curso) => (
                 <Curso key={String(curso.id)}>
@@ -252,6 +326,8 @@ export default function Home() {
           </ConteudoCurso>
         </Main>
       </ContainerBack>
+
+      <Footer />
     </>
   );
 }

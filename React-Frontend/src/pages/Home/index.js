@@ -284,6 +284,8 @@ export default function Home() {
                   </Curso>
                 ))
               )
+            ) : cursos.length === 0 ? (
+              <h2>Desculpe, não foi possível carregar os cursos no momento.</h2>
             ) : (
               cursos.map((curso) => (
                 <Curso key={String(curso.id)}>
@@ -316,7 +318,7 @@ export default function Home() {
                       Adicionar ao carrinho
                     </button>
                     {/* eslint-disable-next-line */}
-                    <div onClick={() => handleFavoritos(curso.id)}>
+                      <div onClick={() => handleFavoritos(curso.id)}>
                       <i className="bi bi-heart-fill" />
                     </div>
                   </Botoes>

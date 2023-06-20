@@ -43,7 +43,7 @@ export default function Index() {
       <aside className="menu white-bg">
         <div className="main-content menu-content">
           <h1>
-            <a href="#home">Curso em Vídeo</a>
+            <a href="#home">Cursos EAD</a>
           </h1>
           <nav>
             <ul>

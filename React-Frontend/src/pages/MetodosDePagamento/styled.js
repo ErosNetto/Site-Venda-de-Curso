@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
 export const Main = styled.div`
-  max-width: 1200px;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 15px 15px;
   position: relative;
@@ -19,7 +19,7 @@ export const OpcoesPagamento = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 22px 22px 0 0;
+    border-radius: 30px 30px 0 0;
     background: rgb(203 203 203);
     border: 1px solid rgb(167 164 164);
 
@@ -43,7 +43,7 @@ export const Conteudo = styled.div`
   padding: 15px 50px;
   position: relative;
   background: #fff;
-  border-radius: 0 0 22px 22px;
+  border-radius: 0 0 30px 30px;
   border: 1px solid rgb(203 203 203);
   border-top: none;
 `;

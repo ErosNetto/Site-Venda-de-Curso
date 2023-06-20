@@ -160,8 +160,12 @@ export default function Curso({ match }) {
       <ContainerBack>
         <Main>
           <TituloTexto>
-            <h1>{nome}</h1>
-            <h2>R$ {preco}</h2>
+            <div>
+              <h1>{nome}</h1>
+            </div>
+            <div>
+              <h2>R$ {preco}</h2>
+            </div>
           </TituloTexto>
           <GridConteudo>
             <LadoEsquerdo>
@@ -183,6 +187,10 @@ export default function Curso({ match }) {
                   Categoria: <Link to={`/home/${categoria}`}>{categoria}</Link>
                 </h4>
               </ConteudoCurso>
+            </LadoEsquerdo>
+            <LadoDireito>
+              <p>{descricao}</p>
+
               <Botoes>
                 <button
                   type="button"
@@ -195,9 +203,6 @@ export default function Curso({ match }) {
                   <i className="bi bi-heart-fill" />
                 </div>
               </Botoes>
-            </LadoEsquerdo>
-            <LadoDireito>
-              <p>{descricao}</p>
             </LadoDireito>
           </GridConteudo>
         </Main>

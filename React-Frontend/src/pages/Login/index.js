@@ -41,7 +41,7 @@ export default function Login(props) {
     dispatch(actions.loginRequest({ email, password, prevPath }));
   };
 
-  // HTML(JSX)
+  // JSX
   return (
     <Container>
       <Loading isLoading={isLoading} />

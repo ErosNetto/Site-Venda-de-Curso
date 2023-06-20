@@ -82,7 +82,7 @@ export default function Header() {
           {/* eslint-disable-next-line */}
           <i onClick={handleExpandir} className="bi bi-list" id="btn-ex" />
           <h1>
-            <Link to="/home">Curso em Vídeo</Link>
+            <Link to="/home">Cursos EAD</Link>
           </h1>
         </div>
 

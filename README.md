@@ -52,7 +52,7 @@ Certifique-se de adicionar as configurações específicas do seu ambiente, como
 Lembre-se de substituir os valores das configurações de exemplo pelos valores corretos do seu ambiente.
 
 ## Futuras Atualizações
-Estamos comprometidos em continuar aprimorando o projeto de venda de cursos online. Algumas das atualizações planejadas para o futuro incluem:
+Algumas das atualizações planejadas para o futuro incluem:
 
 1. **Sistema de Avaliações e Comentários**: Pretendemos implementar um sistema de avaliações e comentários, permitindo que os alunos deixem feedback sobre os cursos adquiridos e compartilhem suas experiências com outros usuários.
 

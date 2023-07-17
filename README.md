@@ -31,6 +31,7 @@ Antes de executar o projeto, é necessário criar um arquivo `.env` dentro da pa
 2. Abra o arquivo `.env` em um editor de texto.
 3. Adicione as configurações necessárias no arquivo, seguindo o formato `CHAVE=VALOR`. Por exemplo:
 
+  ```dotenv
   DATABASE=nomedobanco
   DATABASE_HOST=localhost
   DATABASE_PORT=3306
@@ -42,6 +43,7 @@ Antes de executar o projeto, é necessário criar um arquivo `.env` dentro da pa
 
   APP_URL=http://localhost:3005
   APP_PORT=3005
+  ```
 
 Certifique-se de adicionar as configurações específicas do seu ambiente, como nome do banco de dados, host, porta, usuário e senha do banco de dados, chave do token de autenticação, URL e porta do aplicativo.
 

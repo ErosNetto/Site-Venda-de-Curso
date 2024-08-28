@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('carrinhoDeCompras', {
+    return queryInterface.createTable("carrinhoDeCompras", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,33 +11,35 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'cursos',
-          key: 'id',
+          model: "cursos",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
+          model: "users",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
 
-      created_at: { // Salva registro na base de dados
+      created_at: {
+        // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updated_at: { // Salva registro na base de dados
+      updated_at: {
+        // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable('carrinhoDeCompras'),
+  down: (queryInterface) => queryInterface.dropTable("carrinhoDeCompras"),
 };

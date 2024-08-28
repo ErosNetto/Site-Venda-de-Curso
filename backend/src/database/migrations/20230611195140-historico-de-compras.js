@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('historicoDeCompras', {
+    return queryInterface.createTable("historicoDeCompras", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,21 +11,21 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'cursos',
-          key: 'id',
+          model: "cursos",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
+          model: "users",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       dataDeCompra: {
         type: Sequelize.DATE,
@@ -35,16 +35,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      created_at: { // Salva registro na base de dados
+      created_at: {
+        // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updated_at: { // Salva registro na base de dados
+      updated_at: {
+        // Salva registro na base de dados
         type: Sequelize.DATE,
         allowNull: false,
       },
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable('historicoDeCompras'),
+  down: (queryInterface) => queryInterface.dropTable("historicoDeCompras"),
 };

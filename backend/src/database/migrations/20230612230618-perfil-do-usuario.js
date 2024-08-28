@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('perfilDoUsuario', {
+    return queryInterface.createTable("perfilDoUsuario", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,21 +11,21 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
+          model: "users",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       curso_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'cursos',
-          key: 'id',
+          model: "cursos",
+          key: "id",
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       progresso: {
         type: Sequelize.INTEGER,
@@ -42,5 +42,5 @@ module.exports = {
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable('perfilDoUsuario'),
+  down: (queryInterface) => queryInterface.dropTable("perfilDoUsuario"),
 };

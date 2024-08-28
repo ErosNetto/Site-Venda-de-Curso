@@ -318,7 +318,7 @@ export default function Home() {
                       Adicionar ao carrinho
                     </button>
                     {/* eslint-disable-next-line */}
-                      <div onClick={() => handleFavoritos(curso.id)}>
+                    <div onClick={() => handleFavoritos(curso.id)}>
                       <i className="bi bi-heart-fill" />
                     </div>
                   </Botoes>

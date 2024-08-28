@@ -33,9 +33,13 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-unused-expressions': 0,
     'react/jsx-no-useless-fragment': 'off',
-    // 'no-unused-vars': 'off',
     'jsx-a11y/label-has-associated-control': 0,
     'consistent-return': 'off',
     'no-plusplus': 0,
+
+    'no-unused-vars': 'off',
+    'no-console': 'off',
+    'etc...': 'off',
+    // "prettier/prettier": "off",
   },
 };

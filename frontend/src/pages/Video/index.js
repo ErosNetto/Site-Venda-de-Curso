@@ -52,7 +52,11 @@ export default function VideoPlayer({ match }) {
       <Container>
         <div style={{ width: '400px' }}>
           {/* eslint-disable-next-line */}
-          <video src={urlVideo} controls style={{ width: '100%', height: 'auto' }}>
+          <video
+            src={urlVideo}
+            controls
+            style={{ width: '100%', height: 'auto' }}
+          >
             <source src={urlVideo} type="video/mp4, video/mov" />
             Seu navegador não suporta a reprodução de vídeos.
           </video>

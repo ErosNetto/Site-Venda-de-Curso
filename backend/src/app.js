@@ -6,7 +6,7 @@ dotenv.config();
 import "./database";
 
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 // import helmet from 'helmet';
 
 import homeRoutes from "./routes/homeRoutes";
@@ -43,7 +43,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors(corsOptions));
+    // this.app.use(cors(corsOptions));
     // this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());

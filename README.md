@@ -1,4 +1,4 @@
-# TCC-Site Venda de Curso
+# Site Venda de Curso
 
 Versão: 1.1.0
 
